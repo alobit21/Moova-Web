@@ -6,6 +6,7 @@ import { FAQ } from "@/features/landing/sections/FAQ"
 import { Footer } from "@/features/landing/sections/Footer"
 import { Hero } from "@/features/landing/sections/Hero"
 import { SecondSale } from "@/features/landing/sections/SecondSale"
+import { Testimonials } from "@/features/landing/sections/Testimonials"
 
 
 function App() {
@@ -20,6 +21,8 @@ function App() {
 
       <DeliverySpeaks />
       <FAQ />
+      <Testimonials />
+
 
       <Footer/>
 
