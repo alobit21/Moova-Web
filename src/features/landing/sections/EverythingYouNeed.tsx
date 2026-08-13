@@ -1,0 +1,79 @@
+import instantRider from "@/assets/becomeOne/instant-rider.png"
+import realTimeTracking from "@/assets/becomeOne/real-time-tracking.png"
+import customerNotifications from "@/assets/becomeOne/customer-notifications.png"
+import orderManagement from "@/assets/becomeOne/order-management.png"
+import deliveryStatus from "@/assets/becomeOne/delivery-status.png"
+import businessInsights from "@/assets/becomeOne/business-insights.png"
+import bgImage from "@/assets/becomeOne/everything-you-need-bg.png"
+
+const FEATURES = [
+  {
+    icon: instantRider,
+    title: "Instant Rider Assignment",
+    description: "Connect orders with available riders quickly and efficiently.",
+  },
+  {
+    icon: realTimeTracking,
+    title: "Real-Time Tracking",
+    description: "Know exactly where deliveries are at every stage.",
+  },
+  {
+    icon: customerNotifications,
+    title: "Customer Notifications",
+    description: "Keep customers informed automatically throughout the delivery journey.",
+  },
+  {
+    icon: orderManagement,
+    title: "Order Management Dashboard",
+    description: "Manage deliveries from one simple interface.",
+  },
+  {
+    icon: deliveryStatus,
+    title: "Delivery Status Updates",
+    description: "Track every order from pickup to successful delivery.",
+  },
+  {
+    icon: businessInsights,
+    title: "Business Insights",
+    description: "Monitor delivery performance and improve operations.",
+  },
+] as const
+
+export function EverythingYouNeed() {
+  return (
+    <section
+      id="features"
+      className="relative isolate overflow-hidden bg-[#1c3b7a] py-24 lg:py-32"
+    >
+      <img
+        src={bgImage}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+
+      <div className="relative mx-auto max-w-6xl px-6 lg:px-12">
+        <h2 className="text-center text-4xl font-extrabold text-white sm:text-5xl">
+          Everything You Need to Deliver Better
+        </h2>
+
+        <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {FEATURES.map(({ icon, title, description }) => (
+            <div
+              key={title}
+              className="mx-auto flex w-full max-w-[370px] min-h-[220px] flex-col gap-4 rounded-2xl border border-white/10 bg-white/10 p-8 backdrop-blur-sm"
+            >
+              <img src={icon} alt="" aria-hidden="true" className="h-14 w-14" />
+              <div>
+                <h3 className="text-lg font-bold text-white">{title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-white/75">
+                  {description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
