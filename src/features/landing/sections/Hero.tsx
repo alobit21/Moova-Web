@@ -40,10 +40,10 @@ export function Hero() {
 
           <div className="mt-10 flex flex-wrap gap-4">
             <Button
-              size="lg"
-              className="rounded-full bg-emerald-500 px-8 text-white hover:bg-emerald-400"
-            >
-              Start Delivering Smarter
+                size="lg"
+                className="rounded-full bg-brand px-8 text-brand-foreground hover:bg-brand/90"
+                >
+                Start Delivering Smarter
             </Button>
             <Button
               size="lg"
