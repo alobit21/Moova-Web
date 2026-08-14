@@ -27,7 +27,7 @@ export function Header() {
 
         <nav className="hidden items-center gap-10 md:flex">
           {NAV_LINKS.map((link) => (
-            <a
+            
               key={link.label}
               href={link.href}
               className="text-sm font-medium text-white/90 transition-colors hover:text-white"
@@ -39,11 +39,9 @@ export function Header() {
 
         <div className="flex items-center gap-3">
           <Button
-            asChild
+            render={<a href="#get-started">Get Started</a>}
             className="hidden rounded-full bg-blue-600 px-6 hover:bg-blue-500 sm:inline-flex"
-          >
-            <a href="#get-started">Get Started</a>
-          </Button>
+          />
 
           <DropdownMenu>
             <DropdownMenuTrigger

@@ -41,7 +41,6 @@ const SOCIAL_LINKS = [
   { label: "LinkedIn", href: "https://linkedin.com", icon: LinkedinIcon },
 ] as const
 
-
 const linkButtonClass =
   "h-auto justify-start p-0 text-base font-normal text-white/70 no-underline hover:text-white hover:no-underline"
 
@@ -58,14 +57,18 @@ export function Footer() {
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-20 sm:grid-cols-2 lg:grid-cols-4 lg:px-12">
         {/* Brand */}
         <div>
-          <Button asChild variant="link" className="h-auto p-0 no-underline hover:no-underline">
-            <a href="#home" className="flex items-center gap-2">
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-white text-lg font-bold text-[#1c3b7a]">
-                M
-              </span>
-              <span className="text-xl font-bold text-white">Moova</span>
-            </a>
-          </Button>
+          <Button
+            variant="link"
+            className="h-auto p-0 no-underline hover:no-underline"
+            render={
+              <a href="#home" className="flex items-center gap-2">
+                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-white text-lg font-bold text-[#1c3b7a]">
+                  M
+                </span>
+                <span className="text-xl font-bold text-white">Moova</span>
+              </a>
+            }
+          />
           <p className="mt-4 max-w-[16ch] text-white/70">
             Delivering businesses forward.
           </p>
@@ -77,9 +80,11 @@ export function Footer() {
           <ul className="mt-5 flex flex-col gap-3">
             {QUICK_LINKS.map((link) => (
               <li key={link.label}>
-                <Button asChild variant="link" className={linkButtonClass}>
-                  <a href={link.href}>{link.label}</a>
-                </Button>
+                <Button
+                  variant="link"
+                  className={linkButtonClass}
+                  render={<a href={link.href}>{link.label}</a>}
+                />
               </li>
             ))}
           </ul>
@@ -91,15 +96,19 @@ export function Footer() {
           <div className="mt-5 flex flex-col gap-4">
             <div>
               <p className="text-xs font-bold tracking-wide text-white">EMAIL</p>
-              <Button asChild variant="link" className={linkButtonClass}>
-                <a href="mailto:smartcava@moova.co.tz">smartcava@moova.co.tz</a>
-              </Button>
+              <Button
+                variant="link"
+                className={linkButtonClass}
+                render={<a href="mailto:smartcava@moova.co.tz">smartcava@moova.co.tz</a>}
+              />
             </div>
             <div>
               <p className="text-xs font-bold tracking-wide text-white">PHONE</p>
-              <Button asChild variant="link" className={linkButtonClass}>
-                <a href="tel:+255222123456">+255 (0) 22 212 3456</a>
-              </Button>
+              <Button
+                variant="link"
+                className={linkButtonClass}
+                render={<a href="tel:+255222123456">+255 (0) 22 212 3456</a>}
+              />
             </div>
           </div>
         </div>
@@ -110,12 +119,16 @@ export function Footer() {
           <ul className="mt-5 flex flex-col gap-3">
             {SOCIAL_LINKS.map(({ label, href, icon: Icon }) => (
               <li key={label}>
-                <Button asChild variant="link" className={linkButtonClass}>
-                  <a href={href} target="_blank" rel="noopener noreferrer">
-                    <Icon className="h-4 w-4" />
-                    {label}
-                  </a>
-                </Button>
+                <Button
+                  variant="link"
+                  className={linkButtonClass}
+                  render={
+                    <a href={href} target="_blank" rel="noopener noreferrer">
+                      <Icon className="h-4 w-4" />
+                      {label}
+                    </a>
+                  }
+                />
               </li>
             ))}
           </ul>
