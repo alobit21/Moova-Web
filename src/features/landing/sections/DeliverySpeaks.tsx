@@ -1,33 +1,5 @@
 import { Bell, Gem, MapPin, Zap } from "lucide-react"
-
-const NOTIFICATIONS = [
-  {
-    icon: "📦",
-    title: "Bidhaa Imechukuliwa",
-    body: "Habari njema! Oda yako imechukuliwa na sasa iko njiani kuja kwako. Fuatilia delivery yako moja kwa moja.",
-  },
-  {
-    icon: "🚀",
-    title: "Iko Njiani",
-    body: "Habari njema! Oda yako iko njiani sasa na inatarajiwa kufika hivi karibuni. Namba: MOV-20260103-DNZ",
-  },
-  {
-    icon: "✅",
-    title: "Oda Imekabidhiwa",
-    body: "Oda yako imefikishwa kwa mafanikio eneo la Goba Njia Nne. Asante kwa kuamini na kutuchagua Moova!",
-  },
-  {
-    icon: "📋",
-    title: "Oda Imetengenezwa",
-    body: "Habari! Tumepokea oda yako kutoka Mwanga_Shop. Namba: MOV-20260103-DNZ. Bidhaa: Bags. Gharama: TZS 3,000",
-  },
-  {
-    icon: "🏍️",
-    title: "Dereva Amechaguliwa",
-    body: "Habari njema! Salvatory Yonah amechaguliwa kusafirisha oda yako. Plate: MC 124. Fuatilia: moova.co.tz",
-  },
-] as const
-
+  import { DELIVERY_NOTIFICATIONS } from "@/features/landing/data/notifications"
 const BADGES = [
   { icon: Gem, label: "Live updates on orders", className: "text-purple-600" },
   { icon: MapPin, label: "Highly rated riders", className: "text-emerald-600" },
@@ -89,7 +61,7 @@ export function DeliverySpeaks() {
       {/* Notification cards marquee */}
       <div className="edge-fade relative mt-16 overflow-hidden">
         <div className="flex w-max animate-marquee gap-6">
-          {[...NOTIFICATIONS, ...NOTIFICATIONS].map((item, i) => (
+          {[...DELIVERY_NOTIFICATIONS, ...DELIVERY_NOTIFICATIONS].map((item, i) => (
             <NotificationCard key={i} {...item} />
           ))}
         </div>
