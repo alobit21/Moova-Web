@@ -27,7 +27,7 @@ export function Header() {
 
         <nav className="hidden items-center gap-10 md:flex">
           {NAV_LINKS.map((link) => (
-            
+            <a
               key={link.label}
               href={link.href}
               className="text-sm font-medium text-white/90 transition-colors hover:text-white"
