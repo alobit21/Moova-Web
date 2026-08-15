@@ -110,39 +110,67 @@ function FirstClickMock() {
 
 function DecisiveMomentMock() {
   return (
-    <div className="flex flex-col gap-5 rounded-2xl border border-blue-100 bg-white p-5">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600 text-white">
-            <Navigation className="h-4 w-4" />
+    <>
+      <style>{`
+        @keyframes progress-grow {
+          0% { width: 0%; }
+          100% { width: 90%; }
+        }
+        .progress-bar-delivery {
+          animation: progress-grow 3.5s ease-in-out infinite alternate;
+          animation-delay: -1s;
+        }
+        .progress-bar-trust {
+          animation: progress-grow 4.5s ease-in-out infinite alternate;
+          animation-delay: 0s;
+        }
+      `}</style>
+      <div className="flex flex-col gap-5 rounded-2xl border border-blue-100 bg-white p-5">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600 text-white">
+              <Navigation className="h-4 w-4" />
+            </span>
+            <div>
+              <p className="text-xs text-muted-foreground">Your rider</p>
+              <p className="text-sm font-semibold text-foreground">4 minutes away</p>
+            </div>
+          </div>
+          <span className="flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
+            <span className="h-1.5 w-1.5 rounded-full bg-blue-600" />
+            Live
           </span>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <span className="h-2 w-2 shrink-0 rounded-full bg-blue-600" />
+          <span className="h-px flex-1 border-t border-dashed border-blue-200" />
+          <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-500" />
+        </div>
+
+        <div className="flex flex-col gap-1.5">
           <div>
-            <p className="text-xs text-muted-foreground">Your rider</p>
-            <p className="text-sm font-semibold text-foreground">4 minutes away</p>
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-muted-foreground">Trust level</span>
+              <span className="font-semibold text-blue-700">90%</span>
+            </div>
+            <div className="mt-2 h-2 rounded-full bg-slate-100">
+              <div className="progress-bar-trust h-full rounded-full bg-gradient-to-r from-blue-600 to-emerald-500" />
+            </div>
+          </div>
+
+          <div>
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-muted-foreground">Delivery progress</span>
+              <span className="font-semibold text-blue-700">90%</span>
+            </div>
+            <div className="mt-2 h-2 rounded-full bg-slate-100">
+              <div className="progress-bar-delivery h-full rounded-full bg-blue-600" />
+            </div>
           </div>
         </div>
-        <span className="flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
-          <span className="h-1.5 w-1.5 rounded-full bg-blue-600" />
-          Live
-        </span>
       </div>
-
-      <div className="flex items-center gap-2">
-        <span className="h-2 w-2 shrink-0 rounded-full bg-blue-600" />
-        <span className="h-px flex-1 border-t border-dashed border-blue-200" />
-        <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-500" />
-      </div>
-
-      <div>
-        <div className="flex items-center justify-between text-xs">
-          <span className="text-muted-foreground">Delivery progress</span>
-          <span className="font-semibold text-blue-700">90%</span>
-        </div>
-        <div className="mt-2 h-2 rounded-full bg-slate-100">
-          <div className="h-full w-[90%] rounded-full bg-blue-600" />
-        </div>
-      </div>
-    </div>
+    </>
   )
 }
 
@@ -184,7 +212,7 @@ function LoyaltyLoopMock() {
 
 export function SecondSale() {
   return (
-    <section id="trust-journey" className="relative isolate overflow-hidden bg-white py-24 lg:py-32">
+    <section id="trust-journey" className="relative isolate overflow-hidden bg-[#F8FAFC] py-24 mt-18 lg:py-32">
       {/* Ambient background blobs — echoes the reference gradient transition */}
       <div
         aria-hidden="true"
@@ -198,10 +226,13 @@ export function SecondSale() {
       <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
         {/* Section header */}
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-4xl font-extrabold leading-tight text-foreground sm:text-5xl">
-            The second sale <br className="hidden sm:block" />
-            is won <span className="text-blue-700">during delivery.</span>
-          </h2>
+         <h2 className="text-4xl font-extrabold leading-tight text-[#0F172A] sm:text-5xl">
+  The second sale <br className="hidden sm:block" />
+  is won{" "}
+  <span className="bg-gradient-to-r from-[#2648A6] to-[#61A6F9] bg-clip-text text-transparent">
+    during delivery.
+  </span>
+</h2>
           <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
             Winning the first order takes marketing. Winning the second depends on
             what happens after checkout. Moova keeps customers informed from
