@@ -61,7 +61,7 @@ export function Hero() {
           <div className="mt-10 flex flex-wrap gap-4">
             <Button
               size="lg"
-              className="rounded-full bg-brand px-8 text-brand-foreground hover:bg-brand/90"
+              className="rounded-full bg-[#5DD586] px-8 text-brand-foreground hover:bg-brand/90"
             >
               Start Delivering Smarter
             </Button>
