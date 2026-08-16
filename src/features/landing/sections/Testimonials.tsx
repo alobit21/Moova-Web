@@ -33,9 +33,9 @@ const TESTIMONIALS = [
 
 function StarRating() {
   return (
-    <div className="flex w-fit items-center gap-0.5 rounded bg-brand px-1.5 py-1">
+    <div className="flex w-fit items-center gap-0.5 rounded  px-1.5 py-1">
       {Array.from({ length: 5 }).map((_, i) => (
-        <Star key={i} className="h-3 w-3 fill-white text-white" />
+        <Star key={i} className="h-3 w-3 fill-[#5DD586] text-white" />
       ))}
     </div>
   )
@@ -45,7 +45,7 @@ export function Testimonials() {
   return (
     <section id="testimonials" className="bg-slate-50 py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
-        <h2 className="text-center text-4xl font-extrabold text-blue-900 sm:text-5xl">
+        <h2 className="text-center text-4xl font-instrument text-[#1F3B89] sm:text-5xl">
           What Online Businesses Say
         </h2>
 
@@ -60,7 +60,7 @@ export function Testimonials() {
               }
             >
               <CardContent className="px-8">
-                <Quote className="h-8 w-8 text-brand" strokeWidth={2.5} />
+                <Quote className="h-8 w-8 text-[#5DD586]" strokeWidth={2.5} />
 
                 <p
                   className={`mt-6 text-base leading-relaxed ${
@@ -74,7 +74,7 @@ export function Testimonials() {
                   <img
                     src={t.avatar}
                     alt={t.name}
-                    className="h-[52px] w-[52px] rounded-full object-cover"
+                    className="h-13 w-13 rounded-full object-cover"
                   />
                   <div>
                     <StarRating />
