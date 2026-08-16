@@ -288,7 +288,7 @@ export function SecondSale() {
         </div>
 
         {/* CTA banner */}
-        <div className="mt-20 overflow-hidden rounded-3xl bg-gradient-to-r from-blue-800 via-blue-700 to-blue-500 px-8 py-16 text-center sm:px-16 md:py-20">
+        <div className="mt-20 overflow-hidden rounded-3xl bg-linear-to-r from-[#2648A6] via-[#3A67C2] to-[#61A6F9] px-8 py-16 text-center sm:px-16 md:py-20">
           <h3 className="text-3xl font-extrabold text-white sm:text-4xl">
             Make Every Delivery Your Next Sale.
           </h3>
