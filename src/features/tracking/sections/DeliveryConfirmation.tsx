@@ -1,89 +1,5 @@
-import { CheckCircle2, MessageSquare } from "lucide-react"
-
-function DeliveryPhoneMockup() {
-  return (
-    <div className="relative mx-auto w-full max-w-sm">
-      <div className="relative overflow-hidden rounded-[2.5rem] border-4 border-slate-900 bg-white shadow-2xl">
-        <div className="flex aspect-[9/19] flex-col">
-          <div className="flex items-center justify-between border-b border-border px-5 py-4">
-            <span className="text-xs font-semibold text-muted-foreground">9:41</span>
-            <div className="flex items-center gap-1.5">
-              <div className="h-2.5 w-2.5 rounded-full bg-slate-900" />
-              <div className="h-2.5 w-2.5 rounded-full bg-slate-900" />
-            </div>
-          </div>
-
-          <div className="flex-1 bg-slate-50 px-5 py-6">
-            <div className="mx-auto w-full max-w-[260px] space-y-4">
-              <div className="rounded-2xl border border-border bg-white p-4 shadow-sm">
-                <div className="flex items-center gap-2">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500">
-                    <MessageSquare className="h-4 w-4 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-slate-900">MESSAGES</p>
-                    <p className="text-[10px] text-muted-foreground">01:35 PM</p>
-                  </div>
-                </div>
-                <p className="mt-3 text-sm font-semibold text-slate-900">
-                  Your order was delivered!
-                </p>
-              </div>
-
-              <div className="rounded-2xl border border-border bg-white p-5 shadow-sm">
-                <div className="flex items-center gap-2">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-brand">
-                    <CheckCircle2 className="h-4 w-4 text-white" />
-                  </div>
-                  <p className="text-sm font-bold text-slate-900">Delivery details</p>
-                </div>
-
-                <div className="mt-4 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-                      <span className="text-xs font-semibold text-slate-900">Order delivered</span>
-                    </div>
-                    <span className="text-[10px] text-muted-foreground">01:35 PM</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-                      <span className="text-xs font-semibold text-slate-900">On the Way</span>
-                    </div>
-                    <span className="text-[10px] text-muted-foreground">01:25 PM</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="h-4 w-4 rounded-full border-2 border-border" />
-                      <span className="text-xs text-muted-foreground">Picked up</span>
-                    </div>
-                    <span className="text-[10px] text-muted-foreground">01:20 PM</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="h-4 w-4 rounded-full border-2 border-border" />
-                      <span className="text-xs text-muted-foreground">Received</span>
-                    </div>
-                    <span className="text-[10px] text-muted-foreground">01:10 PM</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="rounded-2xl bg-emerald-500 p-5 text-center text-white shadow-sm">
-                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-white/20">
-                  <CheckCircle2 className="h-7 w-7 text-white" />
-                </div>
-                <p className="text-sm font-bold">DELIVERY CONFIRMED</p>
-                <p className="mt-1 text-[10px] text-white/80">Your package has arrived safely</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
+import { CheckCircle2 } from "lucide-react"
+import deliveryPhoneMockup from "@/assets/tracking/delivery-confirmation-phone.png"
 
 const BENEFITS = [
   "Instant confirmation at the time of delivery",
@@ -117,7 +33,11 @@ export function DeliveryConfirmation() {
           </div>
 
           <div className="flex justify-center lg:justify-end">
-            <DeliveryPhoneMockup />
+            <img
+              src={deliveryPhoneMockup}
+              alt="Delivery confirmation phone mockup"
+              className="w-full max-w-sm"
+            />
           </div>
         </div>
       </div>
