@@ -6,6 +6,7 @@ import { TrackingResult } from "@/features/tracking/components/TrackingResult"
 import { TrackingSpeaks } from "@/features/tracking/sections/TrackingSpeaks"
 import { DeliveryConfirmation } from "@/features/tracking/sections/DeliveryConfirmation"
 import { CustomerFeedback } from "@/features/tracking/sections/CustomerFeedback"
+import { BrandedExperience } from "@/features/tracking/sections/BrandedExperience"
 
 // TODO: remove once the real tracking API is wired up.
 const MOCK_RESULT: TrackingResultType = {
@@ -62,6 +63,7 @@ export function TrackingPage() {
       <TrackingSpeaks />
       <DeliveryConfirmation />
       <CustomerFeedback />
+      <BrandedExperience />
     </section>
   )
 }
