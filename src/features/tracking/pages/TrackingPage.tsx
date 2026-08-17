@@ -2,7 +2,8 @@ import { useState } from "react"
 import trackingIllustration from "@/assets/tracking/tracking-illustration.png"
 import { ParcelSearchForm } from "@/features/tracking/components/ParcelSearchForm"
 import type { TrackingResult as TrackingResultType } from "@/features/tracking/types/tracking.types"
-import { TrackingResult } from "../components/TrackingResult"
+import { TrackingResult } from "@/features/tracking/components/TrackingResult"
+import { TrackingSpeaks } from "@/features/tracking/sections/TrackingSpeaks"
 
 // TODO: remove once the real tracking API is wired up.
 const MOCK_RESULT: TrackingResultType = {
@@ -55,6 +56,8 @@ export function TrackingPage() {
 
         {result ? <TrackingResult result={result} /> : null}
       </div>
+
+      <TrackingSpeaks />
     </section>
   )
 }
