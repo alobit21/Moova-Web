@@ -12,7 +12,7 @@ export function BrandedExperience() {
   return (
     <section className="bg-white py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
           <div className="relative flex justify-center lg:justify-start">
             <img
               src={brandedExperienceWoman}
@@ -22,11 +22,11 @@ export function BrandedExperience() {
             <img
               src={brandedExperiencePhone}
               alt="Tracking phone mockup"
-              className="absolute -right-4 top-1/2 w-48 -translate-y-1/2 lg:-right-12"
+              className="absolute -right-2 top-1/2 w-44 -translate-y-1/2 lg:-right-6"
             />
           </div>
 
-          <div className="max-w-xl">
+          <div className="max-w-xl lg:pl-8">
             <h2 className="text-4xl font-extrabold leading-tight text-foreground sm:text-5xl">
               20% faster delivery with a branded experience
             </h2>
