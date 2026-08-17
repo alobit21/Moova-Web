@@ -3,11 +3,15 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
 @import "@fontsource-variable/instrument-sans";
+@import "leaflet/dist/leaflet.css";
+
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
     --color-brand: var(--brand);
+    --color-tracking: var(--tracking);
+    --color-tracking-foreground: var(--tracking-foreground);
     --color-brand-foreground: var(--brand-foreground);
     --color-navy: var(--navy);
     --color-teal: var(--teal);
@@ -60,6 +64,8 @@
 
 :root {
     --brand: #2648A6;
+    --tracking: #829ce2;
+    --tracking-foreground: oklch(1 0 0);
     --brand-foreground: oklch(1 0 0);
     --navy: #1c3b7a;
     --teal: #0D9488;
