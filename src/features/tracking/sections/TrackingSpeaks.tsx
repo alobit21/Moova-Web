@@ -46,7 +46,7 @@ function NotificationCard({
   body: string
 }) {
   return (
-    <Card className="w-[300px] shrink-0 border-0 shadow-sm">
+    <Card className="w-75 shrink-0 border-0 shadow-sm">
       <CardContent className="p-6">
         <div className="text-2xl">{icon}</div>
         <h3 className="mt-3 text-base font-bold text-foreground">{title}</h3>
@@ -77,9 +77,9 @@ function BadgePill({
 
 export function TrackingSpeaks() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-blue-50/70 to-white py-24 lg:py-32">
+    <section className="relative overflow-hidden bg-linear-to-b from-blue-50/70 to-white py-24 lg:py-32">
       <div className="relative mx-auto max-w-4xl px-6 text-center lg:px-12">
-        <h2 className="text-4xl font-extrabold leading-tight text-foreground sm:text-5xl">
+        <h2 className="text-4xl font-instrument leading-tight text-[#1F3B89] sm:text-5xl">
           Every Delivery Speaks for with you
         </h2>
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">

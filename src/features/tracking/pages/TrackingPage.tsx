@@ -4,6 +4,7 @@ import { ParcelSearchForm } from "@/features/tracking/components/ParcelSearchFor
 import type { TrackingResult as TrackingResultType } from "@/features/tracking/types/tracking.types"
 import { TrackingResult } from "@/features/tracking/components/TrackingResult"
 import { TrackingSpeaks } from "@/features/tracking/sections/TrackingSpeaks"
+import { DeliveryConfirmation } from "@/features/tracking/sections/DeliveryConfirmation"
 
 // TODO: remove once the real tracking API is wired up.
 const MOCK_RESULT: TrackingResultType = {
@@ -58,6 +59,7 @@ export function TrackingPage() {
       </div>
 
       <TrackingSpeaks />
+      <DeliveryConfirmation />
     </section>
   )
 }
