@@ -22,7 +22,7 @@ export function BrandedExperience() {
             <img
               src={brandedExperiencePhone}
               alt="Tracking phone mockup"
-              className="absolute -right-2 top-1/2 w-44 -translate-y-1/2 lg:-right-6"
+              className="absolute left-full top-1/2 w-44 -translate-x-1/2 -translate-y-1/2"
             />
           </div>
 
