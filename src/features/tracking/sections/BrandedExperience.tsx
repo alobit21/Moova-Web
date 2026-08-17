@@ -13,7 +13,7 @@ export function BrandedExperience() {
     <section className="bg-white py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
-          <div className="relative flex justify-center lg:justify-start">
+          <div className="relative">
             <img
               src={brandedExperienceWoman}
               alt="Customer with shopping bags"
@@ -26,7 +26,7 @@ export function BrandedExperience() {
             />
           </div>
 
-          <div className="max-w-xl lg:pl-8">
+          <div className="max-w-xl lg:pl-48">
             <h2 className="text-4xl font-extrabold leading-tight text-foreground sm:text-5xl">
               20% faster delivery with a branded experience
             </h2>
