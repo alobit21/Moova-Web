@@ -1,6 +1,5 @@
 import { CheckCircle2 } from "lucide-react"
-import brandedExperienceWoman from "@/assets/tracking/branded-experience-woman.png"
-import brandedExperiencePhone from "@/assets/tracking/branded-experience-phone.png"
+import brandedExperienceMockup from "@/assets/tracking/branded-experience.png"
 
 const BENEFITS = [
   "Live updates on driver location and progress",
@@ -12,21 +11,16 @@ export function BrandedExperience() {
   return (
     <section className="bg-white py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
-          <div className="relative">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
+          <div className="flex justify-center">
             <img
-              src={brandedExperienceWoman}
-              alt="Customer with shopping bags"
+              src={brandedExperienceMockup}
+              alt="Branded experience mockup"
               className="w-full max-w-md"
-            />
-            <img
-              src={brandedExperiencePhone}
-              alt="Tracking phone mockup"
-              className="absolute left-full top-1/2 w-44 -translate-x-1/2 -translate-y-1/2"
             />
           </div>
 
-          <div className="max-w-xl lg:pl-48">
+          <div className="max-w-xl">
             <h2 className="text-4xl font-extrabold leading-tight text-foreground sm:text-5xl">
               20% faster delivery with a branded experience
             </h2>
