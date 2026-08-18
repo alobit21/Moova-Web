@@ -10,10 +10,10 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 const NAV_LINKS = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
+  { label: "Home", href: "#home", isRoute: false },
+  { label: "About", href: "#about", isRoute: false },
   { label: "Tracking", href: "/tracking", isRoute: true },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "#contact", isRoute: false },
 ] as const
 
 const navLinkClass = "text-sm font-medium text-white/90 transition-colors hover:text-white"
@@ -52,12 +52,12 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <Button
-            asChild
-            className="hidden rounded-full bg-blue-600 px-6 hover:bg-blue-500 sm:inline-flex"
+          <a
+            href="#get-started"
+            className="hidden rounded-full bg-blue-600 px-6 hover:bg-blue-500 sm:inline-flex text-sm font-medium text-white"
           >
-            <a href="#get-started">Get Started</a>
-          </Button>
+            Get Started
+          </a>
 
           <DropdownMenu>
             <DropdownMenuTrigger
