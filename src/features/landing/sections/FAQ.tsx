@@ -44,7 +44,7 @@ export function FAQ() {
   return (
     <section id="faq" className="bg-white py-24">
       <div className="mx-auto max-w-4xl px-6 lg:px-12">
-        <h2 className="text-center text-4xl font-extrabold text-blue-900 sm:text-5xl">
+        <h2 className="text-center text-4xl font-semibold font-instrument text-[#1F3B89] sm:text-5xl">
           Frequently Asked Questions
         </h2>
 
