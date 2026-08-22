@@ -5,6 +5,7 @@ import orderManagement from "@/assets/becomeOne/order-management.png"
 import deliveryStatus from "@/assets/becomeOne/delivery-status.png"
 import businessInsights from "@/assets/becomeOne/business-insights.png"
 import bgImage from "@/assets/becomeOne/everything-you-need-bg.png"
+import { Card, CardContent } from "@/components/ui/card"
 
 const FEATURES = [
   {
@@ -59,18 +60,20 @@ export function EverythingYouNeed() {
 
         <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map(({ icon, title, description }) => (
-            <div
+            <Card
               key={title}
-              className="mx-auto flex w-full max-w-[370px] min-h-[220px] flex-col gap-4 rounded-2xl border border-white/10 bg-white/10 p-8 backdrop-blur-sm"
+              className="mx-auto flex w-full max-w-[370px] min-h-[220px] rounded-2xl border border-white/10 bg-white/10 p-0 backdrop-blur-sm shadow-none"
             >
-              <img src={icon} alt="" aria-hidden="true" className="h-14 w-14" />
-              <div>
-                <h3 className="text-lg font-bold text-white">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/75">
-                  {description}
-                </p>
-              </div>
-            </div>
+              <CardContent className="flex flex-col gap-4 p-8">
+                <img src={icon} alt="" aria-hidden="true" className="h-14 w-14" />
+                <div>
+                  <h3 className="text-lg font-bold text-white">{title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-white/75">
+                    {description}
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>

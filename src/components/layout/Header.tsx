@@ -76,12 +76,15 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <a
-            href="#get-started"
-            className="hidden items-center justify-center rounded-full bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/25 transition-all duration-200 hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/35 active:scale-95 sm:inline-flex"
-          >
-            Get Started
-          </a>
+          <Button
+            variant="ghost"
+            className="hidden h-auto items-center justify-center rounded-full bg-gradient-to-r from-[#2648A6] to-[#3B82F6] px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/25 transition-all duration-200 hover:opacity-95 hover:text-white hover:shadow-lg hover:shadow-blue-500/35 active:scale-95 sm:inline-flex border-0"
+            render={
+              <a href="#get-started">
+                Get Started
+              </a>
+            }
+          />
 
           <DropdownMenu>
             <DropdownMenuTrigger
@@ -126,12 +129,11 @@ export function Header() {
               <DropdownMenuItem
                 className="mt-2"
                 render={
-                  <a
-                    href="#get-started"
-                    className="flex w-full items-center justify-center rounded-full bg-blue-600 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500"
-                  >
-                    Get Started
-                  </a>
+                  <Button
+                    variant="ghost"
+                    className="flex w-full h-auto items-center justify-center rounded-full bg-gradient-to-r from-[#2648A6] to-[#3B82F6] py-2 text-center text-sm font-semibold text-white shadow-sm hover:opacity-95 hover:text-white border-0"
+                    render={<a href="#get-started">Get Started</a>}
+                  />
                 }
               />
             </DropdownMenuContent>

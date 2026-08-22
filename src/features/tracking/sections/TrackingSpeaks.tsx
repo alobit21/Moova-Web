@@ -1,5 +1,6 @@
 import { Gem, MapPin, Bell, Zap } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 
 const BADGES = [
   { icon: Gem, label: "Live updates on orders", className: "text-purple-600" },
@@ -66,12 +67,12 @@ function BadgePill({
   className: string
 }) {
   return (
-    <div className="flex shrink-0 items-center gap-2 rounded-full bg-white px-5 py-3 shadow-sm">
+    <Badge variant="outline" className="flex shrink-0 items-center gap-2 rounded-full bg-white px-5 py-3 shadow-sm border-0 font-normal">
       <Icon className={`h-4 w-4 ${className}`} strokeWidth={2.5} />
       <span className="whitespace-nowrap text-sm font-semibold text-foreground">
         {label}
       </span>
-    </div>
+    </Badge>
   )
 }
 

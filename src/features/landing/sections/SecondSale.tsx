@@ -10,6 +10,8 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Progress } from "@/components/ui/progress"
 
 const STATS = [
   { icon: Users, value: "2,400+", label: "Businesses onboarded" },
@@ -70,9 +72,9 @@ function MomentCard({
             {eyebrow}
           </span>
           {badge ? (
-            <span className="rounded-full bg-blue-600 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
+            <Badge className="rounded-full bg-blue-600 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-white border-0">
               {badge}
-            </span>
+            </Badge>
           ) : null}
         </div>
 
@@ -136,10 +138,10 @@ function DecisiveMomentMock() {
               <p className="text-sm font-semibold text-foreground">4 minutes away</p>
             </div>
           </div>
-          <span className="flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
+          <Badge variant="secondary" className="flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 border-0">
             <span className="h-1.5 w-1.5 rounded-full bg-blue-600" />
             Live
-          </span>
+          </Badge>
         </div>
 
         <div className="flex items-center gap-2">
@@ -154,9 +156,7 @@ function DecisiveMomentMock() {
               <span className="text-muted-foreground">Trust level</span>
               <span className="font-semibold text-blue-700">90%</span>
             </div>
-            <div className="mt-2 h-2 rounded-full bg-slate-100">
-              <div className="progress-bar-trust h-full rounded-full bg-gradient-to-r from-blue-600 to-emerald-500" />
-            </div>
+            <Progress value={90} className="mt-2 h-2 bg-slate-100" indicatorClassName="progress-bar-trust bg-gradient-to-r from-blue-600 to-emerald-500" />
           </div>
 
           <div>
@@ -164,9 +164,7 @@ function DecisiveMomentMock() {
               <span className="text-muted-foreground">Delivery progress</span>
               <span className="font-semibold text-blue-700">90%</span>
             </div>
-            <div className="mt-2 h-2 rounded-full bg-slate-100">
-              <div className="progress-bar-delivery h-full rounded-full bg-blue-600" />
-            </div>
+            <Progress value={90} className="mt-2 h-2 bg-slate-100" indicatorClassName="progress-bar-delivery bg-blue-600" />
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ import seamoss from "@/assets/become-one/avatars/seamoss.png"
 import fashionistas from "@/assets/become-one/avatars/fashionistas.png"
 import luiStyles from "@/assets/become-one/avatars/lui-styles.png"
 import koreanCosmetics from "@/assets/become-one/avatars/korean-cosmetics.png"
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 
 const OUTER_ORBIT_AVATARS = [
   { src: fashionCenter, alt: "Fashion Center" },
@@ -86,11 +87,10 @@ function OrbitAvatar({
             className={`${counterAnimation} -translate-x-1/2 -translate-y-1/2`}
             style={{ width: size, height: size }}
           >
-            <img
-              src={src}
-              alt={alt}
-              className="h-full w-full rounded-full object-cover shadow-lg ring-4 ring-white"
-            />
+            <Avatar className="h-full w-full rounded-full shadow-lg ring-4 ring-white">
+              <AvatarImage src={src} alt={alt} className="object-cover" />
+              <AvatarFallback>{alt.slice(0, 2).toUpperCase()}</AvatarFallback>
+            </Avatar>
           </div>
         </div>
       </div>

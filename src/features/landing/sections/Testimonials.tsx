@@ -1,5 +1,6 @@
 import { Quote, Star } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import manOne from "@/assets/testimonies/testimonial-man-1.png"
 import manTwo from "@/assets/testimonies/testimonial-man-2.png"
 import manThree from "@/assets/testimonies/testimonial-man-3.png"
@@ -71,11 +72,10 @@ export function Testimonials() {
                 </p>
 
                 <div className="mt-8 flex items-center gap-3">
-                  <img
-                    src={t.avatar}
-                    alt={t.name}
-                    className="h-13 w-13 rounded-full object-cover"
-                  />
+                  <Avatar className="h-13 w-13">
+                    <AvatarImage src={t.avatar} alt={t.name} />
+                    <AvatarFallback>{t.name.slice(0, 2).toUpperCase()}</AvatarFallback>
+                  </Avatar>
                   <div>
                     <StarRating />
                     <p

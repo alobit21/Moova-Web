@@ -22,6 +22,9 @@ import {
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Badge } from "@/components/ui/badge"
+import { Progress } from "@/components/ui/progress"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 const STEP_INTERVAL_MS = 5000
 
@@ -60,9 +63,12 @@ function OrderInboxPanel() {
                 <p className="truncate text-sm font-semibold text-foreground">{o.name}</p>
                 <p className="truncate text-xs text-muted-foreground">{o.items}</p>
               </div>
-              <span className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold ${o.statusClass}`}>
+              <Badge
+                variant="secondary"
+                className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-semibold border-0 ${o.statusClass}`}
+              >
                 {o.status}
-              </span>
+              </Badge>
             </div>
           ))}
         </div>
@@ -77,7 +83,9 @@ function CreateDeliveryPanel() {
       <CardContent className="p-6">
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-bold text-foreground">Create Delivery</h3>
-          <span className="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-700">DRAFT</span>
+          <Badge variant="secondary" className="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-700 border-0">
+            DRAFT
+          </Badge>
         </div>
         <div className="mt-4 flex flex-col gap-4">
           <div>
@@ -130,9 +138,7 @@ function TrackDeliveryPanel() {
           <div className="flex-1">
             <p className="text-xs text-muted-foreground">Order #28492</p>
             <p className="text-sm font-bold text-foreground">Tracking Active</p>
-            <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-muted">
-              <div className="h-full w-2/3 rounded-full bg-emerald-500" />
-            </div>
+            <Progress value={66} className="mt-1.5 h-1.5 w-full bg-muted" indicatorClassName="bg-emerald-500" />
           </div>
         </div>
       </CardContent>
@@ -169,13 +175,13 @@ function AssignRiderPanel() {
                 </p>
               </div>
               {r.selected ? (
-                <span className="shrink-0 rounded-full bg-emerald-500 px-2.5 py-1 text-xs font-semibold text-white">
+                <Badge className="shrink-0 rounded-full bg-emerald-500 px-2.5 py-1 text-xs font-semibold text-white border-0">
                   Assigned
-                </span>
+                </Badge>
               ) : (
-                <span className="shrink-0 rounded-full border border-border px-2.5 py-1 text-xs font-semibold text-muted-foreground">
+                <Badge variant="outline" className="shrink-0 rounded-full border-border px-2.5 py-1 text-xs font-semibold text-muted-foreground">
                   Select
-                </span>
+                </Badge>
               )}
             </div>
           ))}
@@ -465,28 +471,22 @@ export function DeliveryJourney() {
           </p>
         </div>
 
-        <div className="mx-auto mt-10 flex w-fit rounded-full bg-slate-100 p-1.5">
-          <button
-            onClick={() => setTab("shop")}
-            className={`rounded-full px-6 py-2.5 text-sm font-semibold transition-colors ${
-              tab === "shop"
-                ? "bg-teal-500 text-white shadow-sm"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            Online Shop
-          </button>
-          <button
-            onClick={() => setTab("buyer")}
-            className={`rounded-full px-6 py-2.5 text-sm font-semibold transition-colors ${
-              tab === "buyer"
-                ? "bg-teal-500 text-white shadow-sm"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            Online Buyer
-          </button>
-        </div>
+        <Tabs value={tab} onValueChange={(val) => setTab(val as "shop" | "buyer")} className="mx-auto mt-10 w-fit">
+          <TabsList className="h-auto rounded-full bg-slate-100 p-1.5 gap-0">
+            <TabsTrigger
+              value="shop"
+              className="rounded-full px-6 py-2.5 text-sm font-semibold transition-colors data-[state=active]:bg-teal-500 data-[state=active]:text-white data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground border-0"
+            >
+              Online Shop
+            </TabsTrigger>
+            <TabsTrigger
+              value="buyer"
+              className="rounded-full px-6 py-2.5 text-sm font-semibold transition-colors data-[state=active]:bg-teal-500 data-[state=active]:text-white data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground border-0"
+            >
+              Online Buyer
+            </TabsTrigger>
+          </TabsList>
+        </Tabs>
 
         <div className="mt-16 grid gap-12 lg:grid-cols-2 lg:items-center">
           <div className="flex flex-col">

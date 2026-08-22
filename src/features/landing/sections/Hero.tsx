@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 import heroBg from "@/assets/hero-bg.png"
 import phoneMockup from "@/assets/phone-mockup.png"
 import { DELIVERY_NOTIFICATIONS } from "../data/notifications"
@@ -13,11 +15,13 @@ function HeroNotificationCard({
   body: string
 }) {
   return (
-    <div className="flex h-[200px] w-[280px] shrink-0 flex-col rounded-2xl bg-[#2F5392] p-5 font-instrument">
-      <div className="text-xl">{icon}</div>
-      <h3 className="mt-3 text-[12px] font-bold text-white">{title}</h3>
-      <p className="mt-2 text-[12px] leading-relaxed text-white/70">{body}</p>
-    </div>
+    <Card className="flex h-[200px] w-[280px] shrink-0 rounded-2xl border-0 bg-[#2F5392] p-0 font-instrument shadow-none">
+      <CardContent className="flex flex-col p-5">
+        <div className="text-xl">{icon}</div>
+        <h3 className="mt-3 text-[12px] font-bold text-white">{title}</h3>
+        <p className="mt-2 text-[12px] leading-relaxed text-white/70">{body}</p>
+      </CardContent>
+    </Card>
   )
 }
 
@@ -35,7 +39,7 @@ export function Hero() {
 
       <div className="relative mx-auto grid max-w-7xl gap-12 px-6 pb-20 pt-32 lg:grid-cols-2 lg:items-center lg:px-12 lg:pt-40">
         <div className="max-w-xl">
-          <div className="mb-8 inline-flex items-center gap-3 rounded-full bg-white/10 py-2 pl-2 pr-5 backdrop-blur-sm">
+          <Badge variant="secondary" className="mb-8 inline-flex items-center gap-3 rounded-full bg-white/10 py-2 pl-2 pr-5 backdrop-blur-sm border-0 font-normal">
             <div className="flex -space-x-3">
               <span className="h-8 w-8 rounded-full border-2 border-white/40 bg-blue-300" />
               <span className="h-8 w-8 rounded-full border-2 border-white/40 bg-amber-300" />
@@ -45,7 +49,7 @@ export function Hero() {
               <span className="font-semibold">Trust by 500+ brands</span>{" "}
               <span className="text-white/70">globally</span>
             </p>
-          </div>
+          </Badge>
 
           <h1 className="text-5xl font-extrabold leading-[1.05] text-white sm:text-6xl">
             Every Delivery Builds Customer Trust.
