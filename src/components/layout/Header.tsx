@@ -25,7 +25,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        "inset-x-0 top-0 z-20",
+        "inset-x-0 top-0 z-50",
         isHome ? "absolute bg-transparent" : "sticky bg-[#1c3b7a]"
       )}
     >
