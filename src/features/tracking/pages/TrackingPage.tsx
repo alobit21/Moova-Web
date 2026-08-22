@@ -26,7 +26,7 @@ const MOCK_RESULT: TrackingResultType = {
 }
 
 export function TrackingPage() {
-  const [result, setResult] = useState<TrackingResultType | null>(null)
+  const [result, setResult] = useState<TrackingResultType | null>(MOCK_RESULT)
 
   function handleSearch(trackingNumber: string) {
     // TODO: replace with a real API call once the tracking endpoint exists.
@@ -35,7 +35,7 @@ export function TrackingPage() {
   }
 
   return (
-    <section className="relative overflow-hidden bg-white pb-24 pt-16 lg:pt-24">
+    <section className="relative overflow-x-hidden bg-white pb-24 pt-16 lg:pt-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <div className="relative">
           <div className="max-w-2xl">
@@ -57,16 +57,19 @@ export function TrackingPage() {
             className="pointer-events-none absolute right-0 top-0 hidden w-56 lg:block"
           />
         </div>
-
-        {result ? <TrackingResult result={result} /> : null}
       </div>
+
+      {result ? (
+        <div className="mt-12 w-full pl-6 lg:pl-12 xl:pl-[calc(max(0px,(100vw-80rem)/2)+3rem)] pr-0">
+          <TrackingResult result={result} />
+        </div>
+      ) : null}
 
       <TrackingSpeaks />
       <DeliveryConfirmation />
       <CustomerFeedback />
       <BrandedExperience />
       <FAQ />
-      
     </section>
   )
 }
