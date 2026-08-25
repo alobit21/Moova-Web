@@ -210,7 +210,7 @@ function LoyaltyLoopMock() {
 
 export function SecondSale() {
   return (
-    <section id="trust-journey" className="relative isolate overflow-hidden bg-[#F8FAFC] py-24 mt-18 lg:py-32">
+    <section id="trust-journey" className="relative isolate overflow-hidden bg-[#F8FAFC] py-24 lg:py-32">
       {/* Ambient background blobs — echoes the reference gradient transition */}
       <div
         aria-hidden="true"
@@ -297,14 +297,14 @@ export function SecondSale() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Button
               size="lg"
-              className="rounded-full bg-white px-8 text-blue-700 hover:bg-white/90"
+              className="rounded-full bg-white px-8 sm:px-10 text-blue-700 shadow-lg shadow-blue-950/20 hover:bg-white/90 hover:shadow-xl transition-all"
             >
               Get started free
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="rounded-full border-white/60 bg-transparent px-8 text-white hover:bg-white/10 hover:text-white"
+              className="rounded-full border-white/50 bg-white/5 px-8 sm:px-10 text-white backdrop-blur-xs hover:bg-white/15 hover:border-white/80 hover:text-white transition-all"
             >
               Watch Product Demo
             </Button>

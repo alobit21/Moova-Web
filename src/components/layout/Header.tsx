@@ -78,7 +78,7 @@ export function Header() {
         <div className="flex items-center gap-3">
           <Button
             variant="ghost"
-            className="hidden h-auto items-center justify-center rounded-full bg-gradient-to-r from-[#2648A6] to-[#3B82F6] px-6 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-500/25 transition-all duration-200 hover:opacity-95 hover:text-white hover:shadow-lg hover:shadow-blue-500/35 active:scale-95 sm:inline-flex border-0"
+            className="hidden h-11 sm:h-12 items-center justify-center rounded-full bg-gradient-to-r from-[#2648A6] to-[#3B82F6] px-7 py-3 text-sm sm:text-base font-semibold text-white shadow-md shadow-blue-500/25 transition-all duration-200 hover:opacity-95 hover:text-white hover:shadow-lg hover:shadow-blue-500/35 active:scale-95 sm:inline-flex border-0"
             render={
               <a href="#get-started">
                 Get Started
