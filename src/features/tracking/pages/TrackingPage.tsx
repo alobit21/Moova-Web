@@ -35,35 +35,36 @@ export function TrackingPage() {
   }
 
   return (
-    <section className="relative overflow-x-hidden bg-white pb-24 pt-16 lg:pt-24">
-      <div className="mx-auto max-w-7xl px-6 lg:px-12">
-        <div className="relative">
-          <div className="max-w-2xl">
-            <h1 className="text-4xl font-extrabold text-foreground sm:text-5xl">
+    <section className="relative overflow-x-hidden bg-white pb-20 pt-10 sm:pt-14 lg:pt-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
+        <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+          <div className="max-w-xl w-full">
+            <h1 className="text-3xl font-extrabold text-foreground sm:text-4xl lg:text-5xl tracking-tight">
               Parcel tracking
             </h1>
-            <p className="mt-3 text-muted-foreground">
-              Enter the parcel tracking number starts with the letter 'M'
+            <p className="mt-3 text-sm sm:text-base text-muted-foreground">
+              Enter the parcel tracking number starts with the letter &apos;M&apos;
               followed by digits.
             </p>
 
             <ParcelSearchForm onSearch={handleSearch} />
           </div>
 
-          <img
-            src={trackingIllustration}
-            alt=""
-            aria-hidden="true"
-            className="pointer-events-none absolute right-0 top-0 hidden w-56 lg:block"
-          />
+          <div className="flex justify-center md:justify-end shrink-0">
+            <img
+              src={trackingIllustration}
+              alt="Parcel tracking illustration"
+              className="w-44 sm:w-56 lg:w-64 h-auto object-contain"
+            />
+          </div>
         </div>
-      </div>
 
-      {result ? (
-        <div className="mt-12 w-full pl-6 lg:pl-12 xl:pl-[calc(max(0px,(100vw-80rem)/2)+3rem)] pr-0">
-          <TrackingResult result={result} />
-        </div>
-      ) : null}
+        {result ? (
+          <div className="mt-10 sm:mt-14 w-full">
+            <TrackingResult result={result} />
+          </div>
+        ) : null}
+      </div>
 
       <TrackingSpeaks />
       <DeliveryConfirmation />

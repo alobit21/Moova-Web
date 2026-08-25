@@ -9,27 +9,27 @@ const BENEFITS = [
 
 export function CustomerFeedback() {
   return (
-    <section className="bg-white py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-12">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
-          <div className="flex justify-center lg:justify-start">
+    <section className="bg-white py-16 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center">
+          <div className="flex justify-center">
             <img
               src={customerFeedbackMockup}
               alt="Customer feedback mockup"
-              className="w-full max-w-lg"
+              className="w-full max-w-xs sm:max-w-md lg:max-w-lg object-contain"
             />
           </div>
 
           <div className="max-w-xl">
-            <h2 className="text-4xl font-extrabold leading-tight text-foreground sm:text-5xl">
+            <h2 className="text-3xl font-extrabold leading-tight text-foreground sm:text-4xl lg:text-5xl">
               Customer feedback &amp; notifications
             </h2>
-            <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+            <p className="mt-4 text-base sm:text-lg leading-relaxed text-muted-foreground">
               Engage with customers during and after delivery with instant
               feedback requests and timely updates on their order status.
             </p>
 
-            <ul className="mt-8 space-y-4">
+            <ul className="mt-6 space-y-3.5">
               {BENEFITS.map((benefit) => (
                 <li key={benefit} className="flex items-start gap-3">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500" />

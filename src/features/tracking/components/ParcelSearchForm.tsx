@@ -23,23 +23,25 @@ export function ParcelSearchForm({ onSearch }: { onSearch: (trackingNumber: stri
  
 
 return (
-    <form onSubmit={handleSubmit} noValidate className="mt-8 flex flex-col gap-3">
-      <Input
-        value={value}
-        onChange={(event) => setValue(event.target.value)}
-        placeholder="M 123 4567 890"
-        aria-label="Parcel tracking number"
-        aria-invalid={Boolean(error)}
-        className="h-14 rounded-xl border-tracking/60 bg-tracking/5 px-5 text-base focus-visible:border-tracking focus-visible:ring-tracking/40"
-      />
-      {error ? (
-        <p role="alert" className="text-sm text-destructive">
-          {error}
-        </p>
-      ) : null}
+    <form onSubmit={handleSubmit} noValidate className="mt-6 flex flex-col sm:flex-row items-stretch gap-3">
+      <div className="relative flex-1">
+        <Input
+          value={value}
+          onChange={(event) => setValue(event.target.value)}
+          placeholder="M 123 4567 890"
+          aria-label="Parcel tracking number"
+          aria-invalid={Boolean(error)}
+          className="h-12 sm:h-14 rounded-xl border-slate-200 bg-slate-50/80 px-4 text-base font-medium text-foreground placeholder:text-muted-foreground focus-visible:bg-white focus-visible:border-blue-600 focus-visible:ring-blue-500/20"
+        />
+        {error ? (
+          <p role="alert" className="mt-1 text-xs text-destructive font-medium">
+            {error}
+          </p>
+        ) : null}
+      </div>
       <Button
         type="submit"
-        className="h-14 rounded-xl bg-tracking text-base font-semibold text-tracking-foreground hover:bg-tracking/90"
+        className="h-12 sm:h-14 px-8 rounded-xl bg-blue-600 hover:bg-blue-700 text-base font-semibold text-white shadow-md shadow-blue-500/20 transition-all shrink-0"
       >
         Search
       </Button>

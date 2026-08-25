@@ -78,12 +78,12 @@ function BadgePill({
 
 export function TrackingSpeaks() {
   return (
-    <section className="relative overflow-hidden bg-linear-to-b from-blue-50/70 to-white py-24 lg:py-32">
-      <div className="relative mx-auto max-w-4xl px-6 text-center lg:px-12">
-        <h2 className="text-4xl font-instrument leading-tight text-[#1F3B89] sm:text-5xl">
-          Every Delivery Speaks for with you
+    <section className="relative overflow-hidden bg-linear-to-b from-blue-50/70 to-white py-16 sm:py-24 lg:py-32">
+      <div className="relative mx-auto max-w-4xl px-4 sm:px-6 text-center lg:px-12">
+        <h2 className="text-3xl font-extrabold leading-tight text-[#1F3B89] sm:text-4xl lg:text-5xl">
+          Every Delivery Speaks for Your Business
         </h2>
-        <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+        <p className="mx-auto mt-4 sm:mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground">
           Customers never have to ask, &quot;Where is my order?&quot; Moova
           automatically sends delivery updates from order creation to
           successful delivery.

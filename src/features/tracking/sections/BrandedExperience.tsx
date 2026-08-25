@@ -9,36 +9,36 @@ const BENEFITS = [
 
 export function BrandedExperience() {
   return (
-    <section className="bg-wwhite  py-20 lg:py-28">
-      <div className="mx-auto max-w-7xl px-6 lg:px-12">
+    <section className="bg-white py-16 sm:py-20 lg:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         {/* Top: centered headline */}
-        <h2 className="mx-auto max-w-3xl text-center text-4xl font-semibold leading-tight text-instrument sm:text-5xl">
+        <h2 className="mx-auto max-w-3xl text-center text-3xl font-extrabold leading-tight text-slate-900 sm:text-4xl lg:text-5xl">
           20% faster delivery with a branded experience
         </h2>
 
         {/* Below: two columns */}
-        <div className="mt-16 grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
+        <div className="mt-12 sm:mt-16 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center">
           {/* Left: image */}
-          <div className="flex justify-center lg:justify-start">
+          <div className="flex justify-center">
             <img
               src={brandedExperienceMockup}
               alt="Customer checking her delivery status on the Moova tracking screen"
-              className="w-full max-w-md rounded-2xl "
+              className="w-full max-w-xs sm:max-w-md rounded-2xl shadow-md"
             />
           </div>
 
           {/* Right: text */}
           <div className="max-w-xl">
-            <h3 className="text-3xl font-extrabold text-foreground sm:text-4xl">
+            <h3 className="text-2xl font-extrabold text-foreground sm:text-3xl lg:text-4xl">
               Real-time delivery tracking
             </h3>
-            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+            <p className="mt-3 text-base sm:text-lg leading-relaxed text-muted-foreground">
               Give customers full visibility into their order with a live
               tracking link shared via SMS. They&apos;ll always know exactly
               when to expect delivery.
             </p>
 
-            <ul className="mt-8 space-y-4">
+            <ul className="mt-6 space-y-3.5">
               {BENEFITS.map((benefit) => (
                 <li key={benefit} className="flex items-start gap-3">
                   <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-100">
