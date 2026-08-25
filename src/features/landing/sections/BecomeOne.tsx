@@ -100,53 +100,55 @@ function OrbitAvatar({
 
 export function BecomeOne() {
   return (
-    <section id="customers" className="relative overflow-hidden bg-[#F5F9FF] py-24 lg:py-32">
-      <div className="relative mx-auto max-w-4xl px-6 text-center lg:px-12">
-  <h2 className="text-4xl font-extrabold leading-tight sm:text-5xl">
-  <span className="block text-[#191B1F]">
-    Become One of Those Seeking to Turn First-Time
-  </span>
+    <section id="customers" className="relative overflow-hidden bg-[#F5F9FF] py-16 sm:py-24 lg:py-32">
+      <div className="relative mx-auto max-w-4xl px-4 sm:px-6 text-center lg:px-12">
+        <h2 className="text-3xl font-extrabold leading-tight sm:text-4xl lg:text-5xl">
+          <span className="block text-[#191B1F]">
+            Become One of Those Seeking to Turn First-Time
+          </span>
 
-  <span className="block font-[Instrument_Sans] italic text-[#1F3B89]">
-    Buyers Into Loyal Customers
-  </span>
-</h2>
-        <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
+          <span className="block font-[Instrument_Sans] italic text-[#1F3B89]">
+            Buyers Into Loyal Customers
+          </span>
+        </h2>
+        <p className="mx-auto mt-4 sm:mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground">
           Join hundreds of merchants already building lasting customer
           relationships through optimized lifecycle marketing.
         </p>
       </div>
 
-      <div className="relative mx-auto mt-16 aspect-square w-full max-w-[560px]">
-        {/* Outer ring: sparse dashes with visible gaps */}
-        <OrbitRing radius={OUTER_RADIUS} dashArray="6 16" strokeWidth={1.5} />
+      <div className="relative mx-auto mt-6 sm:mt-12 flex justify-center overflow-hidden py-4 sm:py-6">
+        <div className="relative aspect-square w-[560px] shrink-0 scale-[0.6] sm:scale-85 md:scale-100 origin-center my-[-100px] sm:my-[-30px] md:my-0 transition-transform">
+          {/* Outer ring: sparse dashes with visible gaps */}
+          <OrbitRing radius={OUTER_RADIUS} dashArray="6 16" strokeWidth={1.5} />
 
-        {/* Inner ring: dense, clearly visible dots */}
-        <OrbitRing radius={INNER_RADIUS} dashArray="1 6" strokeWidth={2.5} />
+          {/* Inner ring: dense, clearly visible dots */}
+          <OrbitRing radius={INNER_RADIUS} dashArray="1 6" strokeWidth={2.5} />
 
-        <div className="absolute inset-0 animate-orbit">
-          {OUTER_ORBIT_AVATARS.map((avatar, i) => (
-            <OrbitAvatar
-              key={avatar.alt}
-              {...avatar}
-              angle={i * (360 / OUTER_ORBIT_AVATARS.length)}
-              radius={OUTER_RADIUS}
-              size={AVATAR_SIZE}
-            />
-          ))}
-        </div>
+          <div className="absolute inset-0 animate-orbit">
+            {OUTER_ORBIT_AVATARS.map((avatar, i) => (
+              <OrbitAvatar
+                key={avatar.alt}
+                {...avatar}
+                angle={i * (360 / OUTER_ORBIT_AVATARS.length)}
+                radius={OUTER_RADIUS}
+                size={AVATAR_SIZE}
+              />
+            ))}
+          </div>
 
-        <div className="absolute inset-0 animate-orbit-reverse">
-          {INNER_ORBIT_AVATARS.map((avatar, i) => (
-            <OrbitAvatar
-              key={avatar.alt}
-              {...avatar}
-              angle={i * (360 / INNER_ORBIT_AVATARS.length) + 45}
-              radius={INNER_RADIUS}
-              size={AVATAR_SIZE}
-              counterAnimation="animate-orbit"
-            />
-          ))}
+          <div className="absolute inset-0 animate-orbit-reverse">
+            {INNER_ORBIT_AVATARS.map((avatar, i) => (
+              <OrbitAvatar
+                key={avatar.alt}
+                {...avatar}
+                angle={i * (360 / INNER_ORBIT_AVATARS.length) + 45}
+                radius={INNER_RADIUS}
+                size={AVATAR_SIZE}
+                counterAnimation="animate-orbit"
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

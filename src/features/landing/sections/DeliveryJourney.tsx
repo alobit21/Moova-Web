@@ -534,9 +534,6 @@ export function DeliveryJourney() {
                     >
                       <p className="min-h-0 text-sm leading-relaxed text-muted-foreground">
                         {step.description}
-                        {step.isPlaceholder && (
-                          <span className="ml-1 font-semibold text-amber-600">(design mockup, not from Figma)</span>
-                        )}
                       </p>
                     </div>
                   </button>

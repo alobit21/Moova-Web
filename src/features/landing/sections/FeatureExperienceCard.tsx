@@ -23,12 +23,12 @@ export function FeatureExperienceCard() {
           <img
             src={experiencePhone}
             alt="Moova app home screen showing shop performance"
-            className="w-[80%] max-w-[320px] translate-y-4"
+            className="w-[75%] max-w-[280px] sm:max-w-[320px] translate-y-4"
           />
 
-          <Card className="absolute right-0 top-6 gap-3 rounded-2xl border-0 p-0 shadow-lg sm:top-10">
-            <CardContent className="flex items-center gap-3 p-4">
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-indigo-100">
+          <Card className="absolute right-0 top-2 sm:top-10 gap-3 rounded-2xl border-0 p-0 shadow-lg bg-white/95 backdrop-blur-xs">
+            <CardContent className="flex items-center gap-2.5 p-3 sm:p-4">
+              <div className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full bg-indigo-100">
                 <svg
                   className="h-4 w-4 text-indigo-600"
                   viewBox="0 0 24 24"
@@ -40,8 +40,8 @@ export function FeatureExperienceCard() {
                 </svg>
               </div>
               <div>
-                <p className="text-xs text-muted-foreground">Live Now</p>
-                <p className="text-sm font-semibold text-foreground">
+                <p className="text-[10px] sm:text-xs text-muted-foreground">Live Now</p>
+                <p className="text-xs sm:text-sm font-semibold text-foreground">
                   Tracking Active
                 </p>
               </div>

@@ -14,11 +14,11 @@ export function FeaturePerformanceCard() {
           Measure Delivery Performance
         </h3>
 
-        <div className="mt-6 flex flex-1 items-end justify-end">
+        <div className="mt-6 flex flex-1 items-end justify-center sm:justify-end overflow-hidden">
           <img
             src={performancePhone}
             alt="Moova app shop profile screen showing order stats and rating"
-            className="w-[85%] max-w-[340px] translate-x-6 translate-y-4"
+            className="w-[85%] max-w-[280px] sm:max-w-[340px] translate-x-0 sm:translate-x-4 translate-y-4"
           />
         </div>
       </CardContent>
