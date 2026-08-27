@@ -20,58 +20,25 @@ interface AOSRevealProps {
 }
 
 /**
- * AOS (Animate On Scroll) reveal component.
- * Integrates with the 'aos' library via data-aos attributes while maintaining 
- * hardware-accelerated CSS transitions for maximum scroll responsiveness.
+ * Official AOS (Animate On Scroll) wrapper component.
+ * Attaches official data-aos attributes for the installed 'aos' library,
+ * ensuring seamless performance, zero stuck elements, and perfect accessibility.
  */
 export function AOSReveal({
   children,
   animation = "fade-up",
   delay = 0,
-  duration = 450,
+  duration = 700,
   className = "",
-  threshold = 0.1,
   as: Component = "div",
 }: AOSRevealProps) {
-  const [ref, isInView] = useInView<HTMLElement>({ threshold, triggerOnce: true })
-
-  const getInitialStyle = (): string => {
-    switch (animation) {
-      case "fade-up":
-        return "translate-y-6 opacity-0"
-      case "fade-down":
-        return "-translate-y-6 opacity-0"
-      case "fade-left":
-        return "translate-x-6 opacity-0"
-      case "fade-right":
-        return "-translate-x-6 opacity-0"
-      case "zoom-in":
-        return "scale-95 opacity-0"
-      case "flip-up":
-        return "[transform:perspective(600px)_rotateX(15deg)_translateY(15px)] opacity-0"
-      default:
-        return "translate-y-6 opacity-0"
-    }
-  }
-
-  const getActiveStyle = (): string => {
-    return "translate-y-0 translate-x-0 scale-100 [transform:perspective(600px)_rotateX(0deg)_translateY(0px)] opacity-100"
-  }
-
   return (
     <Component
-      ref={ref as React.Ref<any>}
       data-aos={animation}
-      data-aos-delay={delay}
+      data-aos-delay={delay || undefined}
       data-aos-duration={duration}
       data-aos-once="true"
-      style={{
-        transitionProperty: "opacity, transform",
-        transitionDuration: `${duration}ms`,
-        transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
-        transitionDelay: `${delay}ms`,
-      }}
-      className={`will-change-transform ${isInView ? getActiveStyle() : getInitialStyle()} ${className}`}
+      className={className}
     >
       {children}
     </Component>
@@ -96,7 +63,7 @@ export function TextReveal({
   className = "",
   wordClassName = "",
   delay = 0,
-  staggerDelay = 50,
+  staggerDelay = 65,
   as: Component = "h2",
 }: TextRevealProps) {
   const [ref, isInView] = useInView<HTMLElement>({ threshold: 0.1, triggerOnce: true })
@@ -111,8 +78,8 @@ export function TextReveal({
             <span
               style={{
                 transitionProperty: "opacity, transform",
-                transitionDuration: "450ms",
-                transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+                transitionDuration: "650ms",
+                transitionTimingFunction: "cubic-bezier(0.22, 1, 0.36, 1)",
                 transitionDelay: `${itemDelay}ms`,
               }}
               className={`inline-block will-change-transform ${

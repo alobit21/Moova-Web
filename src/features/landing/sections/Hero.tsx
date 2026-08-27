@@ -5,7 +5,7 @@ import heroBg from "@/assets/hero-bg.png"
 import phoneMockup from "@/assets/phone-mockup.png"
 import { DELIVERY_NOTIFICATIONS } from "../data/notifications"
 import { useSectionVisibility } from "@/hooks/useInView"
-import { AOSReveal, TextReveal, GradientText } from "@/components/animation/AOSReveal"
+import { GradientText } from "@/components/animation/AOSReveal"
 
 function HeroNotificationCard({
   icon,
@@ -49,69 +49,59 @@ export function Hero() {
         className="relative mx-auto grid max-w-7xl gap-8 sm:gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-12"
       >
         <div className="mx-auto max-w-xl text-center lg:text-left">
-          <AOSReveal animation="fade-down" delay={0}>
-            <Badge
-              variant="secondary"
-              className="mb-6 sm:mb-8 inline-flex items-center gap-2.5 rounded-full bg-white/10 py-1.5 sm:py-2 pl-2 pr-4 sm:pr-5 backdrop-blur-sm border-0 font-normal"
-            >
-              <div className="flex -space-x-3">
-                <span className="h-7 w-7 sm:h-8 sm:w-8 rounded-full border-2 border-white/40 bg-blue-300" />
-                <span className="h-7 w-7 sm:h-8 sm:w-8 rounded-full border-2 border-white/40 bg-amber-300" />
-                <span className="h-7 w-7 sm:h-8 sm:w-8 rounded-full border-2 border-white/40 bg-rose-300" />
-              </div>
-              <p className="text-xs sm:text-sm text-white">
-                <span className="font-semibold">Trusted by 150+ brands</span>
-              </p>
-            </Badge>
-          </AOSReveal>
-
-          <TextReveal
-            as="h1"
-            text="Every Delivery Builds Customer Trust."
-            delay={100}
-            staggerDelay={60}
-            className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] text-white tracking-tight"
-          />
-
-          <AOSReveal animation="fade-up" delay={250}>
-            <p className="mt-4 sm:mt-6 text-base sm:text-lg leading-relaxed text-white/80 max-w-xl mx-auto lg:mx-0">
-              Winning a customer&apos;s first order is hard. Keeping their trust is
-              even harder. Moova helps online businesses manage deliveries with
-              real-time visibility that turns first-time buyers into{" "}
-              <GradientText gradient="from-[#5DD586] via-[#A7F3D0] to-[#5DD586]">
-                loyal customers
-              </GradientText>
-              .
-            </p>
-          </AOSReveal>
-
-          <AOSReveal animation="fade-up" delay={350}>
-            <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 w-full">
-              <Button
-                className="w-full sm:w-auto h-13 sm:h-14 rounded-full bg-[#5DD586] px-8 sm:px-10 text-base font-semibold text-slate-950 shadow-lg shadow-emerald-950/20 hover:bg-[#4ed079] active:scale-[0.98] transition-all cursor-pointer"
-              >
-                Start Free 14-Day Trial
-              </Button>
-              <Button
-                variant="outline"
-                className="w-full sm:w-auto h-13 sm:h-14 rounded-full border-white/50 bg-white/5 px-8 sm:px-10 text-base font-semibold text-white backdrop-blur-xs hover:bg-white/15 hover:border-white/80 hover:text-white active:scale-[0.98] transition-all cursor-pointer"
-              >
-                Watch Product Demo
-              </Button>
+          <Badge
+            variant="secondary"
+            className="mb-6 sm:mb-8 inline-flex items-center gap-2.5 rounded-full bg-white/10 py-1.5 sm:py-2 pl-2 pr-4 sm:pr-5 backdrop-blur-sm border-0 font-normal"
+          >
+            <div className="flex -space-x-3">
+              <span className="h-7 w-7 sm:h-8 sm:w-8 rounded-full border-2 border-white/40 bg-blue-300" />
+              <span className="h-7 w-7 sm:h-8 sm:w-8 rounded-full border-2 border-white/40 bg-amber-300" />
+              <span className="h-7 w-7 sm:h-8 sm:w-8 rounded-full border-2 border-white/40 bg-rose-300" />
             </div>
-            <p className="mt-3 text-xs text-white/70 text-center lg:text-left">
-              No credit card required &middot; Cancel anytime
+            <p className="text-xs sm:text-sm text-white">
+              <span className="font-semibold">Trusted by 150+ brands</span>
             </p>
-          </AOSReveal>
+          </Badge>
+
+          <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] text-white tracking-tight">
+            Every Delivery Builds Customer Trust.
+          </h1>
+
+          <p className="mt-4 sm:mt-6 text-base sm:text-lg leading-relaxed text-white/80 max-w-xl mx-auto lg:mx-0">
+            Winning a customer&apos;s first order is hard. Keeping their trust is
+            even harder. Moova helps online businesses manage deliveries with
+            real-time visibility that turns first-time buyers into{" "}
+            <GradientText gradient="from-[#5DD586] via-[#A7F3D0] to-[#5DD586]">
+              loyal customers
+            </GradientText>
+            .
+          </p>
+
+          <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 w-full">
+            <Button
+              className="w-full sm:w-auto h-13 sm:h-14 rounded-full bg-[#5DD586] px-8 sm:px-10 text-base font-semibold text-slate-950 shadow-lg shadow-emerald-950/20 hover:bg-[#4ed079] active:scale-[0.98] transition-all cursor-pointer"
+            >
+              Start Free 14-Day Trial
+            </Button>
+            <Button
+              variant="outline"
+              className="w-full sm:w-auto h-13 sm:h-14 rounded-full border-white/50 bg-white/5 px-8 sm:px-10 text-base font-semibold text-white backdrop-blur-xs hover:bg-white/15 hover:border-white/80 hover:text-white active:scale-[0.98] transition-all cursor-pointer"
+            >
+              Watch Product Demo
+            </Button>
+          </div>
+          <p className="mt-3 text-xs text-white/70 text-center lg:text-left">
+            No credit card required &middot; Cancel anytime
+          </p>
         </div>
 
-        <AOSReveal animation="fade-left" delay={200} className="relative flex justify-center lg:justify-end mt-4 lg:mt-0">
+        <div className="relative flex justify-center lg:justify-end mt-4 lg:mt-0">
           <img
             src={phoneMockup}
             alt="Moova app showing shop performance and current deliveries"
             className="w-full max-w-xs sm:max-w-md lg:max-w-lg drop-shadow-2xl object-contain"
           />
-        </AOSReveal>
+        </div>
       </div>
 
       {/* Marquee cards inside hero section - paused when off-screen */}

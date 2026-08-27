@@ -8,11 +8,12 @@ import { Footer } from "@/features/landing/sections/Footer"
 function App() {
   useEffect(() => {
     AOS.init({
-      duration: 800,
+      duration: 700,
       once: true,
       easing: "ease-out-cubic",
-      offset: 50,
+      offset: 40,
     })
+    AOS.refresh()
   }, [])
 
   return (
