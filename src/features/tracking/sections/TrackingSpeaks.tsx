@@ -47,11 +47,11 @@ function NotificationCard({
   body: string
 }) {
   return (
-    <Card className="w-75 shrink-0 border-0 shadow-sm">
-      <CardContent className="p-6">
-        <div className="text-2xl">{icon}</div>
-        <h3 className="mt-3 text-base font-bold text-foreground">{title}</h3>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{body}</p>
+    <Card className="w-[240px] sm:w-[300px] shrink-0 border-0 shadow-sm">
+      <CardContent className="p-5 sm:p-6">
+        <div className="text-xl sm:text-2xl">{icon}</div>
+        <h3 className="mt-2.5 text-sm sm:text-base font-bold text-foreground">{title}</h3>
+        <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-muted-foreground">{body}</p>
       </CardContent>
     </Card>
   )
@@ -67,9 +67,9 @@ function BadgePill({
   className: string
 }) {
   return (
-    <Badge variant="outline" className="flex shrink-0 items-center gap-2 rounded-full bg-white px-5 py-3 shadow-sm border-0 font-normal">
+    <Badge variant="outline" className="flex shrink-0 items-center gap-2 rounded-full bg-white px-4 sm:px-5 py-2.5 sm:py-3 shadow-sm border-0 font-normal">
       <Icon className={`h-4 w-4 ${className}`} strokeWidth={2.5} />
-      <span className="whitespace-nowrap text-sm font-semibold text-foreground">
+      <span className="whitespace-nowrap text-xs sm:text-sm font-semibold text-foreground">
         {label}
       </span>
     </Badge>
@@ -78,28 +78,27 @@ function BadgePill({
 
 export function TrackingSpeaks() {
   return (
-    <section className="relative overflow-hidden bg-linear-to-b from-blue-50/70 to-white py-16 sm:py-24 lg:py-32">
+    <section className="relative overflow-hidden bg-linear-to-b from-blue-50/70 to-white py-14 sm:py-24 lg:py-32">
       <div className="relative mx-auto max-w-4xl px-4 sm:px-6 text-center lg:px-12">
-        <h2 className="text-3xl font-extrabold leading-tight text-[#1F3B89] sm:text-4xl lg:text-5xl">
+        <h2 className="text-3xl font-extrabold leading-tight text-[#1F3B89] sm:text-4xl lg:text-5xl tracking-tight">
           Every Delivery Speaks for Your Business
         </h2>
-        <p className="mx-auto mt-4 sm:mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground">
-          Customers never have to ask, &quot;Where is my order?&quot; Moova
-          automatically sends delivery updates from order creation to
+        <p className="mx-auto mt-4 sm:mt-6 max-w-2xl text-sm sm:text-base lg:text-lg leading-relaxed text-muted-foreground">
+          Moova automatically sends delivery updates from order creation to
           successful delivery.
         </p>
       </div>
 
-      <div className="edge-fade relative mt-16 overflow-hidden">
-        <div className="flex w-max animate-marquee gap-6">
+      <div className="edge-fade relative mt-10 sm:mt-16 overflow-hidden">
+        <div className="flex w-max animate-marquee gap-4 sm:gap-6">
           {[...NOTIFICATIONS, ...NOTIFICATIONS].map((item, i) => (
             <NotificationCard key={i} {...item} />
           ))}
         </div>
       </div>
 
-      <div className="edge-fade relative mt-8 overflow-hidden">
-        <div className="flex w-max animate-marquee-reverse gap-4">
+      <div className="edge-fade relative mt-6 sm:mt-8 overflow-hidden">
+        <div className="flex w-max animate-marquee-reverse gap-3 sm:gap-4">
           {[...BADGES, ...BADGES, ...BADGES].map((badge, i) => (
             <BadgePill key={i} {...badge} />
           ))}

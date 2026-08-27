@@ -22,8 +22,8 @@ export function ParcelSearchForm({ onSearch }: { onSearch: (trackingNumber: stri
   }
  
 
-return (
-    <form onSubmit={handleSubmit} noValidate className="mt-6 flex flex-col sm:flex-row items-stretch gap-3">
+  return (
+    <form onSubmit={handleSubmit} noValidate className="mt-6 flex flex-row items-start gap-2.5 sm:gap-3">
       <div className="relative flex-1">
         <Input
           value={value}
@@ -31,7 +31,7 @@ return (
           placeholder="M 123 4567 890"
           aria-label="Parcel tracking number"
           aria-invalid={Boolean(error)}
-          className="h-12 sm:h-14 rounded-xl border-slate-200 bg-slate-50/80 px-4 text-base font-medium text-foreground placeholder:text-muted-foreground focus-visible:bg-white focus-visible:border-blue-600 focus-visible:ring-blue-500/20"
+          className="h-12 sm:h-14 rounded-xl border-slate-200 bg-slate-50/80 px-4 text-sm sm:text-base font-medium text-foreground placeholder:text-muted-foreground focus-visible:bg-white focus-visible:border-blue-600 focus-visible:ring-blue-500/20"
         />
         {error ? (
           <p role="alert" className="mt-1 text-xs text-destructive font-medium">
@@ -41,7 +41,7 @@ return (
       </div>
       <Button
         type="submit"
-        className="h-12 sm:h-14 px-8 rounded-xl bg-blue-600 hover:bg-blue-700 text-base font-semibold text-white shadow-md shadow-blue-500/20 transition-all shrink-0"
+        className="h-12 sm:h-14 px-5 sm:px-8 rounded-xl bg-[#2648A6] hover:bg-[#1f3b89] text-sm sm:text-base font-semibold text-white shadow-md shadow-blue-500/20 transition-all shrink-0 cursor-pointer"
       >
         Search
       </Button>

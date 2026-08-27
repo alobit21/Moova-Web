@@ -1,58 +1,56 @@
-import { Check } from "lucide-react"
+import { MapPin, Star, MessageCircle, Mail } from "lucide-react"
 import brandedExperienceMockup from "@/assets/tracking/branded-experience.jpeg"
 
-const BENEFITS = [
-  "Live updates on driver location and progress",
-  "Predictable delivery timing for customers",
-  'Fewer "where is my order?" calls',
-]
+const FEATURES = [
+  { icon: MapPin, label: "Live driver tracking" },
+  { icon: Star, label: "Instant feedback from customers" },
+  { icon: MessageCircle, label: "Text notifications" },
+  { icon: Mail, label: 'Fewer "where is my order?" calls' },
+] as const
 
 export function BrandedExperience() {
   return (
-    <section className="bg-white py-16 sm:py-20 lg:py-28">
+    <section className="bg-[#FAFCFF] py-16 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-        {/* Top: centered headline */}
-        <h2 className="mx-auto max-w-3xl text-center text-3xl font-extrabold leading-tight text-slate-900 sm:text-4xl lg:text-5xl">
-          20% faster delivery with a branded experience
-        </h2>
-
-        {/* Below: two columns */}
-        <div className="mt-12 sm:mt-16 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center">
-          {/* Left: image */}
-          <div className="flex justify-center">
-            <img
-              src={brandedExperienceMockup}
-              alt="Customer checking her delivery status on the Moova tracking screen"
-              className="w-full max-w-xs sm:max-w-md rounded-2xl shadow-md"
-            />
-          </div>
-
-          {/* Right: text */}
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
+          {/* Left Column: Headline & Feature List */}
           <div className="max-w-xl">
-            <h3 className="text-2xl font-extrabold text-foreground sm:text-3xl lg:text-4xl">
-              Real-time delivery tracking
-            </h3>
-            <p className="mt-3 text-base sm:text-lg leading-relaxed text-muted-foreground">
-              Give customers full visibility into their order with a live
-              tracking link shared via SMS. They&apos;ll always know exactly
-              when to expect delivery.
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-slate-900 tracking-tight">
+              Delight customers with real-time tracking
+            </h2>
+            <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-500 font-normal">
+              Give customers full visibility into their order with a live tracking
+              link shared via SMS. They&apos;ll always know exactly when to expect
+              delivery.
             </p>
 
-            <ul className="mt-6 space-y-3.5">
-              {BENEFITS.map((benefit) => (
-                <li key={benefit} className="flex items-start gap-3">
-                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-100">
-                    <Check className="h-3.5 w-3.5 text-emerald-600" strokeWidth={3} />
-                  </span>
-                  <span className="text-base font-medium text-foreground">
-                    {benefit}
+            <ul className="mt-8 space-y-4">
+              {FEATURES.map(({ icon: Icon, label }) => (
+                <li key={label} className="flex items-center gap-3.5">
+                  <Icon className="h-5 w-5 shrink-0 text-emerald-500" strokeWidth={2} />
+                  <span className="text-sm sm:text-base font-semibold text-slate-800">
+                    {benefitFormatter(label)}
                   </span>
                 </li>
               ))}
             </ul>
           </div>
+
+          {/* Right Column: Mockup Image Container */}
+          <div className="flex items-center justify-center rounded-[32px] bg-slate-50/70 p-4 sm:p-8">
+            {/* REPLACE IMAGE SRC BELOW WITH YOUR DESIRED MOCKUP IMAGE */}
+            <img
+              src={brandedExperienceMockup}
+              alt="Delight customers with real-time tracking mockup"
+              className="w-full max-w-md sm:max-w-lg lg:max-w-xl h-auto object-contain rounded-2xl shadow-xs"
+            />
+          </div>
         </div>
       </div>
     </section>
   )
+}
+
+function benefitFormatter(text: string) {
+  return text
 }
