@@ -28,7 +28,7 @@ export function AOSReveal({
   children,
   animation = "fade-up",
   delay = 0,
-  duration = 700,
+  duration = 900,
   className = "",
   as: Component = "div",
 }: AOSRevealProps) {
