@@ -15,11 +15,11 @@ function HeroNotificationCard({
   body: string
 }) {
   return (
-    <Card className="flex h-[160px] w-[265px] shrink-0 rounded-2xl border border-white/10 bg-[#254685]/80 p-0 font-instrument shadow-none backdrop-blur-xs">
+    <Card className="flex h-[150px] sm:h-[160px] w-[230px] sm:w-[265px] shrink-0 rounded-2xl border border-white/10 bg-[#254685]/80 p-0 font-instrument shadow-none backdrop-blur-xs">
       <CardContent className="flex flex-col p-4 sm:p-5">
-        <div className="text-xl">{icon}</div>
-        <h3 className="mt-2.5 text-xs font-bold text-white sm:text-[13px]">{title}</h3>
-        <p className="mt-1.5 text-[11px] leading-relaxed text-white/70 line-clamp-3">{body}</p>
+        <div className="text-lg sm:text-xl">{icon}</div>
+        <h3 className="mt-2 text-xs font-bold text-white sm:text-[13px]">{title}</h3>
+        <p className="mt-1 text-[11px] leading-relaxed text-white/70 line-clamp-3">{body}</p>
       </CardContent>
     </Card>
   )
@@ -27,67 +27,70 @@ function HeroNotificationCard({
 
 export function Hero() {
   return (
-    <section id="home" className="relative overflow-hidden bg-[#1c3b7a] pb-12 pt-32 lg:pb-16 lg:pt-40">
+    <section id="home" className="relative overflow-hidden bg-[#1c3b7a] pb-10 pt-28 sm:pb-14 sm:pt-36 lg:pb-16 lg:pt-40">
       <div className="absolute inset-0 overflow-hidden">
         <img
           src={heroBg}
           alt=""
           aria-hidden="true"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover opacity-90"
         />
       </div>
 
-      <div className="relative mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-2 lg:items-center lg:px-12">
-        <div className="max-w-xl">
-          <Badge variant="secondary" className="mb-8 inline-flex items-center gap-3 rounded-full bg-white/10 py-2 pl-2 pr-5 backdrop-blur-sm border-0 font-normal">
+      <div className="relative mx-auto grid max-w-7xl gap-8 sm:gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:items-center lg:px-12">
+        <div className="mx-auto max-w-xl text-center lg:text-left">
+          <Badge variant="secondary" className="mb-6 sm:mb-8 inline-flex items-center gap-2.5 rounded-full bg-white/10 py-1.5 sm:py-2 pl-2 pr-4 sm:pr-5 backdrop-blur-sm border-0 font-normal">
             <div className="flex -space-x-3">
-              <span className="h-8 w-8 rounded-full border-2 border-white/40 bg-blue-300" />
-              <span className="h-8 w-8 rounded-full border-2 border-white/40 bg-amber-300" />
-              <span className="h-8 w-8 rounded-full border-2 border-white/40 bg-rose-300" />
+              <span className="h-7 w-7 sm:h-8 sm:w-8 rounded-full border-2 border-white/40 bg-blue-300" />
+              <span className="h-7 w-7 sm:h-8 sm:w-8 rounded-full border-2 border-white/40 bg-amber-300" />
+              <span className="h-7 w-7 sm:h-8 sm:w-8 rounded-full border-2 border-white/40 bg-rose-300" />
             </div>
-            <p className="text-sm text-white">
-              <span className="font-semibold">Trust by 150+ brands</span>
+            <p className="text-xs sm:text-sm text-white">
+              <span className="font-semibold">Trusted by 150+ brands</span>
             </p>
           </Badge>
 
-          <h1 className="text-5xl font-extrabold leading-[1.05] text-white sm:text-6xl">
+          <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] text-white tracking-tight">
             Every Delivery Builds Customer Trust.
           </h1>
 
-          <p className="mt-6 text-lg leading-relaxed text-white/80">
+          <p className="mt-4 sm:mt-6 text-base sm:text-lg leading-relaxed text-white/80 max-w-xl mx-auto lg:mx-0">
             Winning a customer's first order is hard. Keeping their trust is
             even harder. Moova helps online businesses manage deliveries with
             real-time visibility that turns first-time buyers into loyal
             customers.
           </p>
 
-          <div className="mt-10 flex flex-wrap gap-4">
+          <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 w-full">
             <Button
-              className="h-12 sm:h-14 rounded-full bg-[#5DD586] px-8 sm:px-10 text-base font-semibold text-slate-950 shadow-lg shadow-emerald-950/20 hover:bg-[#4ed079] transition-all"
+              className="w-full sm:w-auto h-13 sm:h-14 rounded-full bg-[#5DD586] px-8 sm:px-10 text-base font-semibold text-slate-950 shadow-lg shadow-emerald-950/20 hover:bg-[#4ed079] transition-all cursor-pointer"
             >
-              Start Delivering Smarter
+              Start Free 14-Day Trial
             </Button>
             <Button
               variant="outline"
-              className="h-12 sm:h-14 rounded-full border-white/50 bg-white/5 px-8 sm:px-10 text-base font-semibold text-white backdrop-blur-xs hover:bg-white/15 hover:border-white/80 hover:text-white transition-all"
+              className="w-full sm:w-auto h-13 sm:h-14 rounded-full border-white/50 bg-white/5 px-8 sm:px-10 text-base font-semibold text-white backdrop-blur-xs hover:bg-white/15 hover:border-white/80 hover:text-white transition-all cursor-pointer"
             >
               Watch Product Demo
             </Button>
           </div>
+          <p className="mt-3 text-xs text-white/70 text-center lg:text-left">
+            No credit card required &middot; Cancel anytime
+          </p>
         </div>
 
-        <div className="relative flex justify-center lg:justify-end">
+        <div className="relative flex justify-center lg:justify-end mt-4 lg:mt-0">
           <img
             src={phoneMockup}
             alt="Moova app showing shop performance and current deliveries"
-            className="w-full max-w-md drop-shadow-2xl lg:max-w-lg"
+            className="w-full max-w-xs sm:max-w-md lg:max-w-lg drop-shadow-2xl object-contain"
           />
         </div>
       </div>
 
       {/* Marquee cards inside hero section */}
-      <div className="relative z-10 mt-14 overflow-hidden edge-fade lg:mt-20">
-        <div className="flex w-max animate-marquee gap-5">
+      <div className="relative z-10 mt-10 sm:mt-14 lg:mt-20 overflow-hidden edge-fade">
+        <div className="flex w-max animate-marquee gap-3 sm:gap-5">
           {[...DELIVERY_NOTIFICATIONS, ...DELIVERY_NOTIFICATIONS, ...DELIVERY_NOTIFICATIONS].map((item, i) => (
             <HeroNotificationCard key={i} {...item} />
           ))}

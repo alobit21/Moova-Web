@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react"
 import fashionCenter from "@/assets/become-one/avatars/fashion-center.png"
 import royalHerbs from "@/assets/become-one/avatars/royal-herbs.png"
 import mdigo from "@/assets/become-one/avatars/mdigo.png"
@@ -98,27 +99,117 @@ function OrbitAvatar({
   )
 }
 
+function MobileDockMarquee() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const trackRef = useRef<HTMLDivElement>(null)
+  const offsetRef = useRef(0)
+  const animationFrameRef = useRef<number | null>(null)
+
+  const ALL_AVATARS = [...OUTER_ORBIT_AVATARS, ...INNER_ORBIT_AVATARS]
+  const DISPLAY_AVATARS = [...ALL_AVATARS, ...ALL_AVATARS, ...ALL_AVATARS, ...ALL_AVATARS]
+
+  useEffect(() => {
+    const container = containerRef.current
+    const track = trackRef.current
+    if (!container || !track) return
+
+    let lastTime = performance.now()
+    const speed = 36 // pixels per second
+
+    const animate = (time: number) => {
+      const delta = (time - lastTime) / 1000
+      lastTime = time
+
+      offsetRef.current += speed * delta
+
+      const avatarElements = track.querySelectorAll<HTMLElement>(".dock-avatar")
+      const singleSetWidth = (track.scrollWidth || 1) / 4
+
+      if (offsetRef.current >= singleSetWidth) {
+        offsetRef.current -= singleSetWidth
+      }
+
+      track.style.transform = `translate3d(${-offsetRef.current}px, 0, 0)`
+
+      const containerRect = container.getBoundingClientRect()
+      const centerX = containerRect.left + containerRect.width / 2
+      const maxDist = 110
+
+      avatarElements.forEach((el) => {
+        const elRect = el.getBoundingClientRect()
+        const elCenter = elRect.left + elRect.width / 2
+        const dist = Math.abs(elCenter - centerX)
+
+        if (dist < maxDist) {
+          const factor = Math.cos((dist / maxDist) * (Math.PI / 2))
+          const scale = 1 + 0.5 * factor
+          const zIndex = Math.round(scale * 10)
+          el.style.transform = `scale(${scale})`
+          el.style.zIndex = `${zIndex}`
+          el.style.filter = `brightness(${1 + 0.15 * factor})`
+        } else {
+          el.style.transform = "scale(1)"
+          el.style.zIndex = "1"
+          el.style.filter = "brightness(1)"
+        }
+      })
+
+      animationFrameRef.current = requestAnimationFrame(animate)
+    }
+
+    animationFrameRef.current = requestAnimationFrame(animate)
+
+    return () => {
+      if (animationFrameRef.current !== null) {
+        cancelAnimationFrame(animationFrameRef.current)
+      }
+    }
+  }, [])
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative my-6 w-full overflow-hidden py-10 edge-fade md:hidden"
+    >
+      <div ref={trackRef} className="flex w-max items-center gap-4 px-4 will-change-transform">
+        {DISPLAY_AVATARS.map((avatar, index) => (
+          <div
+            key={`${avatar.alt}-${index}`}
+            className="dock-avatar relative flex h-14 w-14 shrink-0 items-center justify-center transition-transform duration-75 ease-out"
+          >
+            <Avatar className="h-full w-full rounded-full shadow-lg ring-2 ring-white/90">
+              <AvatarImage src={avatar.src} alt={avatar.alt} className="object-cover" />
+              <AvatarFallback>{avatar.alt.slice(0, 2).toUpperCase()}</AvatarFallback>
+            </Avatar>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export function BecomeOne() {
   return (
-    <section id="customers" className="relative overflow-hidden bg-[#F5F9FF] py-16 sm:py-24 lg:py-32">
+    <section id="customers" className="relative overflow-hidden bg-[#F5F9FF] py-14 sm:py-24 lg:py-32">
       <div className="relative mx-auto max-w-4xl px-4 sm:px-6 text-center lg:px-12">
-        <h2 className="text-3xl font-extrabold leading-tight sm:text-4xl lg:text-5xl">
-          <span className="block text-[#191B1F]">
-            Become One of Those Seeking to Turn First-Time
-          </span>
-
-          <span className="block font-[Instrument_Sans] italic text-[#1F3B89]">
-            Buyers Into Loyal Customers
+        <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-[#191B1F]">
+          Become One of Those Seeking to Turn Buyers{" "}
+          <span className="font-[Instrument_Sans] italic text-[#1F3B89] inline-block">
+            Into Loyal Customers
           </span>
         </h2>
-        <p className="mx-auto mt-4 sm:mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground">
+        <p className="mx-auto mt-4 sm:mt-6 max-w-2xl text-sm sm:text-base lg:text-lg leading-relaxed text-muted-foreground">
           Join hundreds of merchants already building lasting customer
-          relationships through optimized lifecycle marketing.
+          relationships through optimized logistics.
         </p>
       </div>
 
-      <div className="relative mx-auto mt-6 sm:mt-12 flex justify-center overflow-hidden py-4 sm:py-6">
-        <div className="relative aspect-square w-[560px] shrink-0 scale-[0.6] sm:scale-85 md:scale-100 origin-center my-[-100px] sm:my-[-30px] md:my-0 transition-transform">
+      {/* Mobile macOS Dock Magnification Marquee */}
+      <MobileDockMarquee />
+
+      {/* Desktop Orbit Ring Visualization */}
+      <div className="relative mx-auto mt-4 sm:mt-8 hidden md:flex justify-center items-center overflow-hidden py-4 sm:py-8 h-[500px] md:h-[600px]">
+        <div className="relative aspect-square w-[560px] shrink-0 scale-[0.85] md:scale-100 origin-center transition-transform">
           {/* Outer ring: sparse dashes with visible gaps */}
           <OrbitRing radius={OUTER_RADIUS} dashArray="6 16" strokeWidth={1.5} />
 

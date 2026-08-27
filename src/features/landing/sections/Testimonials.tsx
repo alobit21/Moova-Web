@@ -44,49 +44,49 @@ function StarRating() {
 
 export function Testimonials() {
   return (
-    <section id="testimonials" className="bg-slate-50 py-24">
-      <div className="mx-auto max-w-7xl px-6 lg:px-12">
-        <h2 className="text-center text-4xl font-instrument text-[#1F3B89] sm:text-5xl">
+    <section id="testimonials" className="bg-slate-50 py-16 sm:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
+        <h2 className="text-center text-3xl sm:text-4xl lg:text-5xl font-instrument text-[#1F3B89] tracking-tight">
           What Online Businesses Say
         </h2>
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-3 lg:items-center">
+        <div className="mt-10 sm:mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:items-center">
           {TESTIMONIALS.map((t) => (
             <Card
               key={t.name}
               className={
                 t.featured
-                  ? "border-0 bg-blue-900 py-10 shadow-xl lg:scale-105"
-                  : " bg-white py-10 "
+                  ? "border-0 bg-blue-900 py-8 sm:py-10 shadow-xl lg:scale-105"
+                  : "bg-white py-8 sm:py-10 shadow-sm"
               }
             >
-              <CardContent className="px-8">
-                <Quote className="h-8 w-8 text-[#5DD586]" strokeWidth={2.5} />
+              <CardContent className="px-5 sm:px-8">
+                <Quote className="h-7 w-7 sm:h-8 sm:w-8 text-[#5DD586]" strokeWidth={2.5} />
 
                 <p
-                  className={`mt-6 text-base leading-relaxed ${
+                  className={`mt-4 sm:mt-6 text-sm sm:text-base leading-relaxed ${
                     t.featured ? "text-white" : "text-foreground"
                   }`}
                 >
                   "{t.quote}"
                 </p>
 
-                <div className="mt-8 flex items-center gap-3">
-                  <Avatar className="h-13 w-13">
+                <div className="mt-6 sm:mt-8 flex items-center gap-3">
+                  <Avatar className="h-11 w-11 sm:h-13 sm:w-13">
                     <AvatarImage src={t.avatar} alt={t.name} />
                     <AvatarFallback>{t.name.slice(0, 2).toUpperCase()}</AvatarFallback>
                   </Avatar>
                   <div>
                     <StarRating />
                     <p
-                      className={`mt-1 font-semibold ${
+                      className={`mt-1 text-sm sm:text-base font-semibold ${
                         t.featured ? "text-white" : "text-foreground"
                       }`}
                     >
                       {t.name}
                     </p>
                     <p
-                      className={`text-sm ${
+                      className={`text-xs sm:text-sm ${
                         t.featured ? "text-white/70" : "text-muted-foreground"
                       }`}
                     >

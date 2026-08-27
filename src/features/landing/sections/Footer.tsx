@@ -42,7 +42,7 @@ const SOCIAL_LINKS = [
 ] as const
 
 const linkButtonClass =
-  "h-auto justify-start p-0 text-base font-normal text-white/70 no-underline hover:text-white hover:no-underline"
+  "h-auto justify-start p-0 text-sm sm:text-base font-normal text-white/70 no-underline hover:text-white hover:no-underline"
 
 export function Footer() {
   return (
@@ -54,7 +54,7 @@ export function Footer() {
         className="absolute inset-0 h-full w-full object-cover"
       />
 
-      <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-20 sm:grid-cols-2 lg:grid-cols-4 lg:px-12">
+      <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-6 lg:px-12 py-12 sm:py-20">
         {/* Brand */}
         <div>
           <Button
@@ -69,7 +69,7 @@ export function Footer() {
               </a>
             }
           />
-          <p className="mt-4 max-w-[16ch] text-white/70">
+          <p className="mt-3 sm:mt-4 max-w-[20ch] text-sm text-white/70">
             Delivering businesses forward.
           </p>
         </div>
@@ -77,7 +77,7 @@ export function Footer() {
         {/* Quick links */}
         <div>
           <h3 className="text-sm font-bold text-white">Quick Links</h3>
-          <ul className="mt-5 flex flex-col gap-3">
+          <ul className="mt-4 sm:mt-5 flex flex-col gap-2.5 sm:gap-3">
             {QUICK_LINKS.map((link) => (
               <li key={link.label}>
                 <Button
@@ -93,9 +93,9 @@ export function Footer() {
         {/* Contact */}
         <div>
           <h3 className="text-sm font-bold text-white">Contact</h3>
-          <div className="mt-5 flex flex-col gap-4">
+          <div className="mt-4 sm:mt-5 flex flex-col gap-3.5 sm:gap-4">
             <div>
-              <p className="text-xs font-bold tracking-wide text-white">EMAIL</p>
+              <p className="text-[11px] sm:text-xs font-bold tracking-wide text-white/90">EMAIL</p>
               <Button
                 variant="link"
                 className={linkButtonClass}
@@ -103,7 +103,7 @@ export function Footer() {
               />
             </div>
             <div>
-              <p className="text-xs font-bold tracking-wide text-white">PHONE</p>
+              <p className="text-[11px] sm:text-xs font-bold tracking-wide text-white/90">PHONE</p>
               <Button
                 variant="link"
                 className={linkButtonClass}
@@ -116,14 +116,14 @@ export function Footer() {
         {/* Social */}
         <div>
           <h3 className="text-sm font-bold text-white">Follow Us</h3>
-          <ul className="mt-5 flex flex-col gap-3">
+          <ul className="mt-4 sm:mt-5 flex flex-col gap-2.5 sm:gap-3">
             {SOCIAL_LINKS.map(({ label, href, icon: Icon }) => (
               <li key={label}>
                 <Button
                   variant="link"
                   className={linkButtonClass}
                   render={
-                    <a href={href} target="_blank" rel="noopener noreferrer">
+                    <a href={href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                       <Icon className="h-4 w-4" />
                       {label}
                     </a>

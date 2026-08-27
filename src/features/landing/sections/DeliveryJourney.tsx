@@ -457,48 +457,48 @@ export function DeliveryJourney() {
   }, [tab, activeStep, steps.length])
 
   return (
-    <section id="how-it-works" className="bg-[#F8FAFC] py-24 lg:py-32">
-      <div className="mx-auto max-w-6xl px-6 lg:px-12">
+    <section id="how-it-works" className="bg-[#F8FAFC] py-16 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-12">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-4xl font-bold leading-tight text-foreground font-instrument sm:text-5xl">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-foreground font-instrument">
             The complete delivery journey{" "}
             <span className="italic text-brand">managed end-to-end</span>
           </h2>
-          <p className="mx-auto mt-6 max-w-xl text-[18px] font-normal leading-relaxed text-muted-foreground font-instrument">
+          <p className="mx-auto mt-4 sm:mt-6 max-w-xl text-base sm:text-lg font-normal leading-relaxed text-muted-foreground font-instrument">
             Moova handles everything from the moment an order is placed to the second it arrives
             at the door — so merchants can focus on selling, and customers always know exactly
             where their order is.
           </p>
         </div>
 
-        <Tabs value={tab} onValueChange={(val) => setTab(val as "shop" | "buyer")} className="mx-auto mt-10 w-fit">
-          <TabsList className="h-auto rounded-full bg-slate-100 p-1.5 gap-0">
+        <Tabs value={tab} onValueChange={(val) => setTab(val as "shop" | "buyer")} className="mx-auto mt-8 sm:mt-10 w-fit">
+          <TabsList className="h-auto rounded-full bg-slate-100 p-1 sm:p-1.5 gap-0">
             <TabsTrigger
               value="shop"
-              className="rounded-full px-6 py-2.5 text-sm font-semibold transition-colors data-[state=active]:bg-teal-500 data-[state=active]:text-white data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground border-0"
+              className="rounded-full px-4 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold transition-colors data-[state=active]:bg-teal-500 data-[state=active]:text-white data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground border-0"
             >
               Online Shop
             </TabsTrigger>
             <TabsTrigger
               value="buyer"
-              className="rounded-full px-6 py-2.5 text-sm font-semibold transition-colors data-[state=active]:bg-teal-500 data-[state=active]:text-white data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground border-0"
+              className="rounded-full px-4 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold transition-colors data-[state=active]:bg-teal-500 data-[state=active]:text-white data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground border-0"
             >
               Online Buyer
             </TabsTrigger>
           </TabsList>
         </Tabs>
 
-        <div className="mt-16 grid gap-12 lg:grid-cols-2 lg:items-center">
+        <div className="mt-10 sm:mt-16 grid gap-8 lg:gap-12 lg:grid-cols-2 lg:items-center">
           <div className="flex flex-col">
             {steps.map((step, index) => {
               const isActive = index === activeStep
               const Icon = step.icon
               return (
-                <div key={step.title} className="flex gap-4">
+                <div key={step.title} className="flex gap-3 sm:gap-4">
                   <div className="flex flex-col items-center">
                     <button
                       onClick={() => setActiveStep(index)}
-                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 transition-colors ${
+                      className={`flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full border-2 transition-colors cursor-pointer ${
                         isActive
                           ? "border-emerald-500 bg-emerald-100 text-emerald-500"
                           : index < activeStep
@@ -515,24 +515,24 @@ export function DeliveryJourney() {
 
                   <button
                     onClick={() => setActiveStep(index)}
-                    className={`mb-6 flex-1 rounded-2xl border p-5 text-left transition-all duration-300 ${
-                      isActive ? "border-emerald-500 bg-emerald-100 shadow-sm" : "border-transparent"
+                    className={`mb-4 sm:mb-6 flex-1 rounded-2xl border p-4 sm:p-5 text-left transition-all duration-300 cursor-pointer ${
+                      isActive ? "border-emerald-500 bg-emerald-100/70 shadow-sm" : "border-transparent"
                     }`}
                   >
                     <p
-                      className={`text-xs font-bold uppercase tracking-wide ${
-                        isActive ? "text-emerald-500" : "text-transparent"
+                      className={`text-[11px] sm:text-xs font-bold uppercase tracking-wide ${
+                        isActive ? "text-emerald-600" : "text-transparent"
                       }`}
                     >
                       Step {String(index + 1).padStart(2, "0")} &middot; Active
                     </p>
-                    <h3 className="mt-1 text-lg font-bold text-foreground">{step.title}</h3>
+                    <h3 className="mt-0.5 sm:mt-1 text-base sm:text-lg font-bold text-foreground">{step.title}</h3>
                     <div
                       className={`grid overflow-hidden transition-all duration-300 ${
                         isActive ? "mt-2 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
                       }`}
                     >
-                      <p className="min-h-0 text-sm leading-relaxed text-muted-foreground">
+                      <p className="min-h-0 text-xs sm:text-sm leading-relaxed text-muted-foreground">
                         {step.description}
                       </p>
                     </div>

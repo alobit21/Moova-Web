@@ -42,23 +42,23 @@ const FAQ_ITEMS = [
 
 export function FAQ() {
   return (
-    <section id="faq" className="bg-white py-24">
-      <div className="mx-auto max-w-4xl px-6 lg:px-12">
-        <h2 className="text-center text-4xl font-semibold font-instrument text-[#1F3B89] sm:text-5xl">
+    <section id="faq" className="bg-white py-16 sm:py-24">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-12">
+        <h2 className="text-center text-3xl sm:text-4xl lg:text-5xl font-semibold font-instrument text-[#1F3B89] tracking-tight">
           Frequently Asked Questions
         </h2>
 
-        <Accordion defaultValue={["what-is-moova"]} className="mt-14 gap-4">
+        <Accordion defaultValue={["what-is-moova"]} className="mt-10 sm:mt-14 gap-3 sm:gap-4">
           {FAQ_ITEMS.map((item) => (
             <AccordionItem
               key={item.value}
               value={item.value}
-              className="rounded-2xl border border-border bg-white px-6 not-last:border-b-0"
+              className="rounded-2xl border border-border bg-white px-4 sm:px-6 not-last:border-b-0"
             >
-              <AccordionTrigger className="py-5 text-base font-semibold text-foreground hover:no-underline sm:text-lg">
+              <AccordionTrigger className="py-4 sm:py-5 text-sm sm:text-lg font-semibold text-foreground hover:no-underline text-left">
                 {item.question}
               </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
+              <AccordionContent className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                 {item.answer}
               </AccordionContent>
             </AccordionItem>

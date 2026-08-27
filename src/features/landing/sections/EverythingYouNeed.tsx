@@ -44,7 +44,7 @@ export function EverythingYouNeed() {
   return (
     <section
       id="features"
-      className="relative isolate overflow-hidden bg-[#1c3b7a] py-24 lg:py-32"
+      className="relative isolate overflow-hidden bg-[#1c3b7a] py-16 sm:py-24 lg:py-32"
     >
       <img
         src={bgImage}
@@ -53,22 +53,22 @@ export function EverythingYouNeed() {
         className="absolute inset-0 h-full w-full object-cover"
       />
 
-      <div className="relative mx-auto max-w-6xl px-6 lg:px-12">
-        <h2 className="text-center text-4xl font-extrabold text-white sm:text-5xl">
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-12">
+        <h2 className="text-center text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
           Everything You Need to Deliver Better
         </h2>
 
-        <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 sm:mt-16 grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map(({ icon, title, description }) => (
             <Card
               key={title}
-              className="mx-auto flex w-full max-w-[370px] min-h-[220px] rounded-2xl border border-white/10 bg-white/10 p-0 backdrop-blur-sm shadow-none"
+              className="mx-auto flex w-full max-w-full sm:max-w-[370px] min-h-[200px] sm:min-h-[220px] rounded-2xl border border-white/10 bg-white/10 p-0 backdrop-blur-sm shadow-none"
             >
-              <CardContent className="flex flex-col gap-4 p-8">
-                <img src={icon} alt="" aria-hidden="true" className="h-14 w-14" />
+              <CardContent className="flex flex-col gap-3 sm:gap-4 p-6 sm:p-8">
+                <img src={icon} alt="" aria-hidden="true" className="h-12 w-12 sm:h-14 sm:w-14" />
                 <div>
-                  <h3 className="text-lg font-bold text-white">{title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-white/75">
+                  <h3 className="text-base sm:text-lg font-bold text-white">{title}</h3>
+                  <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm leading-relaxed text-white/75">
                     {description}
                   </p>
                 </div>

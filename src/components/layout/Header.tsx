@@ -75,10 +75,10 @@ export function Header() {
           })}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <Button
             variant="ghost"
-            className="hidden h-11 sm:h-12 items-center justify-center rounded-full bg-gradient-to-r from-[#2648A6] to-[#3B82F6] px-7 py-3 text-sm sm:text-base font-semibold text-white shadow-md shadow-blue-500/25 transition-all duration-200 hover:opacity-95 hover:text-white hover:shadow-lg hover:shadow-blue-500/35 active:scale-95 sm:inline-flex border-0"
+            className="h-9 sm:h-12 items-center justify-center rounded-full bg-gradient-to-r from-[#2648A6] to-[#3B82F6] px-4 sm:px-7 py-2 sm:py-3 text-xs sm:text-base font-semibold text-white shadow-md shadow-blue-500/25 transition-all duration-200 hover:opacity-95 hover:text-white hover:shadow-lg hover:shadow-blue-500/35 active:scale-95 flex border-0"
             render={
               <a href="#get-started">
                 Get Started
@@ -93,7 +93,7 @@ export function Header() {
                   variant="ghost"
                   size="icon"
                   className={cn(
-                    "md:hidden",
+                    "md:hidden h-9 w-9",
                     isHome
                       ? "text-white hover:bg-white/10"
                       : "text-slate-700 hover:bg-slate-100"
@@ -103,7 +103,7 @@ export function Header() {
                 </Button>
               }
             />
-            <DropdownMenuContent align="end" className="w-52 p-2">
+            <DropdownMenuContent align="end" className="w-56 p-2 z-50">
               {NAV_LINKS.map((link) => {
                 const isActive =
                   (link.href === "/" && pathname === "/") ||
@@ -113,8 +113,8 @@ export function Header() {
                   <DropdownMenuItem
                     key={link.label}
                     className={cn(
-                      "cursor-pointer rounded-lg px-3 py-2 text-sm",
-                      isActive ? "bg-blue-50 font-bold text-blue-600" : "font-medium text-slate-700"
+                      "cursor-pointer rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                      isActive ? "bg-blue-50 font-bold text-blue-600" : "text-slate-700 hover:bg-slate-50"
                     )}
                     render={
                       link.isRoute ? (
@@ -127,11 +127,11 @@ export function Header() {
                 )
               })}
               <DropdownMenuItem
-                className="mt-2"
+                className="mt-2 p-0"
                 render={
                   <Button
                     variant="ghost"
-                    className="flex w-full h-auto items-center justify-center rounded-full bg-gradient-to-r from-[#2648A6] to-[#3B82F6] py-2 text-center text-sm font-semibold text-white shadow-sm hover:opacity-95 hover:text-white border-0"
+                    className="flex w-full h-10 items-center justify-center rounded-full bg-gradient-to-r from-[#2648A6] to-[#3B82F6] py-2 text-center text-sm font-semibold text-white shadow-sm hover:opacity-95 hover:text-white border-0"
                     render={<a href="#get-started">Get Started</a>}
                   />
                 }
