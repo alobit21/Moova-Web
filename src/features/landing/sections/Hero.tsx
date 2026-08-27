@@ -1,14 +1,116 @@
+import { useState, useEffect } from "react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import heroBg from "@/assets/hero-bg.png"
 import phoneMockup from "@/assets/phone-mockup.png"
+import heroMerchant from "@/assets/hero-merchant.png"
 import avatar1 from "@/assets/testimonies/testimonial-man-1.png"
 import avatar2 from "@/assets/become-one/avatars/woman-portrait.png"
 import avatar3 from "@/assets/testimonies/testimonial-man-2.png"
 import { DELIVERY_NOTIFICATIONS } from "../data/notifications"
 import { useSectionVisibility } from "@/hooks/useInView"
 import { AOSReveal, GradientText } from "@/components/animation/AOSReveal"
+
+const HERO_SLIDES = [
+  {
+    id: 1,
+    image: heroMerchant,
+    alt: "Moova merchant fulfillment with AI dispatch and live tracking stats",
+  },
+  {
+    id: 2,
+    image: phoneMockup,
+    alt: "Moova app showing shop performance and current deliveries",
+  },
+]
+
+function HeroCarousel() {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isHovered, setIsHovered] = useState(false)
+
+  useEffect(() => {
+    if (isHovered) return
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % HERO_SLIDES.length)
+    }, 4500)
+    return () => clearInterval(timer)
+  }, [isHovered])
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % HERO_SLIDES.length)
+  }
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length)
+  }
+
+  return (
+    <div
+      className="relative w-full max-w-xs sm:max-w-md lg:max-w-lg mx-auto group pb-8"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Slide Container */}
+      <div className="relative aspect-[4/3.2] sm:aspect-[4/3] w-full overflow-hidden rounded-2xl sm:rounded-3xl">
+        {HERO_SLIDES.map((slide, index) => {
+          const isActive = index === currentIndex
+          return (
+            <div
+              key={slide.id}
+              className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ease-in-out ${
+                isActive
+                  ? "opacity-100 scale-100 pointer-events-auto z-10"
+                  : "opacity-0 scale-95 pointer-events-none z-0"
+              }`}
+            >
+              <img
+                src={slide.image}
+                alt={slide.alt}
+                className="w-full h-full object-contain drop-shadow-2xl"
+              />
+            </div>
+          )
+        })}
+      </div>
+
+      {/* Navigation Chevrons */}
+      <button
+        onClick={prevSlide}
+        aria-label="Previous slide"
+        className="absolute left-0 sm:-left-2 top-1/2 -translate-y-1/2 z-20 flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-slate-900/50 text-white backdrop-blur-md border border-white/20 opacity-0 group-hover:opacity-100 hover:bg-slate-900/80 transition-all cursor-pointer shadow-lg"
+      >
+        <ChevronLeft className="h-5 w-5" />
+      </button>
+
+      <button
+        onClick={nextSlide}
+        aria-label="Next slide"
+        className="absolute right-0 sm:-right-2 top-1/2 -translate-y-1/2 z-20 flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-slate-900/50 text-white backdrop-blur-md border border-white/20 opacity-0 group-hover:opacity-100 hover:bg-slate-900/80 transition-all cursor-pointer shadow-lg"
+      >
+        <ChevronRight className="h-5 w-5" />
+      </button>
+
+      {/* Indicators Dots */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
+        {HERO_SLIDES.map((_, index) => {
+          const isActive = index === currentIndex
+          return (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              aria-label={`Go to slide ${index + 1}`}
+              className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                isActive ? "w-8 bg-[#5DD586]" : "w-2.5 bg-white/40 hover:bg-white/70"
+              }`}
+            />
+          )
+        })}
+      </div>
+    </div>
+  )
+}
 
 function HeroNotificationCard({
   icon,
@@ -119,11 +221,7 @@ export function Hero() {
         </div>
 
         <AOSReveal animation="fade-left" delay={300} duration={1000} className="relative flex justify-center lg:justify-end mt-4 lg:mt-0">
-          <img
-            src={phoneMockup}
-            alt="Moova app showing shop performance and current deliveries"
-            className="w-full max-w-xs sm:max-w-md lg:max-w-lg drop-shadow-2xl object-contain"
-          />
+          <HeroCarousel />
         </AOSReveal>
       </div>
 
