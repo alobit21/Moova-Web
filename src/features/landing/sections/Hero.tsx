@@ -3,6 +3,9 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import heroBg from "@/assets/hero-bg.png"
 import phoneMockup from "@/assets/phone-mockup.png"
+import avatar1 from "@/assets/testimonies/testimonial-man-1.png"
+import avatar2 from "@/assets/become-one/avatars/woman-portrait.png"
+import avatar3 from "@/assets/testimonies/testimonial-man-2.png"
 import { DELIVERY_NOTIFICATIONS } from "../data/notifications"
 import { useSectionVisibility } from "@/hooks/useInView"
 import { AOSReveal, GradientText } from "@/components/animation/AOSReveal"
@@ -54,10 +57,22 @@ export function Hero() {
               variant="secondary"
               className="mb-6 sm:mb-8 inline-flex items-center gap-2.5 rounded-full bg-white/10 py-1.5 sm:py-2 pl-2 pr-4 sm:pr-5 backdrop-blur-sm border-0 font-normal"
             >
-              <div className="flex -space-x-3">
-                <span className="h-7 w-7 sm:h-8 sm:w-8 rounded-full border-2 border-white/40 bg-blue-300" />
-                <span className="h-7 w-7 sm:h-8 sm:w-8 rounded-full border-2 border-white/40 bg-amber-300" />
-                <span className="h-7 w-7 sm:h-8 sm:w-8 rounded-full border-2 border-white/40 bg-rose-300" />
+              <div className="flex -space-x-2.5">
+                <img
+                  src={avatar1}
+                  alt="Customer avatar"
+                  className="h-7 w-7 sm:h-8 sm:w-8 rounded-full border-2 border-white/60 object-cover shadow-sm"
+                />
+                <img
+                  src={avatar2}
+                  alt="Customer avatar"
+                  className="h-7 w-7 sm:h-8 sm:w-8 rounded-full border-2 border-white/60 object-cover shadow-sm"
+                />
+                <img
+                  src={avatar3}
+                  alt="Customer avatar"
+                  className="h-7 w-7 sm:h-8 sm:w-8 rounded-full border-2 border-white/60 object-cover shadow-sm"
+                />
               </div>
               <p className="text-xs sm:text-sm text-white">
                 <span className="font-semibold">Trusted by 150+ brands</span>
