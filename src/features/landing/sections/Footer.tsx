@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import footerBg from "@/assets/footer-bg.png"
+import { AOSReveal } from "@/components/animation/AOSReveal"
 
 function FacebookIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -56,7 +57,7 @@ export function Footer() {
 
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-6 lg:px-12 py-12 sm:py-20">
         {/* Brand */}
-        <div>
+        <AOSReveal animation="fade-up" delay={0}>
           <Button
             variant="link"
             className="h-auto p-0 no-underline hover:no-underline"
@@ -72,10 +73,10 @@ export function Footer() {
           <p className="mt-3 sm:mt-4 max-w-[20ch] text-sm text-white/70">
             Delivering businesses forward.
           </p>
-        </div>
+        </AOSReveal>
 
         {/* Quick links */}
-        <div>
+        <AOSReveal animation="fade-up" delay={100}>
           <h3 className="text-sm font-bold text-white">Quick Links</h3>
           <ul className="mt-4 sm:mt-5 flex flex-col gap-2.5 sm:gap-3">
             {QUICK_LINKS.map((link) => (
@@ -88,10 +89,10 @@ export function Footer() {
               </li>
             ))}
           </ul>
-        </div>
+        </AOSReveal>
 
         {/* Contact */}
-        <div>
+        <AOSReveal animation="fade-up" delay={200}>
           <h3 className="text-sm font-bold text-white">Contact</h3>
           <div className="mt-4 sm:mt-5 flex flex-col gap-3.5 sm:gap-4">
             <div>
@@ -111,10 +112,10 @@ export function Footer() {
               />
             </div>
           </div>
-        </div>
+        </AOSReveal>
 
         {/* Social */}
-        <div>
+        <AOSReveal animation="fade-up" delay={300}>
           <h3 className="text-sm font-bold text-white">Follow Us</h3>
           <ul className="mt-4 sm:mt-5 flex flex-col gap-2.5 sm:gap-3">
             {SOCIAL_LINKS.map(({ label, href, icon: Icon }) => (
@@ -132,7 +133,7 @@ export function Footer() {
               </li>
             ))}
           </ul>
-        </div>
+        </AOSReveal>
       </div>
     </footer>
   )

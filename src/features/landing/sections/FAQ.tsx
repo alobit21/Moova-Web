@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { AOSReveal, TextReveal } from "@/components/animation/AOSReveal"
 
 // NOTE: only "What is Moova?" copy came from the design.
 // The rest are placeholder answers — swap in real copy before shipping.
@@ -43,25 +44,30 @@ const FAQ_ITEMS = [
 export function FAQ() {
   return (
     <section id="faq" className="bg-white py-16 sm:py-24">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-12">
-        <h2 className="text-center text-3xl sm:text-4xl lg:text-5xl font-semibold font-instrument text-[#1F3B89] tracking-tight">
-          Frequently Asked Questions
-        </h2>
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-12 text-center">
+        <TextReveal
+          as="h2"
+          text="Frequently Asked Questions"
+          delay={0}
+          staggerDelay={60}
+          className="text-3xl sm:text-4xl lg:text-5xl font-semibold font-instrument text-[#1F3B89] tracking-tight"
+        />
 
-        <Accordion defaultValue={["what-is-moova"]} className="mt-10 sm:mt-14 gap-3 sm:gap-4">
-          {FAQ_ITEMS.map((item) => (
-            <AccordionItem
-              key={item.value}
-              value={item.value}
-              className="rounded-2xl border border-border bg-white px-4 sm:px-6 not-last:border-b-0"
-            >
-              <AccordionTrigger className="py-4 sm:py-5 text-sm sm:text-lg font-semibold text-foreground hover:no-underline text-left">
-                {item.question}
-              </AccordionTrigger>
-              <AccordionContent className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                {item.answer}
-              </AccordionContent>
-            </AccordionItem>
+        <Accordion defaultValue={["what-is-moova"]} className="mt-10 sm:mt-14 gap-3 sm:gap-4 text-left">
+          {FAQ_ITEMS.map((item, index) => (
+            <AOSReveal key={item.value} animation="fade-up" delay={index * 70}>
+              <AccordionItem
+                value={item.value}
+                className="rounded-2xl border border-border bg-white px-4 sm:px-6 not-last:border-b-0"
+              >
+                <AccordionTrigger className="py-4 sm:py-5 text-sm sm:text-lg font-semibold text-foreground hover:no-underline text-left cursor-pointer">
+                  {item.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  {item.answer}
+                </AccordionContent>
+              </AccordionItem>
+            </AOSReveal>
           ))}
         </Accordion>
       </div>

@@ -115,44 +115,55 @@ function MobileDockMarquee() {
 
     let lastTime = performance.now()
     const speed = 36 // pixels per second
+    let isIntersecting = true
+
+    const observer = new IntersectionObserver(([entry]) => {
+      isIntersecting = entry.isIntersecting
+    }, { threshold: 0.05 })
+
+    observer.observe(container)
 
     const animate = (time: number) => {
-      const delta = (time - lastTime) / 1000
-      lastTime = time
+      if (isIntersecting) {
+        const delta = (time - lastTime) / 1000
+        lastTime = time
 
-      offsetRef.current += speed * delta
+        offsetRef.current += speed * delta
 
-      const avatarElements = track.querySelectorAll<HTMLElement>(".dock-avatar")
-      const singleSetWidth = (track.scrollWidth || 1) / 4
+        const avatarElements = track.querySelectorAll<HTMLElement>(".dock-avatar")
+        const singleSetWidth = (track.scrollWidth || 1) / 4
 
-      if (offsetRef.current >= singleSetWidth) {
-        offsetRef.current -= singleSetWidth
-      }
-
-      track.style.transform = `translate3d(${-offsetRef.current}px, 0, 0)`
-
-      const containerRect = container.getBoundingClientRect()
-      const centerX = containerRect.left + containerRect.width / 2
-      const maxDist = 110
-
-      avatarElements.forEach((el) => {
-        const elRect = el.getBoundingClientRect()
-        const elCenter = elRect.left + elRect.width / 2
-        const dist = Math.abs(elCenter - centerX)
-
-        if (dist < maxDist) {
-          const factor = Math.cos((dist / maxDist) * (Math.PI / 2))
-          const scale = 1 + 0.5 * factor
-          const zIndex = Math.round(scale * 10)
-          el.style.transform = `scale(${scale})`
-          el.style.zIndex = `${zIndex}`
-          el.style.filter = `brightness(${1 + 0.15 * factor})`
-        } else {
-          el.style.transform = "scale(1)"
-          el.style.zIndex = "1"
-          el.style.filter = "brightness(1)"
+        if (offsetRef.current >= singleSetWidth) {
+          offsetRef.current -= singleSetWidth
         }
-      })
+
+        track.style.transform = `translate3d(${-offsetRef.current}px, 0, 0)`
+
+        const containerRect = container.getBoundingClientRect()
+        const centerX = containerRect.left + containerRect.width / 2
+        const maxDist = 110
+
+        avatarElements.forEach((el) => {
+          const elRect = el.getBoundingClientRect()
+          const elCenter = elRect.left + elRect.width / 2
+          const dist = Math.abs(elCenter - centerX)
+
+          if (dist < maxDist) {
+            const factor = Math.cos((dist / maxDist) * (Math.PI / 2))
+            const scale = 1 + 0.5 * factor
+            const zIndex = Math.round(scale * 10)
+            el.style.transform = `scale(${scale})`
+            el.style.zIndex = `${zIndex}`
+            el.style.filter = `brightness(${1 + 0.15 * factor})`
+          } else {
+            el.style.transform = "scale(1)"
+            el.style.zIndex = "1"
+            el.style.filter = "brightness(1)"
+          }
+        })
+      } else {
+        lastTime = time
+      }
 
       animationFrameRef.current = requestAnimationFrame(animate)
     }
@@ -160,6 +171,7 @@ function MobileDockMarquee() {
     animationFrameRef.current = requestAnimationFrame(animate)
 
     return () => {
+      observer.disconnect()
       if (animationFrameRef.current !== null) {
         cancelAnimationFrame(animationFrameRef.current)
       }
@@ -188,20 +200,33 @@ function MobileDockMarquee() {
   )
 }
 
+import { AOSReveal, TextReveal, GradientText } from "@/components/animation/AOSReveal"
+
 export function BecomeOne() {
   return (
     <section id="customers" className="relative overflow-hidden bg-[#F5F9FF] py-14 sm:py-24 lg:py-32">
       <div className="relative mx-auto max-w-4xl px-4 sm:px-6 text-center lg:px-12">
-        <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-[#191B1F]">
-          Become One of Those Seeking to Turn Buyers{" "}
-          <span className="font-[Instrument_Sans] italic text-[#1F3B89] inline-block">
+        <TextReveal
+          as="h2"
+          text="Become One of Those Seeking to Turn Buyers"
+          delay={0}
+          staggerDelay={40}
+          className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-[#191B1F]"
+        />
+        <div className="mt-1 text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
+          <GradientText
+            gradient="from-[#1F3B89] via-[#3B82F6] to-[#1F3B89]"
+            className="font-[Instrument_Sans] italic inline-block"
+          >
             Into Loyal Customers
-          </span>
-        </h2>
-        <p className="mx-auto mt-4 sm:mt-6 max-w-2xl text-sm sm:text-base lg:text-lg leading-relaxed text-muted-foreground">
-          Join hundreds of merchants already building lasting customer
-          relationships through optimized logistics.
-        </p>
+          </GradientText>
+        </div>
+        <AOSReveal animation="fade-up" delay={150}>
+          <p className="mx-auto mt-4 sm:mt-6 max-w-2xl text-sm sm:text-base lg:text-lg leading-relaxed text-muted-foreground">
+            Join hundreds of merchants already building lasting customer
+            relationships through optimized logistics.
+          </p>
+        </AOSReveal>
       </div>
 
       {/* Mobile macOS Dock Magnification Marquee */}

@@ -439,6 +439,8 @@ const BUYER_STEPS: StepDef[] = [
   },
 ]
 
+import { AOSReveal, TextReveal, GradientText } from "@/components/animation/AOSReveal"
+
 export function DeliveryJourney() {
   const [tab, setTab] = useState<"shop" | "buyer">("shop")
   const [activeStep, setActiveStep] = useState(0)
@@ -460,35 +462,47 @@ export function DeliveryJourney() {
     <section id="how-it-works" className="bg-[#F8FAFC] py-16 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-12">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-foreground font-instrument">
-            The complete delivery journey{" "}
-            <span className="italic text-brand">managed end-to-end</span>
-          </h2>
-          <p className="mx-auto mt-4 sm:mt-6 max-w-xl text-base sm:text-lg font-normal leading-relaxed text-muted-foreground font-instrument">
-            Moova handles everything from the moment an order is placed to the second it arrives
-            at the door — so merchants can focus on selling, and customers always know exactly
-            where their order is.
-          </p>
+          <TextReveal
+            as="h2"
+            text="The complete delivery journey"
+            delay={0}
+            staggerDelay={50}
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-foreground font-instrument"
+          />
+          <div className="mt-1 text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight font-instrument">
+            <GradientText gradient="from-[#2648A6] via-[#0D9488] to-[#2648A6]" className="italic">
+              managed end-to-end
+            </GradientText>
+          </div>
+          <AOSReveal animation="fade-up" delay={150}>
+            <p className="mx-auto mt-4 sm:mt-6 max-w-xl text-base sm:text-lg font-normal leading-relaxed text-muted-foreground font-instrument">
+              Moova handles everything from the moment an order is placed to the second it arrives
+              at the door — so merchants can focus on selling, and customers always know exactly
+              where their order is.
+            </p>
+          </AOSReveal>
         </div>
 
-        <Tabs value={tab} onValueChange={(val) => setTab(val as "shop" | "buyer")} className="mx-auto mt-8 sm:mt-10 w-fit">
-          <TabsList className="h-auto rounded-full bg-slate-100 p-1 sm:p-1.5 gap-0">
-            <TabsTrigger
-              value="shop"
-              className="rounded-full px-4 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold transition-colors data-[state=active]:bg-teal-500 data-[state=active]:text-white data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground border-0"
-            >
-              Online Shop
-            </TabsTrigger>
-            <TabsTrigger
-              value="buyer"
-              className="rounded-full px-4 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold transition-colors data-[state=active]:bg-teal-500 data-[state=active]:text-white data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground border-0"
-            >
-              Online Buyer
-            </TabsTrigger>
-          </TabsList>
-        </Tabs>
+        <AOSReveal animation="fade-up" delay={200} className="mx-auto mt-8 sm:mt-10 w-fit">
+          <Tabs value={tab} onValueChange={(val) => setTab(val as "shop" | "buyer")}>
+            <TabsList className="h-auto rounded-full bg-slate-100 p-1 sm:p-1.5 gap-0">
+              <TabsTrigger
+                value="shop"
+                className="rounded-full px-4 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold transition-colors data-[state=active]:bg-teal-500 data-[state=active]:text-white data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground border-0"
+              >
+                Online Shop
+              </TabsTrigger>
+              <TabsTrigger
+                value="buyer"
+                className="rounded-full px-4 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold transition-colors data-[state=active]:bg-teal-500 data-[state=active]:text-white data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground border-0"
+              >
+                Online Buyer
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
+        </AOSReveal>
 
-        <div className="mt-10 sm:mt-16 grid gap-8 lg:gap-12 lg:grid-cols-2 lg:items-center">
+        <div key={tab} className="mt-10 sm:mt-16 grid gap-8 lg:gap-12 lg:grid-cols-2 lg:items-center transition-all duration-300 ease-out">
           <div className="flex flex-col">
             {steps.map((step, index) => {
               const isActive = index === activeStep
@@ -543,7 +557,7 @@ export function DeliveryJourney() {
           </div>
 
           <div className="flex justify-center lg:justify-end">
-            <div key={`${tab}-${activeStep}`} className="w-full max-w-md animate-fade-slide-in">
+            <div key={`${tab}-${activeStep}`} className="w-full max-w-md transition-all duration-300 ease-out opacity-100 translate-y-0">
               {steps[activeStep].panel}
             </div>
           </div>

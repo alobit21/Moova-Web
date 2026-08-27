@@ -4,6 +4,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import manOne from "@/assets/testimonies/testimonial-man-1.png"
 import manTwo from "@/assets/testimonies/testimonial-man-2.png"
 import manThree from "@/assets/testimonies/testimonial-man-3.png"
+import { AOSReveal, TextReveal } from "@/components/animation/AOSReveal"
 
 const TESTIMONIALS = [
   {
@@ -13,6 +14,7 @@ const TESTIMONIALS = [
     role: "CEO of Initech",
     avatar: manOne,
     featured: false,
+    delay: 0,
   },
   {
     quote:
@@ -21,6 +23,7 @@ const TESTIMONIALS = [
     role: "Marketing Manager of Upnow",
     avatar: manTwo,
     featured: true,
+    delay: 120,
   },
   {
     quote:
@@ -29,12 +32,13 @@ const TESTIMONIALS = [
     role: "Barellon NSW",
     avatar: manThree,
     featured: false,
+    delay: 240,
   },
 ] as const
 
 function StarRating() {
   return (
-    <div className="flex w-fit items-center gap-0.5 rounded  px-1.5 py-1">
+    <div className="flex w-fit items-center gap-0.5 rounded px-1.5 py-1">
       {Array.from({ length: 5 }).map((_, i) => (
         <Star key={i} className="h-3 w-3 fill-[#5DD586] text-white" />
       ))}
@@ -45,57 +49,66 @@ function StarRating() {
 export function Testimonials() {
   return (
     <section id="testimonials" className="bg-slate-50 py-16 sm:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-        <h2 className="text-center text-3xl sm:text-4xl lg:text-5xl font-instrument text-[#1F3B89] tracking-tight">
-          What Online Businesses Say
-        </h2>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 text-center">
+        <TextReveal
+          as="h2"
+          text="What Online Businesses Say"
+          delay={0}
+          staggerDelay={60}
+          className="text-3xl sm:text-4xl lg:text-5xl font-instrument text-[#1F3B89] tracking-tight"
+        />
 
-        <div className="mt-10 sm:mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:items-center">
+        <div className="mt-10 sm:mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:items-center text-left">
           {TESTIMONIALS.map((t) => (
-            <Card
+            <AOSReveal
               key={t.name}
-              className={
-                t.featured
-                  ? "border-0 bg-blue-900 py-8 sm:py-10 shadow-xl lg:scale-105"
-                  : "bg-white py-8 sm:py-10 shadow-sm"
-              }
+              animation={t.featured ? "zoom-in" : "fade-up"}
+              delay={t.delay}
             >
-              <CardContent className="px-5 sm:px-8">
-                <Quote className="h-7 w-7 sm:h-8 sm:w-8 text-[#5DD586]" strokeWidth={2.5} />
+              <Card
+                className={`transition-all duration-300 ${
+                  t.featured
+                    ? "border-0 bg-blue-900 py-8 sm:py-10 shadow-xl lg:scale-105"
+                    : "bg-white py-8 sm:py-10 shadow-sm"
+                }`}
+              >
+                <CardContent className="px-5 sm:px-8">
+                  <Quote className="h-7 w-7 sm:h-8 sm:w-8 text-[#5DD586]" strokeWidth={2.5} />
 
-                <p
-                  className={`mt-4 sm:mt-6 text-sm sm:text-base leading-relaxed ${
-                    t.featured ? "text-white" : "text-foreground"
-                  }`}
-                >
-                  "{t.quote}"
-                </p>
+                  <p
+                    className={`mt-4 sm:mt-6 text-sm sm:text-base leading-relaxed ${
+                      t.featured ? "text-white" : "text-foreground"
+                    }`}
+                  >
+                    "{t.quote}"
+                  </p>
 
-                <div className="mt-6 sm:mt-8 flex items-center gap-3">
-                  <Avatar className="h-11 w-11 sm:h-13 sm:w-13">
-                    <AvatarImage src={t.avatar} alt={t.name} />
-                    <AvatarFallback>{t.name.slice(0, 2).toUpperCase()}</AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <StarRating />
-                    <p
-                      className={`mt-1 text-sm sm:text-base font-semibold ${
-                        t.featured ? "text-white" : "text-foreground"
-                      }`}
-                    >
-                      {t.name}
-                    </p>
-                    <p
-                      className={`text-xs sm:text-sm ${
-                        t.featured ? "text-white/70" : "text-muted-foreground"
-                      }`}
-                    >
-                      {t.role}
-                    </p>
+                  <div className="mt-6 sm:mt-8 flex items-center gap-3">
+                    <Avatar className="h-11 w-11 sm:h-13 sm:w-13">
+                      <AvatarImage src={t.avatar} alt={t.name} />
+                      <AvatarFallback>{t.name.slice(0, 2).toUpperCase()}</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <StarRating />
+                      <p
+                        className={`mt-1 text-sm sm:text-base font-semibold ${
+                          t.featured ? "text-white" : "text-foreground"
+                        }`}
+                      >
+                        {t.name}
+                      </p>
+                      <p
+                        className={`text-xs sm:text-sm ${
+                          t.featured ? "text-white/70" : "text-muted-foreground"
+                        }`}
+                      >
+                        {t.role}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </AOSReveal>
           ))}
         </div>
       </div>

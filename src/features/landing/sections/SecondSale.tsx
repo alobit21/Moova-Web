@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
+import { useInView } from "@/hooks/useInView"
 
 const STATS = [
   { icon: Users, value: "2,400+", label: "Businesses onboarded" },
@@ -21,8 +22,15 @@ const STATS = [
 ] as const
 
 function StatsBar() {
+  const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.15, triggerOnce: true })
+
   return (
-    <Card className="mx-auto max-w-4xl rounded-2xl sm:rounded-3xl border-0 shadow-xl shadow-slate-900/5">
+    <Card
+      ref={ref}
+      className={`mx-auto max-w-4xl rounded-2xl sm:rounded-3xl border-0 shadow-xl shadow-slate-900/5 transition-all duration-500 ease-out ${
+        isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
+      }`}
+    >
       <CardContent className="grid grid-cols-2 gap-y-6 px-4 py-6 sm:grid-cols-4 sm:gap-y-0 sm:px-10 sm:py-8">
         {STATS.map(({ icon: Icon, value, label }) => (
           <div
@@ -103,7 +111,7 @@ function FirstClickMock() {
           <p className="text-sm font-semibold text-blue-700">$24.99</p>
         </div>
       </div>
-      <Button className="w-full rounded-full bg-blue-800 text-white hover:bg-blue-700">
+      <Button className="w-full rounded-full bg-blue-800 text-white hover:bg-blue-700 active:scale-[0.98] transition-all">
         Place First Order
       </Button>
     </div>
@@ -208,10 +216,14 @@ function LoyaltyLoopMock() {
   )
 }
 
+import { AOSReveal, TextReveal, GradientText } from "@/components/animation/AOSReveal"
+
 export function SecondSale() {
+  const [cardsRef, cardsInView] = useInView<HTMLDivElement>({ threshold: 0.1, triggerOnce: true })
+
   return (
     <section id="trust-journey" className="relative isolate overflow-hidden bg-[#F8FAFC] py-16 sm:py-24 lg:py-32">
-      {/* Ambient background blobs — echoes the reference gradient transition */}
+      {/* Ambient background blobs */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -left-40 -top-24 h-[320px] w-[320px] sm:h-[420px] sm:w-[420px] rounded-full bg-blue-100/50 blur-3xl"
@@ -224,18 +236,25 @@ export function SecondSale() {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         {/* Section header */}
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-[#0F172A]">
-            The second sale <br className="hidden sm:block" />
-            is won{" "}
-            <span className="bg-gradient-to-r from-[#2648A6] to-[#61A6F9] bg-clip-text text-transparent">
+          <TextReveal
+            as="h2"
+            text="The second sale is won"
+            delay={0}
+            staggerDelay={50}
+            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-[#0F172A]"
+          />
+          <div className="mt-1 text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
+            <GradientText gradient="from-[#2648A6] via-[#61A6F9] to-[#2648A6]">
               during delivery.
-            </span>
-          </h2>
-          <p className="mt-4 sm:mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground">
-            Winning the first order takes marketing. Winning the second depends on
-            what happens after checkout. Moova keeps customers informed from
-            pickup to delivery, turning every order into a reason to buy again.
-          </p>
+            </GradientText>
+          </div>
+          <AOSReveal animation="fade-up" delay={150}>
+            <p className="mt-4 sm:mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground">
+              Winning the first order takes marketing. Winning the second depends on
+              what happens after checkout. Moova keeps customers informed from
+              pickup to delivery, turning every order into a reason to buy again.
+            </p>
+          </AOSReveal>
         </div>
 
         {/* Stats bar */}
@@ -245,16 +264,27 @@ export function SecondSale() {
 
         {/* Three moments */}
         <div className="mt-16 sm:mt-28 text-center">
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-foreground tracking-tight">
-            Three Moments. One Trust Journey.
-          </h3>
-          <p className="mx-auto mt-3 sm:mt-4 max-w-2xl text-sm sm:text-base text-muted-foreground">
-            Every first-time buyer goes through these three moments. Moova makes
-            sure each one builds confidence instead of uncertainty.
-          </p>
+          <TextReveal
+            as="h3"
+            text="Three Moments. One Trust Journey."
+            delay={0}
+            staggerDelay={50}
+            className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-foreground tracking-tight"
+          />
+          <AOSReveal animation="fade-up" delay={120}>
+            <p className="mx-auto mt-3 sm:mt-4 max-w-2xl text-sm sm:text-base text-muted-foreground">
+              Every first-time buyer goes through these three moments. Moova makes
+              sure each one builds confidence instead of uncertainty.
+            </p>
+          </AOSReveal>
         </div>
 
-        <div className="mt-8 sm:mt-12 grid gap-6 md:grid-cols-3 md:items-stretch">
+        <div
+          ref={cardsRef}
+          className={`mt-8 sm:mt-12 grid gap-6 md:grid-cols-3 md:items-stretch transition-all duration-500 ease-out ${
+            cardsInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
+          }`}
+        >
           <MomentCard
             eyebrow="01 / The First Click"
             eyebrowClassName="text-blue-700"
@@ -297,14 +327,14 @@ export function SecondSale() {
           <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full">
             <Button
               size="lg"
-              className="w-full sm:w-auto rounded-full bg-white px-8 sm:px-10 text-blue-700 shadow-lg shadow-blue-950/20 hover:bg-white/90 hover:shadow-xl transition-all cursor-pointer"
+              className="w-full sm:w-auto rounded-full bg-white px-8 sm:px-10 text-blue-700 shadow-lg shadow-blue-950/20 hover:bg-white/90 hover:shadow-xl active:scale-[0.98] transition-all cursor-pointer"
             >
               Get started free
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="w-full sm:w-auto rounded-full border-white/50 bg-white/5 px-8 sm:px-10 text-white backdrop-blur-xs hover:bg-white/15 hover:border-white/80 hover:text-white transition-all cursor-pointer"
+              className="w-full sm:w-auto rounded-full border-white/50 bg-white/5 px-8 sm:px-10 text-white backdrop-blur-xs hover:bg-white/15 hover:border-white/80 hover:text-white active:scale-[0.98] transition-all cursor-pointer"
             >
               Watch Product Demo
             </Button>

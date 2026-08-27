@@ -1,5 +1,8 @@
 import { Bell, Gem, MapPin, Zap } from "lucide-react"
-  import { DELIVERY_NOTIFICATIONS } from "@/features/landing/data/notifications"
+import { DELIVERY_NOTIFICATIONS } from "@/features/landing/data/notifications"
+import { useSectionVisibility } from "@/hooks/useInView"
+import { AOSReveal, TextReveal, GradientText } from "@/components/animation/AOSReveal"
+
 const BADGES = [
   { icon: Gem, label: "Live updates on orders", className: "text-purple-600" },
   { icon: MapPin, label: "Highly rated riders", className: "text-emerald-600" },
@@ -45,22 +48,33 @@ function BadgePill({
 }
 
 export function DeliverySpeaks() {
+  const [sectionRef, isVisible] = useSectionVisibility<HTMLElement>()
+
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-blue-50/70 to-white py-16 sm:py-24 lg:py-32">
+    <section ref={sectionRef} className="relative overflow-hidden bg-gradient-to-b from-blue-50/70 to-white py-16 sm:py-24 lg:py-32">
       <div className="relative mx-auto max-w-4xl px-4 sm:px-6 text-center lg:px-12">
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-[#1c3b7a] tracking-tight">
-          Every Delivery Speaks for Your Business
-        </h2>
-        <p className="mx-auto mt-4 sm:mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground">
-          Customers never have to ask, "Where is my order?" Moova
-          automatically sends delivery updates from order creation to
-          successful delivery.
-        </p>
+        <TextReveal
+          as="h2"
+          text="Every Delivery Speaks for Your Business"
+          delay={0}
+          staggerDelay={50}
+          className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-[#1c3b7a] tracking-tight"
+        />
+        <AOSReveal animation="fade-up" delay={150}>
+          <p className="mx-auto mt-4 sm:mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-muted-foreground">
+            Customers never have to ask, <span className="font-semibold text-slate-800">"Where is my order?"</span>{" "}
+            Moova automatically sends{" "}
+            <GradientText gradient="from-[#1c3b7a] via-[#3B82F6] to-[#1c3b7a]">
+              delivery updates
+            </GradientText>{" "}
+            from order creation to successful delivery.
+          </p>
+        </AOSReveal>
       </div>
 
       {/* Notification cards marquee */}
       <div className="edge-fade relative mt-10 sm:mt-16 overflow-hidden">
-        <div className="flex w-max animate-marquee gap-4 sm:gap-6">
+        <div className={`flex w-max animate-marquee gap-4 sm:gap-6 ${isVisible ? "" : "animation-paused"}`}>
           {[...DELIVERY_NOTIFICATIONS, ...DELIVERY_NOTIFICATIONS].map((item, i) => (
             <NotificationCard key={i} {...item} />
           ))}
@@ -69,7 +83,7 @@ export function DeliverySpeaks() {
 
       {/* Badge pills marquee */}
       <div className="edge-fade relative mt-6 sm:mt-8 overflow-hidden">
-        <div className="flex w-max animate-marquee-reverse gap-3 sm:gap-4">
+        <div className={`flex w-max animate-marquee-reverse gap-3 sm:gap-4 ${isVisible ? "" : "animation-paused"}`}>
           {[...BADGES, ...BADGES, ...BADGES].map((badge, i) => (
             <BadgePill key={i} {...badge} />
           ))}
