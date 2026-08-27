@@ -177,72 +177,6 @@
   -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .animate-marquee,
-  .animate-marquee-reverse {
-    animation: none;
-  }
-}
-
-
-@keyframes fade-slide-in {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-slide-in {
-  animation: fade-slide-in 0.4s ease-out;
-}
-
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-marquee,
-  .animate-marquee-reverse,
-  .animate-orbit,
-  .animate-orbit-reverse,
-  .animate-fade-slide-in {
-    animation: none;
-  }
-}
-
-
-
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.animate-marquee {
-  animation: marquee 40s linear infinite;
-}
-
-.animate-marquee-reverse {
-  animation: marquee 45s linear infinite reverse;
-}
-
-.edge-fade {
-  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-marquee,
-  .animate-marquee-reverse {
-    animation: none;
-  }
-}
-
-
 @keyframes orbit-spin {
   to {
     transform: rotate(360deg);
@@ -257,11 +191,46 @@
   animation: orbit-spin 40s linear infinite reverse;
 }
 
+/* Pause animation class for off-screen marquee performance */
+.animation-paused {
+  animation-play-state: paused !important;
+}
+
+/* Animated Text Gradient Shimmer */
+@keyframes text-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-text-shimmer {
+  background-size: 200% auto;
+  animation: text-shimmer 6s ease infinite;
+}
+
+/* Reduced motion accessibility enforcement */
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee,
   .animate-marquee-reverse,
   .animate-orbit,
-  .animate-orbit-reverse {
-    animation: none;
+  .animate-orbit-reverse,
+  .animate-fade-slide-in,
+  .animate-text-shimmer {
+    animation: none !important;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
