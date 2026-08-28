@@ -6,38 +6,42 @@ import {
 } from "@/components/ui/accordion"
 import { AOSReveal, TextReveal } from "@/components/animation/AOSReveal"
 
-// NOTE: only "What is Moova?" copy came from the design.
-// The rest are placeholder answers — swap in real copy before shipping.
 const FAQ_ITEMS = [
   {
     value: "what-is-moova",
     question: "What is Moova?",
     answer:
-      "Moova is a last-mile delivery management platform designed for online sellers to manage, track, and optimize their delivery process while providing a transparent experience to their customers.",
+      "Moova is a delivery platform that helps online businesses manage and deliver orders to their customers. We connect businesses with drivers and provide tools to make deliveries easier to manage, track, and coordinate.",
   },
   {
-    value: "track-deliveries",
-    question: "Can customers track deliveries?",
+    value: "track-orders",
+    question: "Can my customers track their orders?",
     answer:
-      "Yes — every delivery includes a live tracking link customers can open in their browser, no app required, so they can follow their order from pickup to drop-off.",
+      "Yes. Your customers can receive updates on their delivery and follow the progress of their order, helping them know what is happening from pickup to delivery.",
   },
   {
-    value: "own-riders",
-    question: "Can I use my own riders?",
+    value: "own-driver",
+    question: "Can I use my own driver?",
     answer:
-      "Yes. You can onboard your own riders onto Moova, use our network of delivery partners, or mix both depending on the order.",
+      "Yes. You can invite your own driver to Moova and manage your deliveries through the platform. This allows you to continue working with drivers you already know and trust while benefiting from Moova's delivery management and tracking features.",
   },
   {
     value: "customer-app",
-    question: "Do customers need an app?",
+    question: "Do my customers need to have the Moova app?",
     answer:
-      "No. Customers track deliveries through a link sent via SMS or WhatsApp — no download or account required.",
+      "No. Your customers don't need to download the Moova app to receive their orders or get delivery updates. We make it simple for your customers to stay informed throughout the delivery process.",
   },
   {
-    value: "multiple-deliveries",
-    question: "Can I manage multiple deliveries?",
+    value: "more-than-one-order",
+    question: "What if I have more than one order?",
     answer:
-      "Yes. The Moova dashboard lets you create, assign, and monitor multiple deliveries at once, with full visibility into every order's status.",
+      "Moova helps you manage multiple orders in one place. You can create and monitor several deliveries, check their status, and keep track of your orders without having to manage each delivery separately.",
+  },
+  {
+    value: "order-damaged-or-lost",
+    question: "What happens if a customer's order is damaged or lost?",
+    answer:
+      "If an order is damaged, lost, or there is another issue during delivery, please contact Moova as soon as possible. Our team will review the delivery details and help determine the appropriate next steps based on the circumstances and Moova's applicable policies.",
   },
 ] as const
 
