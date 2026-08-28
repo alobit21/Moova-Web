@@ -124,8 +124,10 @@ function HeroNotificationCard({
   return (
     <Card className="flex h-[150px] sm:h-[160px] w-[230px] sm:w-[265px] shrink-0 rounded-2xl border border-white/10 bg-[#254685]/80 p-0 font-instrument shadow-none backdrop-blur-xs">
       <CardContent className="flex flex-col p-4 sm:p-5">
-        <div className="text-lg sm:text-xl">{icon}</div>
-        <h3 className="mt-2 text-xs font-bold text-white sm:text-[13px]">{title}</h3>
+        <div className="w-8 h-8 sm:w-10 sm:h-10 mb-1 sm:mb-2">
+          <img src={icon} alt="" className="w-full h-full object-contain" />
+        </div>
+        <h3 className="mt-1 sm:mt-2 text-xs font-bold text-white sm:text-[13px]">{title}</h3>
         <p className="mt-1 text-[11px] leading-relaxed text-white/70 line-clamp-3">{body}</p>
       </CardContent>
     </Card>
@@ -205,7 +207,7 @@ export function Hero() {
               <Button
                 className="w-full sm:w-auto h-13 sm:h-14 rounded-full bg-[#5DD586] px-8 sm:px-10 text-base font-semibold text-slate-950 shadow-lg shadow-emerald-950/20 hover:bg-[#4ed079] active:scale-[0.98] transition-all cursor-pointer"
               >
-                Start Free 14-Day Trial
+                Start Delivering Smarter
               </Button>
               <Button
                 variant="outline"
