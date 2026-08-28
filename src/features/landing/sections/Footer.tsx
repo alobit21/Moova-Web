@@ -1,3 +1,4 @@
+import brandLogo from "@/assets/logo/logo.png"
 import { Button } from "@/components/ui/button"
 import footerBg from "@/assets/footer-bg.png"
 import { AOSReveal } from "@/components/animation/AOSReveal"
@@ -62,11 +63,13 @@ export function Footer() {
             variant="link"
             className="h-auto p-0 no-underline hover:no-underline"
             render={
-              <a href="#home" className="flex items-center gap-2">
-                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-white text-lg font-bold text-[#1c3b7a]">
-                  M
-                </span>
-                <span className="text-xl font-bold text-white">Moova</span>
+              <a href="#home" className="flex items-center gap-3">
+                <img 
+                  src={brandLogo} 
+                  alt="Moova Logo" 
+                  className="h-12 w-12 sm:h-14 sm:w-14 object-contain rounded-lg" 
+                />
+                <span className="text-xl sm:text-2xl font-bold text-white -mt-1 sm:-mt-1.5">Moova</span>
               </a>
             }
           />

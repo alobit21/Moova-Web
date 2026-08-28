@@ -1,4 +1,5 @@
- import { Menu } from "lucide-react"
+import brandLogo from "@/assets/logo/logo.png"
+import { Menu } from "lucide-react"
 import { Link, useLocation } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -32,13 +33,15 @@ export function Header() {
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-12">
-        <Link to="/" className="flex items-center gap-2.5 group">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 text-lg font-bold text-white shadow-md shadow-blue-500/30 transition-transform group-hover:scale-105">
-            M
-          </span>
+        <Link to="/" className="flex items-center gap-3 group">
+          <img 
+            src={brandLogo} 
+            alt="Moova Logo" 
+            className="h-12 w-12 sm:h-14 sm:w-14 object-contain transition-transform group-hover:scale-105" 
+          />
           <span
             className={cn(
-              "text-xl font-bold tracking-tight",
+              "text-xl sm:text-2xl font-bold tracking-tight -mt-1 sm:-mt-1.5",
               isHome ? "text-white" : "text-slate-900"
             )}
           >
