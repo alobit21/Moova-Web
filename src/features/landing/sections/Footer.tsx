@@ -63,13 +63,17 @@ export function Footer() {
             variant="link"
             className="h-auto p-0 no-underline hover:no-underline"
             render={
-              <a href="#home" className="flex items-center gap-3">
-                <img 
-                  src={brandLogo} 
-                  alt="Moova Logo" 
-                  className="h-12 w-12 sm:h-14 sm:w-14 object-contain rounded-lg" 
-                />
-                <span className="text-xl sm:text-2xl font-bold text-white -mt-1 sm:-mt-1.5">Moova</span>
+              <a href="#home" className="flex items-center gap-3 sm:gap-4">
+                <div className="flex items-center justify-center shrink-0">
+                  <img 
+                    src={brandLogo} 
+                    alt="Moova Logo" 
+                    className="h-16 w-16 sm:h-20 sm:w-20 object-contain rounded-lg" 
+                  />
+                </div>
+                <div className="flex items-center">
+                  <span className="text-2xl sm:text-3xl font-bold text-white">Moova</span>
+                </div>
               </a>
             }
           />

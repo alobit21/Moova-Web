@@ -33,15 +33,15 @@ export function Header() {
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-12">
-        <Link to="/" className="flex items-center gap-3 group">
-          <img 
-            src={brandLogo} 
-            alt="Moova Logo" 
-            className="h-12 w-12 sm:h-14 sm:w-14 object-contain transition-transform group-hover:scale-105" 
+        <Link to="/" className="flex items-center gap-3 sm:gap-4 group">
+          <img
+            src={brandLogo}
+            alt="Moova Logo"
+            className="h-28 w-16 sm:h-20 sm:w-20 object-contain transition-transform group-hover:scale-105"
           />
           <span
             className={cn(
-              "text-xl sm:text-2xl font-bold tracking-tight -mt-1 sm:-mt-1.5",
+              "text-2xl sm:text-3xl font-bold tracking-tight -mt-1 sm:-mt-1.5",
               isHome ? "text-white" : "text-slate-900"
             )}
           >
