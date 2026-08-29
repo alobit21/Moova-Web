@@ -58,27 +58,21 @@ export function Footer() {
 
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-6 lg:px-12 py-12 sm:py-20">
         {/* Brand */}
-        <AOSReveal animation="fade-up" delay={0}>
-          <Button
-            variant="link"
-            className="h-auto p-0 no-underline hover:no-underline"
-            render={
-              <a href="#home" className="flex items-center gap-3 sm:gap-4">
-                <div className="flex items-center justify-center shrink-0">
-                  <img 
-                    src={brandLogo} 
-                    alt="Moova Logo" 
-                    className="h-16 w-16 sm:h-20 sm:w-20 object-contain rounded-lg" 
-                  />
-                </div>
-                <div className="flex items-center">
-                  <span className="text-2xl sm:text-3xl font-bold text-white">Moova</span>
-                </div>
-              </a>
-            }
-          />
-          <p className="mt-3 sm:mt-4 max-w-[20ch] text-sm text-white/70">
-            Delivering businesses forward.
+        <AOSReveal animation="fade-up" delay={0} className="flex flex-col items-start">
+          <a href="#home" className="flex items-center gap-3 sm:gap-4 group">
+            <div className="flex items-center justify-center shrink-0">
+              <img 
+                src={brandLogo} 
+                alt="Moova Logo" 
+                className="h-16 w-16 sm:h-20 sm:w-20 object-contain rounded-lg transition-transform group-hover:scale-105" 
+              />
+            </div>
+            <div className="flex items-center">
+              <span className="text-2xl sm:text-3xl font-bold text-white">Moova</span>
+            </div>
+          </a>
+          <p className="mt-4 sm:mt-5 max-w-[34ch] text-sm leading-relaxed text-white/70">
+            An app that helps online sellers manage deliveries and give their customers a stress-free delivery experience with real-time tracking.
           </p>
         </AOSReveal>
 
@@ -141,6 +135,20 @@ export function Footer() {
             ))}
           </ul>
         </AOSReveal>
+      </div>
+
+      {/* Bottom Section */}
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
+        <div className="border-t border-white/10 py-6 sm:py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-xs sm:text-sm text-white/60 text-center md:text-left">
+            © {new Date().getFullYear()} Moova. All rights reserved.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-white/60">
+            <a href="#terms" className="hover:text-white transition-colors">Terms of Service</a>
+            <a href="#privacy" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="#cookies" className="hover:text-white transition-colors">Cookie Policy</a>
+          </div>
+        </div>
       </div>
     </footer>
   )

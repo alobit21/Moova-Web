@@ -123,16 +123,16 @@ function DecisiveMomentMock() {
     <>
       <style>{`
         @keyframes progress-grow {
-          0% { width: 0%; }
-          100% { width: 90%; }
+          0% { transform: translateX(-100%); background-color: #2563eb; }
+          100% { transform: translateX(-10%); background-color: #10b981; }
         }
         .progress-bar-delivery {
-          animation: progress-grow 3.5s ease-in-out infinite alternate;
-          animation-delay: -1s;
+          animation: progress-grow 8s ease-in-out infinite alternate;
+          animation-delay: 0s;
         }
         .progress-bar-trust {
-          animation: progress-grow 4.5s ease-in-out infinite alternate;
-          animation-delay: 0s;
+          animation: progress-grow 8s ease-in-out infinite alternate;
+          animation-delay: -2s;
         }
       `}</style>
       <div className="flex flex-col gap-4 sm:gap-5 rounded-2xl border border-blue-100 bg-white p-4 sm:p-5">
@@ -159,13 +159,13 @@ function DecisiveMomentMock() {
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <div>
+          {/* <div>
             <div className="flex items-center justify-between text-xs">
               <span className="text-muted-foreground">Trust level</span>
               <span className="font-semibold text-blue-700">90%</span>
             </div>
             <Progress value={90} className="mt-1.5 h-2 bg-slate-100" indicatorClassName="progress-bar-trust bg-gradient-to-r from-blue-600 to-emerald-500" />
-          </div>
+          </div> */}
 
           <div>
             <div className="flex items-center justify-between text-xs">

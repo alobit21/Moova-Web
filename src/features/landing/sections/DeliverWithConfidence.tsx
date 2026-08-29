@@ -6,17 +6,17 @@ import phoneBack from "@/assets/cta/iMockup - iPhone.png"
 export function DeliverWithConfidence() {
   return (
     <section
-      className="relative bg-cover bg-center py-16 sm:py-24 lg:py-32 font-instrument"
+      className="relative bg-cover bg-center pt-16 sm:pt-24 lg:pt-32 font-instrument z-10 overflow-hidden"
       style={{ backgroundImage: `url(${ctaBackground})` }}
     >
       {/* Dark overlay for extra contrast if needed */}
       <div className="absolute inset-0 bg-[#1c3b7a]/40 mix-blend-multiply" />
       
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end">
           
           {/* Text Column */}
-          <div className="max-w-xl text-center lg:text-left mx-auto lg:mx-0 flex flex-col items-center lg:items-start">
+          <div className="max-w-xl text-center lg:text-left mx-auto lg:mx-0 flex flex-col items-center lg:items-start pb-16 lg:pb-28">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-white tracking-tight">
               Ready to Deliver With Confidence?
             </h2>
@@ -36,19 +36,19 @@ export function DeliverWithConfidence() {
             </Button>
           </div>
 
-          {/* Phones Column - Hidden on large screens because bg image has them */}
-          <div className="flex justify-center items-start mt-12 lg:hidden">
+          {/* Phones Column */}
+          <div className="flex justify-center lg:justify-end items-end mt-8 lg:mt-0 pb-6 lg:pb-10">
             {/* White Phone (Left, Lower, Front) */}
             <img 
               src={phoneBack} 
               alt="Shop performance" 
-              className="relative z-10 w-[180px] sm:w-[240px] object-contain drop-shadow-2xl mt-12 sm:mt-16 transition-transform hover:-translate-y-2 duration-500 delay-75"
+              className="relative z-20 w-[180px] sm:w-[220px] lg:w-[280px] xl:w-[320px] object-contain drop-shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] transition-transform hover:-translate-y-2 duration-500 delay-75 origin-bottom"
             />
             {/* Dark Phone (Right, Higher, Back) */}
             <img 
               src={phoneFront} 
               alt="Delivery orders" 
-              className="relative z-0 w-[180px] sm:w-[240px] object-contain drop-shadow-2xl -ml-16 sm:-ml-24 mt-0 transition-transform hover:-translate-y-2 duration-500"
+              className="relative z-10 w-[180px] sm:w-[220px] lg:w-[280px] xl:w-[320px] object-contain drop-shadow-[0_25px_50px_-12px_rgba(0,0,0,0.7)] -ml-20 sm:-ml-24 lg:-ml-28 xl:-ml-32 mb-12 sm:mb-16 lg:mb-24 transition-transform hover:-translate-y-2 duration-500 origin-bottom"
             />
           </div>
           

@@ -205,15 +205,15 @@ import { AOSReveal, TextReveal, GradientText } from "@/components/animation/AOSR
 export function BecomeOne() {
   return (
     <section id="customers" className="relative overflow-hidden bg-[#F5F9FF] py-14 sm:py-24 lg:py-32">
-      <div className="relative mx-auto max-w-4xl px-4 sm:px-6 text-center lg:px-12">
+      <div className="relative mx-auto max-w-5xl px-4 sm:px-6 text-center lg:px-12">
         <TextReveal
           as="h2"
           text="Become One of Those Seeking to Turn Buyers"
           delay={0}
           staggerDelay={40}
-          className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-[#191B1F]"
+          className="text-2xl xs:text-3xl sm:text-4xl lg:text-[40px] xl:text-[44px] font-extrabold leading-tight text-[#191B1F] md:whitespace-nowrap"
         />
-        <div className="mt-1 text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
+        <div className="mt-1 text-2xl xs:text-3xl sm:text-4xl lg:text-[40px] xl:text-[44px] font-extrabold leading-tight">
           <GradientText
             gradient="from-[#1F3B89] via-[#3B82F6] to-[#1F3B89]"
             className="font-[Instrument_Sans] italic inline-block"
@@ -233,7 +233,7 @@ export function BecomeOne() {
       <MobileDockMarquee />
 
       {/* Desktop Orbit Ring Visualization */}
-      <div className="relative mx-auto mt-4 sm:mt-8 hidden md:flex justify-center items-center overflow-hidden py-4 sm:py-8 h-[500px] md:h-[600px]">
+      <div className="relative mx-auto mt-12 sm:mt-24 hidden md:flex justify-center items-center overflow-hidden py-4 sm:py-8 h-[500px] md:h-[600px]">
         <div className="relative aspect-square w-[560px] shrink-0 scale-[0.85] md:scale-100 origin-center transition-transform">
           {/* Outer ring: sparse dashes with visible gaps */}
           <OrbitRing radius={OUTER_RADIUS} dashArray="6 16" strokeWidth={1.5} />

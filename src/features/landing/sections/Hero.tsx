@@ -4,8 +4,6 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import heroBg from "@/assets/hero-bg.png"
-import phoneMockup from "@/assets/phone-mockup.png"
-import heroMerchant from "@/assets/hero-merchant.png"
 import avatar1 from "@/assets/testimonies/testimonial-man-1.png"
 import avatar2 from "@/assets/become-one/avatars/woman-portrait.png"
 import avatar3 from "@/assets/testimonies/testimonial-man-2.png"
@@ -13,16 +11,35 @@ import { DELIVERY_NOTIFICATIONS } from "../data/notifications"
 import { useSectionVisibility } from "@/hooks/useInView"
 import { AOSReveal, GradientText } from "@/components/animation/AOSReveal"
 
+import mainHeroPhoto from "@/assets/hero/main-hero-photo.png"
+import mainHeroPhoto1 from "@/assets/hero/main-hero-photo1.png"
+import m1 from "@/assets/hero/m1.png"
+import m12 from "@/assets/hero/m12.png"
+import m13 from "@/assets/hero/m13.png"
+import imgBadge1 from "@/assets/hero/image.png"
+import imgBadge2 from "@/assets/hero/image copy.png"
+import imgBadge3 from "@/assets/hero/image copy 2.png"
+
 const HERO_SLIDES = [
   {
     id: 1,
-    image: heroMerchant,
-    alt: "Moova merchant fulfillment with AI dispatch and live tracking stats",
+    image: mainHeroPhoto,
+    alt: "Happy Moova merchant fulfilling orders with AI dispatch",
+    badges: [
+      { src: m1, className: "top-[8%] -right-[8%] w-[65%] sm:w-[50%]" },
+      { src: m12, className: "bottom-[22%] -left-[8%] w-[65%] sm:w-[50%]" },
+      { src: m13, className: "-bottom-[4%] -right-[6%] w-[65%] sm:w-[50%]" },
+    ]
   },
   {
     id: 2,
-    image: phoneMockup,
-    alt: "Moova app showing shop performance and current deliveries",
+    image: mainHeroPhoto1,
+    alt: "Merchant upgrading their delivery operations with Moova",
+    badges: [
+      { src: imgBadge1, className: "top-[10%] -right-[6%] w-[65%] sm:w-[50%]" },
+      { src: imgBadge2, className: "bottom-[25%] -left-[8%] w-[65%] sm:w-[50%]" },
+      { src: imgBadge3, className: "bottom-[2%] -right-[8%] w-[65%] sm:w-[50%]" },
+    ]
   },
 ]
 
@@ -38,38 +55,46 @@ function HeroCarousel() {
     return () => clearInterval(timer)
   }, [isHovered])
 
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % HERO_SLIDES.length)
-  }
-
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length)
-  }
+  const nextSlide = () => setCurrentIndex((prev) => (prev + 1) % HERO_SLIDES.length)
+  const prevSlide = () => setCurrentIndex((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length)
 
   return (
     <div
-      className="relative w-full max-w-xs sm:max-w-md lg:max-w-lg mx-auto group pb-8"
+      className="relative w-full max-w-sm sm:max-w-lg lg:max-w-2xl mx-auto group pb-8"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Slide Container */}
-      <div className="relative aspect-[4/3.2] sm:aspect-[4/3] w-full overflow-hidden rounded-2xl sm:rounded-3xl">
+      <div className="relative w-full overflow-visible rounded-2xl sm:rounded-3xl aspect-[1/1] lg:aspect-[1.05/1]">
         {HERO_SLIDES.map((slide, index) => {
           const isActive = index === currentIndex
           return (
             <div
               key={slide.id}
-              className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ease-in-out ${
+              className={`absolute inset-0 transition-all duration-700 ease-in-out flex items-center justify-center ${
                 isActive
                   ? "opacity-100 scale-100 pointer-events-auto z-10"
                   : "opacity-0 scale-95 pointer-events-none z-0"
               }`}
             >
-              <img
-                src={slide.image}
-                alt={slide.alt}
-                className="w-full h-full object-contain drop-shadow-2xl"
-              />
+              <div className="relative w-full h-full flex items-center justify-center">
+                {/* Main Image */}
+                <img
+                  src={slide.image}
+                  alt={slide.alt}
+                  className="w-[82%] h-[90%] object-cover rounded-[32px] drop-shadow-2xl z-10"
+                />
+                
+                {/* Floating Badges */}
+                {slide.badges.map((badge, bIndex) => (
+                  <img
+                    key={bIndex}
+                    src={badge.src}
+                    alt="Feature badge"
+                    className={`absolute z-20 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.3)] rounded-2xl transition-all hover:scale-105 hover:-translate-y-1 duration-500 ${badge.className}`}
+                  />
+                ))}
+              </div>
             </div>
           )
         })}
@@ -79,21 +104,21 @@ function HeroCarousel() {
       <button
         onClick={prevSlide}
         aria-label="Previous slide"
-        className="absolute left-0 sm:-left-2 top-1/2 -translate-y-1/2 z-20 flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-slate-900/50 text-white backdrop-blur-md border border-white/20 opacity-0 group-hover:opacity-100 hover:bg-slate-900/80 transition-all cursor-pointer shadow-lg"
+        className="absolute left-2 sm:-left-4 top-1/2 -translate-y-1/2 z-30 flex h-9 w-9 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-md border border-white/20 opacity-0 group-hover:opacity-100 hover:bg-white/20 transition-all cursor-pointer shadow-lg"
       >
-        <ChevronLeft className="h-5 w-5" />
+        <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" />
       </button>
 
       <button
         onClick={nextSlide}
         aria-label="Next slide"
-        className="absolute right-0 sm:-right-2 top-1/2 -translate-y-1/2 z-20 flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-slate-900/50 text-white backdrop-blur-md border border-white/20 opacity-0 group-hover:opacity-100 hover:bg-slate-900/80 transition-all cursor-pointer shadow-lg"
+        className="absolute right-2 sm:-right-4 top-1/2 -translate-y-1/2 z-30 flex h-9 w-9 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-md border border-white/20 opacity-0 group-hover:opacity-100 hover:bg-white/20 transition-all cursor-pointer shadow-lg"
       >
-        <ChevronRight className="h-5 w-5" />
+        <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" />
       </button>
 
       {/* Indicators Dots */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
+      <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
         {HERO_SLIDES.map((_, index) => {
           const isActive = index === currentIndex
           return (
@@ -216,9 +241,7 @@ export function Hero() {
                 Watch Product Demo
               </Button>
             </div>
-            <p className="mt-3 text-xs text-white/70 text-center lg:text-left">
-              No credit card required &middot; Cancel anytime
-            </p>
+           
           </AOSReveal>
         </div>
 
@@ -230,13 +253,20 @@ export function Hero() {
       {/* Marquee cards inside hero section - paused when off-screen */}
       <div className="relative z-10 mt-10 sm:mt-14 lg:mt-20 overflow-hidden edge-fade">
         <div
-          className={`flex w-max animate-marquee gap-3 sm:gap-5 ${
+          className={`flex w-max animate-marquee ${
             isVisible ? "" : "animation-paused"
           }`}
         >
-          {[...DELIVERY_NOTIFICATIONS, ...DELIVERY_NOTIFICATIONS, ...DELIVERY_NOTIFICATIONS].map((item, i) => (
-            <HeroNotificationCard key={i} {...item} />
-          ))}
+          <div className="flex shrink-0 items-center gap-3 sm:gap-5 pr-3 sm:pr-5">
+            {[...DELIVERY_NOTIFICATIONS, ...DELIVERY_NOTIFICATIONS].map((item, i) => (
+              <HeroNotificationCard key={`a-${i}`} {...item} />
+            ))}
+          </div>
+          <div className="flex shrink-0 items-center gap-3 sm:gap-5 pr-3 sm:pr-5">
+            {[...DELIVERY_NOTIFICATIONS, ...DELIVERY_NOTIFICATIONS].map((item, i) => (
+              <HeroNotificationCard key={`b-${i}`} {...item} />
+            ))}
+          </div>
         </div>
       </div>
     </section>

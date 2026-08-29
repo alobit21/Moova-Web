@@ -12,9 +12,9 @@ import {
 
 const NAV_LINKS = [
   { label: "Home", href: "/", isRoute: true },
-  { label: "How It Works", href: "/#how-it-works", isRoute: false },
+  { label: "About", href: "/#how-it-works", isRoute: false },
   { label: "Tracking", href: "/tracking", isRoute: true },
-  { label: "Pricing", href: "/#pricing", isRoute: false },
+  // { label: "Pricing", href: "/#pricing", isRoute: false },
   { label: "FAQ", href: "/#faq", isRoute: false },
   { label: "Contact", href: "/#contact", isRoute: false },
 ] as const
