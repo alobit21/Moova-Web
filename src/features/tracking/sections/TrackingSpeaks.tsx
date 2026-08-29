@@ -28,8 +28,8 @@ function NotificationCard({
         <div className="w-8 h-8 sm:w-10 sm:h-10 mb-2">
           <img src={icon} alt="" className="w-full h-full object-contain" />
         </div>
-        <h3 className="mt-2.5 text-sm sm:text-base font-bold text-foreground">{title}</h3>
-        <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-muted-foreground">{body}</p>
+        <h3 className="mt-2.5 text-sm sm:text-base font-bold text-[#2648A6]">{title}</h3>
+        <p className="mt-1.5 text-xs sm:text-sm leading-relaxed font-regular font-sans text-[#5E656E]">{body}</p>
       </CardContent>
     </Card>
   )
@@ -47,7 +47,7 @@ function BadgePill({
   return (
     <Badge variant="outline" className="flex shrink-0 items-center gap-2 rounded-full bg-white px-4 sm:px-5 py-2.5 sm:py-3 border-0 ring-0 shadow-none font-normal">
       <Icon className={`h-4 w-4 ${className}`} strokeWidth={2.5} />
-      <span className="whitespace-nowrap text-xs sm:text-sm font-semibold text-foreground">
+      <span className="whitespace-nowrap text-xs sm:text-sm  font-sans font-bold text-[#2648A6]">
         {label}
       </span>
     </Badge>
@@ -63,7 +63,7 @@ export function TrackingSpeaks() {
         <h2 className="text-3xl font-extrabold leading-tight text-[#1F3B89] sm:text-4xl lg:text-5xl tracking-tight">
           Every Delivery Speaks for Your Business
         </h2>
-        <p className="mx-auto mt-4 sm:mt-6 max-w-2xl text-sm sm:text-base lg:text-lg leading-relaxed text-muted-foreground">
+        <p className="mx-auto mt-4 sm:mt-6 max-w-2xl text-sm sm:text-base lg:text-lg leading-relaxed font-regular font-sans text-[#5E656E]">
           Moova automatically sends delivery updates from order creation to
           successful delivery.
         </p>

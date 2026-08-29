@@ -40,7 +40,7 @@ function StarRating() {
   return (
     <div className="flex w-fit items-center gap-0.5 rounded px-1.5 py-1">
       {Array.from({ length: 5 }).map((_, i) => (
-        <Star key={i} className="h-3 w-3 fill-[#5DD586] text-white" />
+        <Star key={i} className="h-3 w-3 fill-[#5DD586] text-[#FFFFFF]" />
       ))}
     </div>
   )
@@ -52,11 +52,19 @@ export function Testimonials() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 text-center">
         <TextReveal
           as="h2"
-          text="What Online Businesses Say"
+          text="29K+ Happy Customers in Tanzania"
           delay={0}
           staggerDelay={60}
-          className="text-3xl sm:text-4xl lg:text-5xl font-instrument text-[#1F3B89] tracking-tight"
+          className="text-3xl sm:text-4xl lg:text-5xl font-bold font-instrument text-[#1F3B89] tracking-tight"
         />
+        <AOSReveal animation="fade-up" delay={150}>
+          <p className="mt-4 sm:mt-6 text-base sm:text-lg font-semibold text-[#1F3B89]">
+            400+ Deliveries Completed • 150+ Online Businesses
+          </p>
+          <p className="mt-2 sm:mt-3 text-sm sm:text-base font-regular text-[#5E656E]">
+            Real Deliveries. Real Results. Real Stories.
+          </p>
+        </AOSReveal>
 
         <div className="mt-10 sm:mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:items-center text-left">
           {TESTIMONIALS.map((t) => (
@@ -66,19 +74,17 @@ export function Testimonials() {
               delay={t.delay}
             >
               <Card
-                className={`transition-all duration-300 ${
-                  t.featured
+                className={`transition-all duration-300 ${t.featured
                     ? "border-0 bg-blue-900 py-8 sm:py-10 shadow-xl lg:scale-105"
                     : "bg-white py-8 sm:py-10 shadow-sm"
-                }`}
+                  }`}
               >
                 <CardContent className="px-5 sm:px-8">
                   <Quote className="h-7 w-7 sm:h-8 sm:w-8 text-[#5DD586]" strokeWidth={2.5} />
 
                   <p
-                    className={`mt-4 sm:mt-6 text-sm sm:text-base leading-relaxed ${
-                      t.featured ? "text-white" : "text-foreground"
-                    }`}
+                    className={`mt-4 sm:mt-6 text-sm sm:text-base leading-relaxed ${t.featured ? "text-[#FFFFFF]" : "text-foreground"
+                      }`}
                   >
                     "{t.quote}"
                   </p>
@@ -91,16 +97,14 @@ export function Testimonials() {
                     <div>
                       <StarRating />
                       <p
-                        className={`mt-1 text-sm sm:text-base font-semibold ${
-                          t.featured ? "text-white" : "text-foreground"
-                        }`}
+                        className={`mt-1 text-sm sm:text-base font-semibold ${t.featured ? "text-[#FFFFFF]" : "text-foreground"
+                          }`}
                       >
                         {t.name}
                       </p>
                       <p
-                        className={`text-xs sm:text-sm ${
-                          t.featured ? "text-white/70" : "text-muted-foreground"
-                        }`}
+                        className={`text-xs sm:text-sm ${t.featured ? "text-[#FFFFFF]/70" : "text-muted-foreground"
+                          }`}
                       >
                         {t.role}
                       </p>

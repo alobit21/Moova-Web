@@ -208,10 +208,10 @@ export function BecomeOne() {
       <div className="relative mx-auto max-w-5xl px-4 sm:px-6 text-center lg:px-12">
         <TextReveal
           as="h2"
-          text="Become One of Those Seeking to Turn Buyers"
+          text="Become One of Those Seeking to Turn First-Time"
           delay={0}
           staggerDelay={40}
-          className="text-2xl xs:text-3xl sm:text-4xl lg:text-[40px] xl:text-[44px] font-extrabold leading-tight text-[#191B1F] md:whitespace-nowrap"
+          className="text-2xl xs:text-3xl sm:text-4xl lg:text-[40px] xl:text-[44px] font-extrabold font-[Instrument_Sans] leading-tight text-[#191B1F] md:whitespace-nowrap"
         />
         <div className="mt-1 text-2xl xs:text-3xl sm:text-4xl lg:text-[40px] xl:text-[44px] font-extrabold leading-tight">
           <GradientText
@@ -222,7 +222,7 @@ export function BecomeOne() {
           </GradientText>
         </div>
         <AOSReveal animation="fade-up" delay={150}>
-          <p className="mx-auto mt-4 sm:mt-6 max-w-2xl text-sm sm:text-base lg:text-lg leading-relaxed text-muted-foreground">
+          <p className="mx-auto mt-4 sm:mt-6 max-w-2xl text-sm sm:text-base lg:text-lg leading-relaxed text-[#5E656E]">
             Join hundreds of merchants already building lasting customer
             relationships through optimized logistics.
           </p>

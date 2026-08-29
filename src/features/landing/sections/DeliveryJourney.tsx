@@ -47,7 +47,7 @@ function OrderInboxPanel() {
       <CardContent className="p-6">
         <h3 className="text-lg font-bold text-foreground">Receive Customer Order</h3>
         <div className="mt-1 flex items-center justify-between text-xs">
-          <span className="font-semibold uppercase tracking-wide text-muted-foreground">Order Inbox</span>
+          <span className="font-semibold uppercase tracking-widetext-[#5E656E]">Order Inbox</span>
           <span className="font-semibold text-emerald-500">3 New Alerts</span>
         </div>
         <div className="mt-4 flex flex-col divide-y divide-border">
@@ -61,7 +61,7 @@ function OrderInboxPanel() {
               </div>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-semibold text-foreground">{o.name}</p>
-                <p className="truncate text-xs text-muted-foreground">{o.items}</p>
+                <p className="truncate text-xstext-[#5E656E]">{o.items}</p>
               </div>
               <Badge
                 variant="secondary"
@@ -89,21 +89,21 @@ function CreateDeliveryPanel() {
         </div>
         <div className="mt-4 flex flex-col gap-4">
           <div>
-            <p className="text-xs font-semibold text-muted-foreground">Pickup Location</p>
+            <p className="text-xs font-semiboldtext-[#5E656E]">Pickup Location</p>
             <Input readOnly value="67A Lugard Road, Ikoyi" className="mt-1" />
           </div>
           <div>
-            <p className="text-xs font-semibold text-muted-foreground">Drop-off Address</p>
+            <p className="text-xs font-semiboldtext-[#5E656E]">Drop-off Address</p>
             <Input readOnly value="11 Ibile Close, Ogunyanya" className="mt-1" />
           </div>
           <div>
-            <p className="text-xs font-semibold text-muted-foreground">Package Specifications</p>
-              <div className="mt-1 flex items-center justify-between rounded-md border border-border bg-emerald-100 px-3 py-2 text-sm">
+            <p className="text-xs font-semiboldtext-[#5E656E]">Package Specifications</p>
+            <div className="mt-1 flex items-center justify-between rounded-md border border-border bg-emerald-100 px-3 py-2 text-sm">
               <span className="font-medium text-foreground">media.png</span>
               <span className="text-muted-foreground">84.8 KB</span>
             </div>
           </div>
-          <Button className="w-full bg-emerald-500 text-white hover:bg-emerald-600">
+          <Button className="w-full bg-emerald-500 text-[#FFFFFF] hover:bg-emerald-600">
             Create &amp; Assign Rider
           </Button>
         </div>
@@ -136,7 +136,7 @@ function TrackDeliveryPanel() {
             <Package className="h-4 w-4 text-slate-900" />
           </div>
           <div className="flex-1">
-            <p className="text-xs text-muted-foreground">Order #28492</p>
+            <p className="text-xstext-[#5E656E]">Order #28492</p>
             <p className="text-sm font-bold text-foreground">Tracking Active</p>
             <Progress value={66} className="mt-1.5 h-1.5 w-full bg-muted" indicatorClassName="bg-emerald-500" />
           </div>
@@ -156,30 +156,29 @@ function AssignRiderPanel() {
     <Card className="w-full max-w-md border-0 shadow-xl">
       <CardContent className="p-6">
         <h3 className="text-lg font-bold text-foreground">Assign a Trusted Rider</h3>
-        <p className="mt-1 text-xs text-muted-foreground">3 riders available nearby</p>
+        <p className="mt-1 text-xstext-[#5E656E]">3 riders available nearby</p>
         <div className="mt-4 flex flex-col gap-2">
           {riders.map((r) => (
             <div
               key={r.name}
-              className={`flex items-center gap-3 rounded-xl border p-3 ${
-                r.selected ? "border-emerald-500 bg-emerald-100" : "border-border"
-              }`}
+              className={`flex items-center gap-3 rounded-xl border p-3 ${r.selected ? "border-emerald-500 bg-emerald-100" : "border-border"
+                }`}
             >
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-900 text-white">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-900 text-[#FFFFFF]">
                 <User className="h-5 w-5" />
               </div>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-semibold text-foreground">{r.name}</p>
-                <p className="flex items-center gap-1 text-xs text-muted-foreground">
+                <p className="flex items-center gap-1 text-xstext-[#5E656E]">
                   <Star className="h-3 w-3 fill-amber-400 text-amber-400" /> {r.rating} &middot; {r.trips} trips &middot; {r.vehicle}
                 </p>
               </div>
               {r.selected ? (
-                <Badge className="shrink-0 rounded-full bg-emerald-500 px-2.5 py-1 text-xs font-semibold text-white border-0">
+                <Badge className="shrink-0 rounded-full bg-emerald-500 px-2.5 py-1 text-xs font-semibold text-[#FFFFFF] border-0">
                   Assigned
                 </Badge>
               ) : (
-                <Badge variant="outline" className="shrink-0 rounded-full border-border px-2.5 py-1 text-xs font-semibold text-muted-foreground">
+                <Badge variant="outline" className="shrink-0 rounded-full border-border px-2.5 py-1 text-xs font-semiboldtext-[#5E656E]">
                   Select
                 </Badge>
               )}
@@ -196,22 +195,22 @@ function BuildTrustPanel() {
     <Card className="w-full max-w-md border-0 shadow-xl">
       <CardContent className="p-6">
         <h3 className="text-lg font-bold text-foreground">Build Customer Trust</h3>
-        <div className="mt-4 rounded-xl bg-slate-900 p-5 text-white">
+        <div className="mt-4 rounded-xl bg-slate-900 p-5 text-[#FFFFFF]">
           <div className="flex items-center gap-2">
             <ShieldCheck className="h-5 w-5 text-emerald-500" />
             <span className="text-sm font-semibold">Branded Tracking Page</span>
           </div>
-          <p className="mt-2 text-xs text-white/70">moova.co.tz/track/MOV-20260414-WGDF</p>
+          <p className="mt-2 text-xs text-[#FFFFFF]/70">moova.co.tz/track/MOV-20260414-WGDF</p>
           <div className="mt-4 flex items-center gap-1">
             {Array.from({ length: 5 }).map((_, i) => (
               <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
             ))}
-            <span className="ml-2 text-xs font-semibold text-white/90">4.9 average rating</span>
+            <span className="ml-2 text-xs font-semibold text-[#FFFFFF]/90">4.9 average rating</span>
           </div>
         </div>
         <div className="mt-4 flex items-center gap-3 rounded-lg border border-border p-3">
           <ThumbsUp className="h-5 w-5 shrink-0 text-emerald-500" />
-          <p className="text-sm text-muted-foreground">
+          <p className="text-smtext-[#5E656E]">
             <span className="font-semibold text-foreground">92% of customers</span> order again
             after their first delivery.
           </p>
@@ -229,7 +228,7 @@ function ReceiveConfirmationPanel() {
           <CheckCircle2 className="h-7 w-7 text-emerald-500" />
         </div>
         <h3 className="mt-4 text-lg font-bold text-foreground">Order Confirmed!</h3>
-        <p className="mt-1 text-sm text-muted-foreground">
+        <p className="mt-1 text-smtext-[#5E656E]">
           Order #MOV-20260414-WGDF has been received
         </p>
         <div className="mt-4 rounded-xl bg-slate-50 p-4 text-left text-sm">
@@ -263,7 +262,7 @@ function ReceiveConfidencePanel() {
           <Camera className="h-8 w-8 shrink-0 text-emerald-500" />
           <div>
             <p className="text-sm font-semibold text-foreground">Photo proof attached</p>
-            <p className="text-xs text-muted-foreground">Delivered to your doorstep, 2:41 PM</p>
+            <p className="text-xstext-[#5E656E]">Delivered to your doorstep, 2:41 PM</p>
           </div>
         </div>
         <div className="mt-4">
@@ -287,7 +286,7 @@ function ProductOrderPanel() {
         <div className="mt-4 rounded-xl bg-teal-100 p-4">
           <p className="text-xs font-semibold text-teal-500">01 / The First Click</p>
           <div className="mt-3 flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-900 text-white">
+            <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-900 text-[#FFFFFF]">
               <Package className="h-5 w-5" />
             </div>
             <div>
@@ -295,7 +294,7 @@ function ProductOrderPanel() {
               <p className="text-sm font-semibold text-slate-900">$24.99</p>
             </div>
           </div>
-          <Button className="mt-4 w-full bg-emerald-500 text-white hover:bg-emerald-600">Place First Order</Button>
+          <Button className="mt-4 w-full bg-emerald-500 text-[#FFFFFF] hover:bg-emerald-600">Place First Order</Button>
         </div>
       </CardContent>
     </Card>
@@ -308,14 +307,14 @@ function RiderProfilePanel() {
       <CardContent className="p-6">
         <h3 className="text-lg font-bold text-foreground">Live Assignment Details</h3>
         <div className="mt-4 rounded-xl bg-teal-100 p-5 text-center">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-slate-900 text-white">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-slate-900 text-[#FFFFFF]">
             <User className="h-7 w-7" />
           </div>
           <p className="mt-3 text-sm font-bold text-foreground">Emeka Obi</p>
-          <p className="mt-1 flex items-center justify-center gap-1 text-xs text-muted-foreground">
+          <p className="mt-1 flex items-center justify-center gap-1 text-xstext-[#5E656E]">
             <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" /> 4.9 (1,240 trips)
           </p>
-          <p className="text-xs text-muted-foreground">Honda CB 150 &middot; ABJ-234-KY</p>
+          <p className="text-xstext-[#5E656E]">Honda CB 150 &middot; ABJ-234-KY</p>
           <div className="mt-4 flex gap-2">
             <Button size="sm" variant="outline" className="flex-1 gap-1.5 text-emerald-500">
               <Phone className="h-3.5 w-3.5" /> Call
@@ -380,7 +379,7 @@ const SHOP_STEPS: StepDef[] = [
     description:
       "Moova matches your delivery with a verified, highly-rated rider nearby — or use your own in-house rider if you prefer. Every rider is tracked and accountable from pickup to drop-off.",
     isPlaceholder: true,
-    panel: <AssignRiderPanel/>,
+    panel: <AssignRiderPanel />,
   },
   {
     icon: Truck,
@@ -413,7 +412,7 @@ const BUYER_STEPS: StepDef[] = [
     description:
       "The moment your order is placed, you'll get an instant confirmation with your order number and expected delivery window — no waiting around wondering if it went through.",
     isPlaceholder: true,
-    panel: <ReceiveConfirmationPanel/>,
+    panel: <ReceiveConfirmationPanel />,
   },
   {
     icon: User,
@@ -435,7 +434,7 @@ const BUYER_STEPS: StepDef[] = [
     description:
       "Get notified the moment your order arrives, with delivery confirmation and photo proof when needed. No more wondering — you know exactly when your package is safely in your hands.",
     isPlaceholder: true,
-    panel: <ReceiveConfidencePanel/>,
+    panel: <ReceiveConfidencePanel />,
   },
 ]
 
@@ -475,7 +474,7 @@ export function DeliveryJourney() {
             </GradientText>
           </div>
           <AOSReveal animation="fade-up" delay={150}>
-            <p className="mx-auto mt-4 sm:mt-6 max-w-xl text-base sm:text-lg font-normal leading-relaxed text-muted-foreground font-instrument">
+            <p className="mx-auto mt-4 sm:mt-6 max-w-xl text-base sm:text-lg font-normal leading-relaxed text-[#5E656E] font-instrument">
               Moova handles everything from the moment an order is placed to the second it arrives
               at the door — so merchants can focus on selling, and customers always know exactly
               where their order is.
@@ -488,13 +487,13 @@ export function DeliveryJourney() {
             <TabsList className="h-auto rounded-full bg-slate-100 p-1 sm:p-1.5 gap-0">
               <TabsTrigger
                 value="shop"
-                className="rounded-full px-4 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold transition-colors data-[state=active]:bg-teal-500 data-[state=active]:text-white data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground border-0"
+                className="rounded-full px-4 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold transition-colors data-[state=active]:bg-teal-500 data-[state=active]:text-[#FFFFFF] data-[state=active]:shadow-smtext-[#5E656E] hover:text-foreground border-0"
               >
                 Online Shop
               </TabsTrigger>
               <TabsTrigger
                 value="buyer"
-                className="rounded-full px-4 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold transition-colors data-[state=active]:bg-teal-500 data-[state=active]:text-white data-[state=active]:shadow-sm text-muted-foreground hover:text-foreground border-0"
+                className="rounded-full px-4 sm:px-6 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold transition-colors data-[state=active]:bg-teal-500 data-[state=active]:text-[#FFFFFF] data-[state=active]:shadow-smtext-[#5E656E] hover:text-foreground border-0"
               >
                 Online Buyer
               </TabsTrigger>
@@ -512,13 +511,12 @@ export function DeliveryJourney() {
                   <div className="flex flex-col items-center">
                     <button
                       onClick={() => setActiveStep(index)}
-                      className={`flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full border-2 transition-colors cursor-pointer ${
-                        isActive
+                      className={`flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full border-2 transition-colors cursor-pointer ${isActive
+                        ? "border-emerald-500 bg-emerald-100 text-emerald-500"
+                        : index < activeStep
                           ? "border-emerald-500 bg-emerald-100 text-emerald-500"
-                          : index < activeStep
-                            ? "border-emerald-500 bg-emerald-100 text-emerald-500"
-                            : "border-border bg-white text-muted-foreground"
-                      }`}
+                          : "border-border bg-whitetext-[#5E656E]"
+                        }`}
                     >
                       <Icon className="h-4 w-4" />
                     </button>
@@ -529,24 +527,21 @@ export function DeliveryJourney() {
 
                   <button
                     onClick={() => setActiveStep(index)}
-                    className={`mb-4 sm:mb-6 flex-1 rounded-2xl border p-4 sm:p-5 text-left transition-all duration-300 cursor-pointer ${
-                      isActive ? "border-emerald-500 bg-emerald-100/70 shadow-sm" : "border-transparent"
-                    }`}
+                    className={`mb-4 sm:mb-6 flex-1 rounded-2xl border p-4 sm:p-5 text-left transition-all duration-300 cursor-pointer ${isActive ? "border-emerald-500 bg-emerald-100/70 shadow-sm" : "border-transparent"
+                      }`}
                   >
                     <p
-                      className={`text-[11px] sm:text-xs font-bold uppercase tracking-wide ${
-                        isActive ? "text-emerald-600" : "text-transparent"
-                      }`}
+                      className={`text-[11px] sm:text-xs font-bold uppercase tracking-wide ${isActive ? "text-emerald-600" : "text-transparent"
+                        }`}
                     >
                       Step {String(index + 1).padStart(2, "0")} &middot; Active
                     </p>
                     <h3 className="mt-0.5 sm:mt-1 text-base sm:text-lg font-bold text-foreground">{step.title}</h3>
                     <div
-                      className={`grid overflow-hidden transition-all duration-300 ${
-                        isActive ? "mt-2 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                      }`}
+                      className={`grid overflow-hidden transition-all duration-300 ${isActive ? "mt-2 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                        }`}
                     >
-                      <p className="min-h-0 text-xs sm:text-sm leading-relaxed text-muted-foreground">
+                      <p className="min-h-0 text-xs sm:text-sm leading-relaxed text-[#5E656E]">
                         {step.description}
                       </p>
                     </div>

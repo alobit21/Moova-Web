@@ -26,9 +26,9 @@ const HERO_SLIDES = [
     image: mainHeroPhoto,
     alt: "Happy Moova merchant fulfilling orders with AI dispatch",
     badges: [
-      { src: m1, className: "top-[8%] -right-[8%] w-[65%] sm:w-[50%]" },
-      { src: m12, className: "bottom-[22%] -left-[8%] w-[65%] sm:w-[50%]" },
-      { src: m13, className: "-bottom-[4%] -right-[6%] w-[65%] sm:w-[50%]" },
+      { src: imgBadge1, className: "top-[10%] -right-[6%] w-[65%] sm:w-[50%]" },
+      { src: imgBadge2, className: "bottom-[25%] -left-[8%] w-[65%] sm:w-[50%]" },
+      { src: imgBadge3, className: "bottom-[2%] -right-[8%] w-[65%] sm:w-[50%]" },
     ]
   },
   {
@@ -36,9 +36,9 @@ const HERO_SLIDES = [
     image: mainHeroPhoto1,
     alt: "Merchant upgrading their delivery operations with Moova",
     badges: [
-      { src: imgBadge1, className: "top-[10%] -right-[6%] w-[65%] sm:w-[50%]" },
-      { src: imgBadge2, className: "bottom-[25%] -left-[8%] w-[65%] sm:w-[50%]" },
-      { src: imgBadge3, className: "bottom-[2%] -right-[8%] w-[65%] sm:w-[50%]" },
+      { src: m1, className: "top-[8%] -right-[8%] w-[65%] sm:w-[50%]" },
+      { src: m12, className: "bottom-[22%] -left-[8%] w-[65%] sm:w-[50%]" },
+      { src: m13, className: "-bottom-[4%] -right-[6%] w-[65%] sm:w-[50%]" },
     ]
   },
 ]
@@ -71,11 +71,10 @@ function HeroCarousel() {
           return (
             <div
               key={slide.id}
-              className={`absolute inset-0 transition-all duration-700 ease-in-out flex items-center justify-center ${
-                isActive
+              className={`absolute inset-0 transition-all duration-700 ease-in-out flex items-center justify-center ${isActive
                   ? "opacity-100 scale-100 pointer-events-auto z-10"
                   : "opacity-0 scale-95 pointer-events-none z-0"
-              }`}
+                }`}
             >
               <div className="relative w-full h-full flex items-center justify-center">
                 {/* Main Image */}
@@ -84,7 +83,7 @@ function HeroCarousel() {
                   alt={slide.alt}
                   className="w-[82%] h-[90%] object-cover rounded-[32px] drop-shadow-2xl z-10"
                 />
-                
+
                 {/* Floating Badges */}
                 {slide.badges.map((badge, bIndex) => (
                   <img
@@ -104,7 +103,7 @@ function HeroCarousel() {
       <button
         onClick={prevSlide}
         aria-label="Previous slide"
-        className="absolute left-2 sm:-left-4 top-1/2 -translate-y-1/2 z-30 flex h-9 w-9 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-md border border-white/20 opacity-0 group-hover:opacity-100 hover:bg-white/20 transition-all cursor-pointer shadow-lg"
+        className="absolute left-2 sm:-left-4 top-1/2 -translate-y-1/2 z-30 flex h-9 w-9 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-white/10 text-[#FFFFFF] backdrop-blur-md border border-white/20 opacity-0 group-hover:opacity-100 hover:bg-white/20 transition-all cursor-pointer shadow-lg"
       >
         <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" />
       </button>
@@ -112,7 +111,7 @@ function HeroCarousel() {
       <button
         onClick={nextSlide}
         aria-label="Next slide"
-        className="absolute right-2 sm:-right-4 top-1/2 -translate-y-1/2 z-30 flex h-9 w-9 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-md border border-white/20 opacity-0 group-hover:opacity-100 hover:bg-white/20 transition-all cursor-pointer shadow-lg"
+        className="absolute right-2 sm:-right-4 top-1/2 -translate-y-1/2 z-30 flex h-9 w-9 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-white/10 text-[#FFFFFF] backdrop-blur-md border border-white/20 opacity-0 group-hover:opacity-100 hover:bg-white/20 transition-all cursor-pointer shadow-lg"
       >
         <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" />
       </button>
@@ -126,9 +125,8 @@ function HeroCarousel() {
               key={index}
               onClick={() => setCurrentIndex(index)}
               aria-label={`Go to slide ${index + 1}`}
-              className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                isActive ? "w-8 bg-[#5DD586]" : "w-2.5 bg-white/40 hover:bg-white/70"
-              }`}
+              className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${isActive ? "w-8 bg-[#5DD586]" : "w-2.5 bg-white/40 hover:bg-white/70"
+                }`}
             />
           )
         })}
@@ -152,8 +150,8 @@ function HeroNotificationCard({
         <div className="w-8 h-8 sm:w-10 sm:h-10 mb-1 sm:mb-2">
           <img src={icon} alt="" className="w-full h-full object-contain" />
         </div>
-        <h3 className="mt-1 sm:mt-2 text-xs font-bold text-white sm:text-[13px]">{title}</h3>
-        <p className="mt-1 text-[11px] leading-relaxed text-white/70 line-clamp-3">{body}</p>
+        <h3 className="mt-1 sm:mt-2 text-xs font-bold text-[#C9DEFD] sm:text-[13px]">{title}</h3>
+        <p className="mt-1 text-[11px] font-sans font-regular leading-relaxed text-[#F1F2F3] line-clamp-3">{body}</p>
       </CardContent>
     </Card>
   )
@@ -203,20 +201,20 @@ export function Hero() {
                   className="h-7 w-7 sm:h-8 sm:w-8 rounded-full border-2 border-white/60 object-cover shadow-sm"
                 />
               </div>
-              <p className="text-xs sm:text-sm text-white">
+              <p className="text-xs sm:text-sm text-[#FFFFFF]">
                 <span className="font-semibold">Trusted by 150+ brands</span>
               </p>
             </Badge>
           </AOSReveal>
 
           <AOSReveal animation="fade-up" delay={150} duration={1000}>
-            <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] text-white tracking-tight">
+            <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[1.1] text-[#FFFFFF] tracking-tight">
               Every Delivery Builds Customer Trust.
             </h1>
           </AOSReveal>
 
           <AOSReveal animation="fade-up" delay={300} duration={1000}>
-            <p className="mt-4 sm:mt-6 text-base sm:text-lg leading-relaxed text-white/80 max-w-xl mx-auto lg:mx-0">
+            <p className="mt-4 sm:mt-6 text-base sm:text-lg leading-relaxed text-[#FFFFFF]/80 max-w-xl mx-auto lg:mx-0">
               Winning a customer&apos;s first order is hard. Keeping their trust is
               even harder. Moova helps online businesses manage deliveries with
               real-time visibility that turns first-time buyers into{" "}
@@ -236,12 +234,12 @@ export function Hero() {
               </Button>
               <Button
                 variant="outline"
-                className="w-full sm:w-auto h-13 sm:h-14 rounded-full border-white/50 bg-white/5 px-8 sm:px-10 text-base font-semibold text-white backdrop-blur-xs hover:bg-white/15 hover:border-white/80 hover:text-white active:scale-[0.98] transition-all cursor-pointer"
+                className="w-full sm:w-auto h-13 sm:h-14 rounded-full border-white/50 bg-white/5 px-8 sm:px-10 text-base font-semibold text-[#FFFFFF] backdrop-blur-xs hover:bg-white/15 hover:border-white/80 hover:text-[#FFFFFF] active:scale-[0.98] transition-all cursor-pointer"
               >
                 Watch Product Demo
               </Button>
             </div>
-           
+
           </AOSReveal>
         </div>
 
@@ -253,9 +251,8 @@ export function Hero() {
       {/* Marquee cards inside hero section - paused when off-screen */}
       <div className="relative z-10 mt-10 sm:mt-14 lg:mt-20 overflow-hidden edge-fade">
         <div
-          className={`flex w-max animate-marquee ${
-            isVisible ? "" : "animation-paused"
-          }`}
+          className={`flex w-max animate-marquee ${isVisible ? "" : "animation-paused"
+            }`}
         >
           <div className="flex shrink-0 items-center gap-3 sm:gap-5 pr-3 sm:pr-5">
             {[...DELIVERY_NOTIFICATIONS, ...DELIVERY_NOTIFICATIONS].map((item, i) => (

@@ -28,7 +28,7 @@ export function Header() {
       className={cn(
         "inset-x-0 top-0 z-50 transition-colors duration-200",
         isHome
-          ? "absolute bg-transparent text-white"
+          ? "absolute bg-transparent text-[#FFFFFF]"
           : "sticky bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-xs text-slate-900"
       )}
     >
@@ -42,7 +42,7 @@ export function Header() {
           <span
             className={cn(
               "text-2xl sm:text-3xl font-bold tracking-tight -mt-1 sm:-mt-1.5",
-              isHome ? "text-white" : "text-slate-900"
+              isHome ? "text-[#FFFFFF]" : "text-slate-900"
             )}
           >
             Moova
@@ -59,8 +59,8 @@ export function Header() {
               "text-sm transition-colors duration-150",
               isHome
                 ? isActive
-                  ? "font-bold text-white"
-                  : "font-medium text-white/80 hover:text-white"
+                  ? "font-bold text-[#FFFFFF]"
+                  : "font-medium text-[#FFFFFF]/80 hover:text-[#FFFFFF]"
                 : isActive
                   ? "font-bold text-blue-600"
                   : "font-medium text-slate-600 hover:text-blue-600"
@@ -81,7 +81,7 @@ export function Header() {
         <div className="flex items-center gap-2 sm:gap-3">
           <Button
             variant="ghost"
-            className="h-9 sm:h-12 items-center justify-center rounded-full bg-gradient-to-r from-[#2648A6] to-[#3B82F6] px-4 sm:px-7 py-2 sm:py-3 text-xs sm:text-base font-semibold text-white shadow-md shadow-blue-500/25 transition-all duration-200 hover:opacity-95 hover:text-white hover:shadow-lg hover:shadow-blue-500/35 active:scale-95 flex border-0"
+            className="h-9 sm:h-12 items-center justify-center rounded-full bg-gradient-to-r from-[#2648A6] to-[#3B82F6] px-4 sm:px-7 py-2 sm:py-3 text-xs sm:text-base font-semibold text-[#FFFFFF] shadow-md shadow-blue-500/25 transition-all duration-200 hover:opacity-95 hover:text-[#FFFFFF] hover:shadow-lg hover:shadow-blue-500/35 active:scale-95 flex border-0"
             render={
               <a href="#get-started">
                 Get Started
@@ -98,7 +98,7 @@ export function Header() {
                   className={cn(
                     "md:hidden h-9 w-9",
                     isHome
-                      ? "text-white hover:bg-white/10"
+                      ? "text-[#FFFFFF] hover:bg-white/10"
                       : "text-slate-700 hover:bg-slate-100"
                   )}
                 >
@@ -134,7 +134,7 @@ export function Header() {
                 render={
                   <Button
                     variant="ghost"
-                    className="flex w-full h-10 items-center justify-center rounded-full bg-gradient-to-r from-[#2648A6] to-[#3B82F6] py-2 text-center text-sm font-semibold text-white shadow-sm hover:opacity-95 hover:text-white border-0"
+                    className="flex w-full h-10 items-center justify-center rounded-full bg-gradient-to-r from-[#2648A6] to-[#3B82F6] py-2 text-center text-sm font-semibold text-[#FFFFFF] shadow-sm hover:opacity-95 hover:text-[#FFFFFF] border-0"
                     render={<a href="#get-started">Get Started</a>}
                   />
                 }

@@ -11,8 +11,8 @@ export function FeatureShowcaseCard() {
       {/* Background tint overlay for legibility on mobile */}
       <div className="absolute inset-0 bg-indigo-50/85 md:bg-transparent" />
       <CardContent className="relative z-10 flex min-h-[200px] sm:min-h-[340px] flex-col items-start justify-center gap-3 sm:gap-4 p-5 sm:p-10 md:p-12 md:pl-[52%]">
-        <img src={globeIcon} alt="" className="h-10 w-10 sm:h-14 sm:w-14" />
-        <h3 className="max-w-md text-xl sm:text-3xl md:text-4xl font-bold leading-tight text-blue-900">
+        <img src={globeIcon} alt="" className="h-12 w-12 sm:h-14 sm:w-14" />
+        <h3 className="max-w-md text-xl sm:text-3xl md:text-4xl font-semibold leading-tight text-[#2648A6]">
           Every Delivery Is A Chance To Win Your Customer Again.
         </h3>
       </CardContent>

@@ -3,13 +3,6 @@ import { Button } from "@/components/ui/button"
 import footerBg from "@/assets/footer-bg.png"
 import { AOSReveal } from "@/components/animation/AOSReveal"
 
-function FacebookIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
-      <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12Z" />
-    </svg>
-  )
-}
 
 function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -32,19 +25,17 @@ function LinkedinIcon(props: React.SVGProps<SVGSVGElement>) {
 const QUICK_LINKS = [
   { label: "Home", href: "#home" },
   { label: "How It Works", href: "#how-it-works" },
-  { label: "Pricing", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ] as const
 
 const SOCIAL_LINKS = [
-  { label: "Facebook", href: "https://facebook.com", icon: FacebookIcon },
-  { label: "Instagram", href: "https://instagram.com", icon: InstagramIcon },
-  { label: "LinkedIn", href: "https://linkedin.com", icon: LinkedinIcon },
+  { label: "Instagram", href: "https://www.instagram.com/moova_hq?igsi=YjF3ZGltbHVmNnZz", icon: InstagramIcon },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/moova-hq/", icon: LinkedinIcon },
 ] as const
 
 const linkButtonClass =
-  "h-auto justify-start p-0 text-sm sm:text-base font-normal text-white/70 no-underline hover:text-white hover:no-underline"
+  "h-auto justify-start p-0 text-sm sm:text-base font-normal text-[#FFFFFF]/70 no-underline hover:text-[#FFFFFF] hover:no-underline"
 
 export function Footer() {
   return (
@@ -61,24 +52,24 @@ export function Footer() {
         <AOSReveal animation="fade-up" delay={0} className="flex flex-col items-start">
           <a href="#home" className="flex items-center gap-3 sm:gap-4 group">
             <div className="flex items-center justify-center shrink-0">
-              <img 
-                src={brandLogo} 
-                alt="Moova Logo" 
-                className="h-16 w-16 sm:h-20 sm:w-20 object-contain rounded-lg transition-transform group-hover:scale-105" 
+              <img
+                src={brandLogo}
+                alt="Moova Logo"
+                className="h-16 w-16 sm:h-20 sm:w-20 object-contain rounded-lg transition-transform group-hover:scale-105"
               />
             </div>
             <div className="flex items-center">
-              <span className="text-2xl sm:text-3xl font-bold text-white">Moova</span>
+              <span className="text-2xl sm:text-3xl font-bold text-[#FFFFFF]">Moova</span>
             </div>
           </a>
-          <p className="mt-4 sm:mt-5 max-w-[34ch] text-sm leading-relaxed text-white/70">
+          <p className="mt-4 sm:mt-5 max-w-[34ch] text-sm leading-relaxed text-[#FFFFFF]/70">
             An app that helps online sellers manage deliveries and give their customers a stress-free delivery experience with real-time tracking.
           </p>
         </AOSReveal>
 
         {/* Quick links */}
         <AOSReveal animation="fade-up" delay={100}>
-          <h3 className="text-sm font-bold text-white">Quick Links</h3>
+          <h3 className="text-sm font-bold text-[#FFFFFF]">Quick Links</h3>
           <ul className="mt-4 sm:mt-5 flex flex-col gap-2.5 sm:gap-3">
             {QUICK_LINKS.map((link) => (
               <li key={link.label}>
@@ -94,10 +85,10 @@ export function Footer() {
 
         {/* Contact */}
         <AOSReveal animation="fade-up" delay={200}>
-          <h3 className="text-sm font-bold text-white">Contact</h3>
+          <h3 className="text-sm font-bold text-[#FFFFFF]">Contact</h3>
           <div className="mt-4 sm:mt-5 flex flex-col gap-3.5 sm:gap-4">
             <div>
-              <p className="text-[11px] sm:text-xs font-bold tracking-wide text-white/90">EMAIL</p>
+              <p className="text-[11px] sm:text-xs font-bold tracking-wide text-[#FFFFFF]/90">EMAIL</p>
               <Button
                 variant="link"
                 className={linkButtonClass}
@@ -105,11 +96,11 @@ export function Footer() {
               />
             </div>
             <div>
-              <p className="text-[11px] sm:text-xs font-bold tracking-wide text-white/90">PHONE</p>
+              <p className="text-[11px] sm:text-xs font-bold tracking-wide text-[#FFFFFF]/90">PHONE</p>
               <Button
                 variant="link"
                 className={linkButtonClass}
-                render={<a href="tel:+255222123456">+255 (0) 22 212 3456</a>}
+                render={<a href="tel:+255753156659">+255 753 156 659</a>}
               />
             </div>
           </div>
@@ -117,7 +108,7 @@ export function Footer() {
 
         {/* Social */}
         <AOSReveal animation="fade-up" delay={300}>
-          <h3 className="text-sm font-bold text-white">Follow Us</h3>
+          <h3 className="text-sm font-bold text-[#FFFFFF]">Follow Us</h3>
           <ul className="mt-4 sm:mt-5 flex flex-col gap-2.5 sm:gap-3">
             {SOCIAL_LINKS.map(({ label, href, icon: Icon }) => (
               <li key={label}>
@@ -140,13 +131,12 @@ export function Footer() {
       {/* Bottom Section */}
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
         <div className="border-t border-white/10 py-6 sm:py-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs sm:text-sm text-white/60 text-center md:text-left">
+          <p className="text-xs sm:text-sm text-[#FFFFFF]/60 text-center md:text-left">
             © {new Date().getFullYear()} Moova. All rights reserved.
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-white/60">
-            <a href="#terms" className="hover:text-white transition-colors">Terms of Service</a>
-            <a href="#privacy" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#cookies" className="hover:text-white transition-colors">Cookie Policy</a>
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-[#FFFFFF]/60">
+            <a href="#privacy" className="hover:text-[#FFFFFF] transition-colors">Privacy Policy</a>
+            <a href="#terms" className="hover:text-[#FFFFFF] transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>

@@ -21,7 +21,7 @@ export function DeliveryConfirmation() {
               staggerDelay={50}
               className="text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-foreground tracking-tight"
             />
-            <p className="mt-3 sm:mt-4 text-sm sm:text-base lg:text-lg leading-relaxed text-muted-foreground">
+            <p className="mt-3 sm:mt-4 text-sm sm:text-base lg:text-lg leading-relaxed text-[#5E656E]">
               Reassure customers the moment their order is delivered with clear
               confirmation via text or email. Reduce customer friction and build trust.
             </p>

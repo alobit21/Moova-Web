@@ -34,7 +34,7 @@ export function TrackingResultPanel({ result }: { result: TrackingResult }) {
             <div className="flex flex-col items-center pt-1">
               <span className="h-3 w-3 rounded-full bg-emerald-500 ring-2 ring-emerald-100" />
               <div className="my-1 w-0.5 flex-1 min-h-[36px] bg-slate-200" />
-              <span className="h-3 w-3 rounded-full bg-indigo-600 ring-2 ring-indigo-100" />
+              <span className="h-3 w-3 rounded-full  bg-[#2648A6] ring-2 ring-indigo-100" />
             </div>
             <div className="flex flex-1 flex-col justify-between gap-3">
               <div>

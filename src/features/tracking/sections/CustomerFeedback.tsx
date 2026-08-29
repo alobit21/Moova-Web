@@ -29,7 +29,7 @@ export function CustomerFeedback() {
               staggerDelay={50}
               className="text-2xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-foreground tracking-tight"
             />
-            <p className="mt-3 sm:mt-4 text-sm sm:text-base lg:text-lg leading-relaxed text-muted-foreground">
+            <p className="mt-3 sm:mt-4 text-sm sm:text-base lg:text-lg leading-relaxed text-[#5E656E]">
               Gather ratings and comments immediately after delivery to strengthen
               relationships with real-time customer data.
             </p>

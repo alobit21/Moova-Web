@@ -20,7 +20,7 @@ export function ParcelSearchForm({ onSearch }: { onSearch: (trackingNumber: stri
     setError(null)
     onSearch(normalized)
   }
- 
+
 
   return (
     <form onSubmit={handleSubmit} noValidate className="mt-6 flex flex-row items-start gap-2.5 sm:gap-3">
@@ -41,7 +41,7 @@ export function ParcelSearchForm({ onSearch }: { onSearch: (trackingNumber: stri
       </div>
       <Button
         type="submit"
-        className="h-12 sm:h-14 px-5 sm:px-8 rounded-xl bg-[#2648A6] hover:bg-[#1f3b89] active:scale-[0.98] text-sm sm:text-base font-semibold text-white shadow-md shadow-blue-500/20 transition-all shrink-0 cursor-pointer"
+        className="h-12 sm:h-14 px-5 sm:px-8 rounded-xl bg-[#2648A6] hover:bg-[#1f3b89] active:scale-[0.98] text-sm sm:text-base font-semibold text-[#FFFFFF] shadow-md shadow-blue-500/20 transition-all shrink-0 cursor-pointer"
       >
         Search
       </Button>

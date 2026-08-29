@@ -42,7 +42,7 @@ export function TrackingPage() {
             <h1 className="text-3xl font-extrabold text-foreground sm:text-4xl lg:text-5xl tracking-tight">
               Parcel tracking
             </h1>
-            <p className="mt-3 text-sm sm:text-base text-muted-foreground">
+            <p className="mt-3 text-sm sm:text-basetext-[#5E656E]">
               Enter the parcel tracking number starts with the letter &apos;M&apos;
               followed by digits.
             </p>
