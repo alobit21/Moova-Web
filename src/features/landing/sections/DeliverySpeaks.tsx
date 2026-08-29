@@ -11,7 +11,6 @@ import {
   ArrowRight,
   ThumbsUp,
   ShieldCheck,
-  PackageCheck as PackageCheckIcon, // just in case
 } from "lucide-react"
 import { useSectionVisibility } from "@/hooks/useInView"
 import { AOSReveal, TextReveal } from "@/components/animation/AOSReveal"

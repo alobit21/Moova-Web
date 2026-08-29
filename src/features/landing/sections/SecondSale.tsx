@@ -3,7 +3,6 @@ import {
   CheckCircle2,
   Coffee,
   Navigation,
-  Package,
   Star,
   TrendingUp,
   Users,
