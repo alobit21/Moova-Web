@@ -1,6 +1,8 @@
 import { MapPin, Star, MessageCircle, Mail } from "lucide-react"
-import brandedExperienceMockup from "@/assets/tracking/branded-experience.jpeg"
-import { AOSReveal, TextReveal, GradientText } from "@/components/animation/AOSReveal"
+import phoneMockup from "@/assets/tracking/phone-mockup.png"
+import review1 from "@/assets/tracking/d1.png"
+import review2 from "@/assets/tracking/d2.png"
+import { AOSReveal, TextReveal } from "@/components/animation/AOSReveal"
 
 const FEATURES = [
   { icon: MapPin, label: "Live driver tracking" },
@@ -18,16 +20,11 @@ export function BrandedExperience() {
           <AOSReveal animation="fade-right" delay={0} className="max-w-xl">
             <TextReveal
               as="h2"
-              text="Delight customers with"
+              text="Delight customers with real-time tracking"
               delay={0}
               staggerDelay={50}
               className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-slate-900 tracking-tight"
             />
-            <div className="mt-1 text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
-              <GradientText gradient="from-[#1F3B89] via-[#0D9488] to-[#1F3B89]">
-                real-time tracking
-              </GradientText>
-            </div>
             <p className="mt-4 text-base sm:text-lg leading-relaxed text-slate-500 font-normal">
               Give customers full visibility into their order with a live tracking
               link shared via SMS. They&apos;ll always know exactly when to expect
@@ -50,13 +47,30 @@ export function BrandedExperience() {
           <AOSReveal
             animation="zoom-in"
             delay={150}
-            className="flex items-center justify-center rounded-[32px] bg-slate-50/70 p-4 sm:p-8"
+            className="flex items-end justify-center rounded-[32px] bg-slate-50/70 pt-8 sm:pt-12 lg:pt-16 overflow-hidden min-h-[400px] lg:min-h-[500px]"
           >
-            <img
-              src={brandedExperienceMockup}
-              alt="Delight customers with real-time tracking mockup"
-              className="w-full max-w-md sm:max-w-lg lg:max-w-xl h-auto object-contain rounded-2xl shadow-xs"
-            />
+            <div className="relative flex items-end justify-center w-full px-4 sm:px-8 lg:px-12 pb-0">
+              {/* Center Phone */}
+              <img
+                src={phoneMockup}
+                alt="Live tracking app"
+                className="relative z-10 w-[220px] sm:w-[260px] lg:w-[300px] h-auto object-contain drop-shadow-2xl translate-y-4 sm:translate-y-6"
+              />
+              
+              {/* Left Floating Review (d1) */}
+              <img
+                src={review1}
+                alt="Customer review - very fast"
+                className="absolute z-20 left-2 sm:left-4 lg:left-8 top-[62%] -translate-y-1/2 w-[140px] sm:w-[170px] lg:w-[210px] drop-shadow-xl hover:-translate-y-[64%] transition-transform duration-500"
+              />
+              
+              {/* Right Floating Review (d2) */}
+              <img
+                src={review2}
+                alt="Customer review - wonderful delivery"
+                className="absolute z-20 right-2 sm:right-4 lg:right-8 top-[28%] -translate-y-1/2 w-[150px] sm:w-[180px] lg:w-[220px] drop-shadow-xl hover:-translate-y-[30%] transition-transform duration-500"
+              />
+            </div>
           </AOSReveal>
         </div>
       </div>

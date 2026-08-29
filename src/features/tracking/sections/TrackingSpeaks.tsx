@@ -2,6 +2,7 @@ import { Gem, MapPin, Bell, Zap } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { useSectionVisibility } from "@/hooks/useInView"
+import { DELIVERY_NOTIFICATIONS } from "@/features/landing/data/notifications"
 
 const BADGES = [
   { icon: Gem, label: "Live updates on orders", className: "text-purple-600" },
@@ -10,33 +11,7 @@ const BADGES = [
   { icon: Zap, label: "Quick and easy onboarding", className: "text-amber-500" },
 ] as const
 
-const NOTIFICATIONS = [
-  {
-    icon: "📦",
-    title: "Bidhaa Imechukuliwa",
-    body: "Habari njema! Oda yako imechukuliwa na sasa iko njiani kuja kwako. Fuatilia delivery yako moja kwa moja.",
-  },
-  {
-    icon: "🚀",
-    title: "Iko Njiani",
-    body: "Habari njema! Oda yako iko njiani sasa na inatarajiwa kufika hivi karibuni. Namba: MOV-20260103-DNZ",
-  },
-  {
-    icon: "✅",
-    title: "Oda Imekabidhiwa",
-    body: "Oda yako imefikishwa kwa mafanikio eneo la Goba Njia Nne. Asante kwa kuamini na kutuchagua Moova!",
-  },
-  {
-    icon: "📋",
-    title: "Oda Imetengenezwa",
-    body: "Habari! Tumepokea oda yako kutoka Mwanga_Shop. Namba: MOV-20260103-DNZ. Bidhaa: Bags. Gharama: TZS 3,000",
-  },
-  {
-    icon: "🏍️",
-    title: "Dereva Amechaguliwa",
-    body: "Habari njema! Salvatory Yonah amechaguliwa kusafirisha oda yako. Plate: MC 124. Fuatilia: moova.co.tz",
-  },
-]
+
 
 function NotificationCard({
   icon,
@@ -50,7 +25,9 @@ function NotificationCard({
   return (
     <Card className="w-[240px] sm:w-[300px] shrink-0 border-0 shadow-sm">
       <CardContent className="p-5 sm:p-6">
-        <div className="text-xl sm:text-2xl">{icon}</div>
+        <div className="w-8 h-8 sm:w-10 sm:h-10 mb-2">
+          <img src={icon} alt="" className="w-full h-full object-contain" />
+        </div>
         <h3 className="mt-2.5 text-sm sm:text-base font-bold text-foreground">{title}</h3>
         <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-muted-foreground">{body}</p>
       </CardContent>
@@ -94,7 +71,7 @@ export function TrackingSpeaks() {
 
       <div className="edge-fade relative mt-10 sm:mt-16 overflow-hidden">
         <div className={`flex w-max animate-marquee gap-4 sm:gap-6 ${isVisible ? "" : "animation-paused"}`}>
-          {[...NOTIFICATIONS, ...NOTIFICATIONS].map((item, i) => (
+          {[...DELIVERY_NOTIFICATIONS, ...DELIVERY_NOTIFICATIONS, ...DELIVERY_NOTIFICATIONS].map((item, i) => (
             <NotificationCard key={i} {...item} />
           ))}
         </div>
