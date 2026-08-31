@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react"
 import brandLogo from "@/assets/logo/logo.png"
 import { Menu } from "lucide-react"
 import { Link, useLocation } from "react-router-dom"
@@ -22,26 +23,45 @@ const NAV_LINKS = [
 export function Header() {
   const { pathname } = useLocation()
   const isHome = pathname === "/"
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20)
+    }
+    handleScroll()
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   return (
     <header
       className={cn(
-        "inset-x-0 top-0 z-50 transition-colors duration-200",
+        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
         isHome
-          ? "absolute bg-transparent text-[#FFFFFF]"
-          : "sticky bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-xs text-slate-900"
+          ? isScrolled
+            ? "bg-[#1c3b7a]/90 backdrop-blur-md border-b border-white/10 shadow-lg shadow-black/10 text-[#FFFFFF]"
+            : "bg-transparent text-[#FFFFFF] border-b border-transparent"
+          : isScrolled
+            ? "bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-md text-slate-900"
+            : "bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-xs text-slate-900"
       )}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-12">
+      <div
+        className={cn(
+          "mx-auto flex max-w-7xl items-center justify-between px-6 transition-all duration-300 lg:px-12",
+          isScrolled ? "py-3.5" : "py-5"
+        )}
+      >
         <Link to="/" className="flex items-center gap-3 sm:gap-4 group">
           <img
             src={brandLogo}
             alt="Moova Logo"
-            className="h-28 w-16 sm:h-20 sm:w-20 object-contain transition-transform group-hover:scale-105"
+            className="h-12 w-12 sm:h-14 sm:w-14 object-contain transition-transform group-hover:scale-105"
           />
           <span
             className={cn(
-              "text-2xl sm:text-3xl font-bold tracking-tight -mt-1 sm:-mt-1.5",
+              "text-2xl sm:text-3xl font-bold tracking-tight",
               isHome ? "text-[#FFFFFF]" : "text-slate-900"
             )}
           >
@@ -81,7 +101,7 @@ export function Header() {
         <div className="flex items-center gap-2 sm:gap-3">
           <Button
             variant="ghost"
-            className="h-9 sm:h-12 items-center justify-center rounded-full bg-gradient-to-r from-[#2648A6] to-[#3B82F6] px-4 sm:px-7 py-2 sm:py-3 text-xs sm:text-base font-semibold text-[#FFFFFF] shadow-md shadow-blue-500/25 transition-all duration-200 hover:opacity-95 hover:text-[#FFFFFF] hover:shadow-lg hover:shadow-blue-500/35 active:scale-95 flex border-0"
+            className="h-9 sm:h-11 items-center justify-center rounded-full bg-gradient-to-r from-[#2648A6] to-[#3B82F6] px-4 sm:px-6 py-2 text-xs sm:text-sm font-semibold text-[#FFFFFF] shadow-md shadow-blue-500/25 transition-all duration-200 hover:opacity-95 hover:text-[#FFFFFF] hover:shadow-lg hover:shadow-blue-500/35 active:scale-95 flex border-0"
             render={
               <a href="#get-started">
                 Get Started

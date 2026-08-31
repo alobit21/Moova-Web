@@ -123,7 +123,7 @@ export function TrackingPage() {
         description="Track your Moova parcel delivery in real-time."
       />
       <main>
-        <section className="relative overflow-x-hidden bg-white pb-20 pt-10 sm:pt-14 lg:pt-20">
+        <section className="relative overflow-x-hidden bg-white pb-20 pt-24 sm:pt-28 lg:pt-32">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
             <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-8">
               <div className="max-w-xl w-full">

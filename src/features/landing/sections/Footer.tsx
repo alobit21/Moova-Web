@@ -39,7 +39,7 @@ const linkButtonClass =
 
 export function Footer() {
   return (
-    <footer className="relative isolate overflow-hidden bg-[#1c3b7a]">
+    <footer id="contact" className="relative isolate overflow-hidden bg-[#1c3b7a]">
       <img
         src={footerBg}
         alt=""

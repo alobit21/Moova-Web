@@ -85,7 +85,7 @@ export function DeliverySpeaks() {
   const [sectionRef] = useSectionVisibility<HTMLElement>()
 
   return (
-    <section ref={sectionRef} className="relative w-full ">
+    <section ref={sectionRef} id="how-it-works" className="relative w-full ">
       {/* Top Part: Online Shop */}
       <div className="bg-[#FFFFFF] px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="mx-auto max-w-7xl">
