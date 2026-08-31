@@ -48,11 +48,19 @@ export function TrackingPage() {
       wsRef.current.close()
     }
 
-    // Use localhost for local dev or production URL
-    const wsUrl = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
-      ? `ws://${window.location.hostname}:8000/ws/track/${trackingNumber}/`
-      : `wss://moova-api.codemash.co.tz/ws/track/${trackingNumber}/`
+    // Try to get WebSocket URL from environment variable, fallback to automatic detection
+    const envWsUrl = import.meta.env.VITE_WS_API_URL
+    let wsBaseUrl = ""
     
+    if (envWsUrl) {
+      wsBaseUrl = envWsUrl.endsWith('/') ? envWsUrl.slice(0, -1) : envWsUrl
+    } else {
+      wsBaseUrl = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+        ? `ws://${window.location.hostname}:8000`
+        : `wss://moova-api.codemash.co.tz`
+    }
+
+    const wsUrl = `${wsBaseUrl}/ws/track/${trackingNumber}/`
     console.log("Connecting to WebSocket:", wsUrl)
     const ws = new WebSocket(wsUrl)
     wsRef.current = ws
