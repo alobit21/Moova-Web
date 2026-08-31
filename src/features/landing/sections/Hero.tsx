@@ -145,13 +145,13 @@ function HeroNotificationCard({
   body: string
 }) {
   return (
-    <Card className="flex h-[150px] sm:h-[160px] w-[230px] sm:w-[265px] shrink-0 rounded-2xl border border-white/10 bg-[#254685]/80 p-0 font-instrument shadow-none backdrop-blur-xs">
+    <Card className="flex h-[150px] sm:h-[160px] w-[230px] sm:w-[265px] shrink-0 rounded-2xl border border-white/10 bg-[#254685]/80 p-0  shadow-none backdrop-blur-xs">
       <CardContent className="flex flex-col p-4 sm:p-5">
         <div className="w-8 h-8 sm:w-10 sm:h-10 mb-1 sm:mb-2">
           <img src={icon} alt="" className="w-full h-full object-contain" />
         </div>
         <h3 className="mt-1 sm:mt-2 text-xs font-bold text-[#C9DEFD] sm:text-[13px]">{title}</h3>
-        <p className="mt-1 text-[11px] font-sans font-regular leading-relaxed text-[#F1F2F3] line-clamp-3">{body}</p>
+        <p className="mt-1 text-[11px]  font-regular leading-relaxed text-[#F1F2F3] line-clamp-3">{body}</p>
       </CardContent>
     </Card>
   )

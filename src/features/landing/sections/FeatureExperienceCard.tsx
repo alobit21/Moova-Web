@@ -14,7 +14,7 @@ export function FeatureExperienceCard() {
           Every Order Deserves a Better Experience.
         </h3>
 
-        <p className="mt-4 max-w-md font-sans font-regular text-base leading-relaxed text-[#EAEEFA]">
+        <p className="mt-4 max-w-md  font-regular text-base leading-relaxed text-[#EAEEFA]">
           Create delivery orders in seconds, assign trusted riders, and keep
           every package moving without the manual coordination.
         </p>

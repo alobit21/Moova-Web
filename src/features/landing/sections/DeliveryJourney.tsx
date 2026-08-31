@@ -466,15 +466,15 @@ export function DeliveryJourney() {
             text="The complete delivery journey"
             delay={0}
             staggerDelay={50}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-foreground font-instrument"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-foreground "
           />
-          <div className="mt-1 text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight font-instrument">
+          <div className="mt-1 text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight ">
             <GradientText gradient="from-[#2648A6] via-[#0D9488] to-[#2648A6]" className="italic">
               managed end-to-end
             </GradientText>
           </div>
           <AOSReveal animation="fade-up" delay={150}>
-            <p className="mx-auto mt-4 sm:mt-6 max-w-xl text-base sm:text-lg font-normal leading-relaxed text-[#5E656E] font-instrument">
+            <p className="mx-auto mt-4 sm:mt-6 max-w-xl text-base sm:text-lg font-normal leading-relaxed text-[#5E656E] ">
               Moova handles everything from the moment an order is placed to the second it arrives
               at the door — so merchants can focus on selling, and customers always know exactly
               where their order is.

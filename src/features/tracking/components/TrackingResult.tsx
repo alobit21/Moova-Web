@@ -17,6 +17,7 @@ export function TrackingResult({ result }: { result: TrackingResultType }) {
           dropoff={result.dropoff.coordinates}
           pickupLabel={result.pickup.address}
           dropoffLabel={result.dropoff.address}
+          driverLocation={result.driverLocation}
         />
       </div>
     </div>

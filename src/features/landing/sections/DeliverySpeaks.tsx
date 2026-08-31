@@ -85,7 +85,7 @@ export function DeliverySpeaks() {
   const [sectionRef] = useSectionVisibility<HTMLElement>()
 
   return (
-    <section ref={sectionRef} className="relative w-full font-instrument">
+    <section ref={sectionRef} className="relative w-full ">
       {/* Top Part: Online Shop */}
       <div className="bg-[#FFFFFF] px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="mx-auto max-w-7xl">
@@ -108,7 +108,7 @@ export function DeliverySpeaks() {
 
           <div className="mt-16 sm:mt-24">
             <div className="flex items-center gap-4 mb-8">
-              <h3 className="text-[10px] sm:text-xs font-bold font-sans uppercase tracking-wider text-[#2648A6]">
+              <h3 className="text-[10px] sm:text-xs font-bold  uppercase tracking-wider text-[#2648A6]">
                 For Online Shop
               </h3>
               <div className="h-px flex-1  text-[#E2E8F0]"></div>
@@ -119,14 +119,14 @@ export function DeliverySpeaks() {
                 <AOSReveal key={step.num} animation="fade-up" delay={i * 100}>
                   <div className="flex flex-col h-full rounded-2xl border border-gray-100 bg-[#FFFFFF] p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow">
                     <div className="flex items-center justify-between mb-4">
-                      <span className="text-2xl sm:text-3xl font-bold font-sans text-[#2648A6]">
+                      <span className="text-2xl sm:text-3xl font-bold  text-[#2648A6]">
                         {step.num}
                       </span>
                       <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-[#EBF0FF]">
                         <step.icon className="h-4 w-4 sm:h-5 sm:w-5 text-[#2648A6]" />
                       </div>
                     </div>
-                    <h4 className="text-sm sm:text-base font-bold font-sans text-gray-900 mb-2">
+                    <h4 className="text-sm sm:text-base font-bold  text-gray-900 mb-2">
                       {step.title}
                     </h4>
                     <p className="text-xs sm:text-sm  text-[#5E656E] leading-relaxed">
@@ -184,10 +184,10 @@ export function DeliverySpeaks() {
                       <step.icon className="h-4 w-4 sm:h-5 sm:w-5 text-[#22D3EE]" />
                     </div>
                   </div>
-                  <h4 className="text-sm sm:text-base   font-sans  font-bold text-[#F8FAFC] mb-2">
+                  <h4 className="text-sm sm:text-base     font-bold text-[#F8FAFC] mb-2">
                     {step.title}
                   </h4>
-                  <p className="text-xs sm:text-sm text-[#94A3B8] leading-relaxed font-regular font-sans">
+                  <p className="text-xs sm:text-sm text-[#94A3B8] leading-relaxed font-regular ">
                     {step.desc}
                   </p>
                 </div>

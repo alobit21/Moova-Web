@@ -11,13 +11,13 @@ export function FeatureGrowthCard() {
         </div>
 
 
-        <h3 className="mt-5 text-2xl font-semibold font-instrumental leading-tight text-[#2648A6] sm:text-3xl">
+        <h3 className="mt-5 text-2xl font-semibold  leading-tight text-[#2648A6] sm:text-3xl">
           Stop Managing Deliveries.
           <br />
           Start Growing Your Business.
         </h3>
 
-        <p className="mt-4 max-w-md text-base leading-relaxed font-regular font-instrumental text-[#5E656E]">
+        <p className="mt-4 max-w-md text-base leading-relaxed font-regular  text-[#5E656E]">
           Spend less time calling riders, following up on orders, and
           answering "Where is my order?" messages. Manage everything from
           one simple dashboard.

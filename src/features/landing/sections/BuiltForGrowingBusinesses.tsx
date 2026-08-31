@@ -17,10 +17,10 @@ export function BuiltForGrowingBusinesses() {
             text="Built For Growing Online Businesses"
             delay={0}
             staggerDelay={50}
-            className="text-3xl sm:text-4xl lg:text-5xl font-semibold font-instrumental text-[#2648A6] tracking-tight"
+            className="text-3xl sm:text-4xl lg:text-5xl font-semibold  text-[#2648A6] tracking-tight"
           />
           <AOSReveal animation="fade-up" delay={150}>
-            <p className="mt-4 sm:mt-6 text-base sm:text-lg leading-relaxed text-[#5E656E] font-regular font-instrumental">
+            <p className="mt-4 sm:mt-6 text-base sm:text-lg leading-relaxed text-[#5E656E] font-regular ">
               From creating delivery orders and assigning riders to tracking
               performance and keeping customers informed,{" "}
               <GradientText gradient="from-blue-900 via-blue-600 to-blue-900" className="font-semibold">

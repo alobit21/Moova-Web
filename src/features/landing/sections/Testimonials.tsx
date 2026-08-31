@@ -55,7 +55,7 @@ export function Testimonials() {
           text="29K+ Happy Customers in Tanzania"
           delay={0}
           staggerDelay={60}
-          className="text-3xl sm:text-4xl lg:text-5xl font-bold font-instrument text-[#1F3B89] tracking-tight"
+          className="text-3xl sm:text-4xl lg:text-5xl font-bold  text-[#1F3B89] tracking-tight"
         />
         <AOSReveal animation="fade-up" delay={150}>
           <p className="mt-4 sm:mt-6 text-base sm:text-lg font-semibold text-[#1F3B89]">

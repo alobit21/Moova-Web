@@ -2,7 +2,7 @@ import { useState, type FormEvent } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 
-const TRACKING_NUMBER_PATTERN = /^M\d+$/i
+const TRACKING_NUMBER_PATTERN = /^M[\w-]+$/i
 
 export function ParcelSearchForm({ onSearch }: { onSearch: (trackingNumber: string) => void }) {
   const [value, setValue] = useState("")
@@ -13,7 +13,7 @@ export function ParcelSearchForm({ onSearch }: { onSearch: (trackingNumber: stri
     const normalized = value.replace(/\s+/g, "")
 
     if (!TRACKING_NUMBER_PATTERN.test(normalized)) {
-      setError("Enter a valid tracking number starting with 'M' followed by digits.")
+      setError("Enter a valid tracking number starting with 'M'.")
       return
     }
 

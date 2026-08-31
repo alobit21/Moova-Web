@@ -60,7 +60,7 @@ export function EverythingYouNeed() {
           text="Everything You Need to Deliver Better"
           delay={0}
           staggerDelay={50}
-          className="text-3xl sm:text-4xl lg:text-5xl font-semibold font-instrumental text-[#FFFFFF] tracking-tight"
+          className="text-3xl sm:text-4xl lg:text-5xl font-semibold  text-[#FFFFFF] tracking-tight"
         />
 
         <div className="mt-10 sm:mt-16 grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -72,8 +72,8 @@ export function EverythingYouNeed() {
                 <CardContent className="flex flex-col gap-3 sm:gap-4 p-6 sm:p-8">
                   <img src={icon} alt="" aria-hidden="true" className="h-12 w-12 sm:h-14 sm:w-14" />
                   <div>
-                    <h3 className="text-base sm:text-lg font-bold font-instrumental text-[#FFFFFF]">{title}</h3>
-                    <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm leading-relaxed  font-regular font-sans text-[#EAEEFA]">
+                    <h3 className="text-base sm:text-lg font-bold  text-[#FFFFFF]">{title}</h3>
+                    <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm leading-relaxed  font-regular  text-[#EAEEFA]">
                       {description}
                     </p>
                   </div>

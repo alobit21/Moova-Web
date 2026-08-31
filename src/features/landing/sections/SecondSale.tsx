@@ -269,7 +269,7 @@ export function SecondSale() {
             className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#191B1F] tracking-tight"
           />
           <AOSReveal animation="fade-up" delay={120}>
-            <p className="mx-auto mt-3 sm:mt-4 max-w-2xl text-sm font-regular font-sans text-[#5E656E]">
+            <p className="mx-auto mt-3 sm:mt-4 max-w-2xl text-sm font-regular  text-[#5E656E]">
               Every first-time buyer goes through these three moments. Moova makes
               sure each one builds confidence instead of uncertainty.
             </p>
@@ -311,17 +311,17 @@ export function SecondSale() {
 
         {/* CTA banner */}
         <div className="mt-14 sm:mt-20 overflow-hidden rounded-2xl sm:rounded-3xl bg-linear-to-r from-[#2648A6] via-[#3A67C2] to-[#61A6F9] px-5 py-10 sm:px-16 md:py-20 text-center">
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold font-instrumental text-[#FFFFFF]">
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold  text-[#FFFFFF]">
             Make Every Delivery Your Next Sale.
           </h3>
-          <p className="mx-auto mt-3 sm:mt-4 max-w-2xl  font-regular font-sans text-sm sm:text-base text-[#FFFFFF]/85">
+          <p className="mx-auto mt-3 sm:mt-4 max-w-2xl  font-regular  text-sm sm:text-base text-[#FFFFFF]/85">
             Every delivery is a chance to build trust, reduce customer anxiety,
             and turn first-time buyers into loyal customers with Moova.
           </p>
           <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full">
             <Button
               size="lg"
-              className="w-full sm:w-auto rounded-full bg-white px-8 sm:px-10 text-[#2648A6] font-semibold font-sans shadow-lg shadow-blue-950/20 hover:bg-white/90 hover:shadow-xl active:scale-[0.98] transition-all cursor-pointer"
+              className="w-full sm:w-auto rounded-full bg-white px-8 sm:px-10 text-[#2648A6] font-semibold  shadow-lg shadow-blue-950/20 hover:bg-white/90 hover:shadow-xl active:scale-[0.98] transition-all cursor-pointer"
             >
               Get started free
             </Button>

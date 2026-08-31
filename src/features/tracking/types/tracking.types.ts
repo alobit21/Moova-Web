@@ -8,16 +8,17 @@ export type RouteAddress = {
 }
 
 export type TrackingResult = {
-  status: DeliveryStatus
-  etaMinutes: number
-  timestamp: string
-  city: string
-  createdBy: string
+  status: string
+  etaMinutes?: number
+  timestamp?: string
+  city?: string
+  createdBy?: string
   pickup: RouteAddress
   dropoff: RouteAddress
-  driverName: string
-  vehicle: string
-  plate: string
-  paymentMethod: string
-  requestedByLine: string
+  driverName?: string
+  vehicle?: string
+  plate?: string
+  paymentMethod?: string
+  requestedByLine?: string
+  driverLocation?: [number, number]
 }

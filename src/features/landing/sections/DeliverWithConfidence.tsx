@@ -6,7 +6,7 @@ import phoneBack from "@/assets/cta/iMockup - iPhone.png"
 export function DeliverWithConfidence() {
   return (
     <section
-      className="relative bg-cover bg-center pt-16 sm:pt-24 lg:pt-32 font-instrument z-10 overflow-hidden"
+      className="relative bg-cover bg-center pt-16 sm:pt-24 lg:pt-32  z-10 overflow-hidden"
       style={{ backgroundImage: `url(${ctaBackground})` }}
     >
       {/* Dark overlay for extra contrast if needed */}

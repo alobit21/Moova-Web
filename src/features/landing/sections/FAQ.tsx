@@ -54,7 +54,7 @@ export function FAQ() {
           text="Frequently Asked Questions"
           delay={0}
           staggerDelay={60}
-          className="text-3xl sm:text-4xl lg:text-5xl font-semibold font-instrument text-[#1F3B89] tracking-tight"
+          className="text-3xl sm:text-4xl lg:text-5xl font-semibold  text-[#1F3B89] tracking-tight"
         />
 
         <Accordion defaultValue={["what-is-moova"]} className="mt-10 sm:mt-14 gap-3 sm:gap-4 text-left">

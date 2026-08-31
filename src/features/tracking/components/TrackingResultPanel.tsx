@@ -11,7 +11,7 @@ const ACTIONS = [
 
 export function TrackingResultPanel({ result }: { result: TrackingResult }) {
   return (
-    <div className="flex flex-col justify-between bg-white p-4 sm:p-6 font-sans">
+    <div className="flex flex-col justify-between bg-white p-4 sm:p-6 ">
       <div className="space-y-4">
         {/* Top Header Badge & COD info */}
         <div className="flex items-center justify-between gap-2">
