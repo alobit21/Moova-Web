@@ -8,6 +8,7 @@ import { DeliveryConfirmation } from "@/features/tracking/sections/DeliveryConfi
 import { CustomerFeedback } from "@/features/tracking/sections/CustomerFeedback"
 import { BrandedExperience } from "@/features/tracking/sections/BrandedExperience"
 import { FAQ } from "@/features/landing/sections/FAQ"
+import { SEO } from "@/components/seo/SEO"
 
 const DEFAULT_COORDS: [number, number] = [-6.7924, 39.2083] // Dar es Salaam center fallback
 
@@ -28,6 +29,7 @@ const MOCK_RESULT: TrackingResultType = {
 
 export function TrackingPage() {
   const [result, setResult] = useState<TrackingResultType | null>(null)
+  const [searchNumber, setSearchNumber] = useState<string>("")
   const wsRef = useRef<WebSocket | null>(null)
 
   useEffect(() => {
@@ -35,6 +37,7 @@ export function TrackingPage() {
     const urlParams = new URLSearchParams(window.location.search)
     const orderNum = urlParams.get("orderNumber")
     if (orderNum) {
+      setSearchNumber(orderNum)
       connectToTracking(orderNum)
     }
 
@@ -105,6 +108,7 @@ export function TrackingPage() {
   }
 
   function handleSearch(trackingNumber: string) {
+    setSearchNumber(trackingNumber)
     connectToTracking(trackingNumber)
     // Update URL without reloading page
     const url = new URL(window.location.href)
@@ -113,42 +117,50 @@ export function TrackingPage() {
   }
 
   return (
-    <section className="relative overflow-x-hidden bg-white pb-20 pt-10 sm:pt-14 lg:pt-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-        <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-          <div className="max-w-xl w-full">
-            <h1 className="text-3xl font-extrabold text-foreground sm:text-4xl lg:text-5xl tracking-tight">
-              Parcel tracking
-            </h1>
-            <p className="mt-3 text-sm sm:text-basetext-[#5E656E]">
-              Enter the parcel tracking number starts with the letter &apos;M&apos;
-              followed by digits.
-            </p>
+    <>
+      <SEO 
+        title={searchNumber ? `Moova | Track ${searchNumber}` : "Moova | Parcel Tracking"} 
+        description="Track your Moova parcel delivery in real-time."
+      />
+      <main>
+        <section className="relative overflow-x-hidden bg-white pb-20 pt-10 sm:pt-14 lg:pt-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
+            <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+              <div className="max-w-xl w-full">
+                <h1 className="text-3xl font-extrabold text-foreground sm:text-4xl lg:text-5xl tracking-tight">
+                  Parcel tracking
+                </h1>
+                <p className="mt-3 text-sm sm:text-basetext-[#5E656E]">
+                  Enter the parcel tracking number starts with the letter &apos;M&apos;
+                  followed by digits.
+                </p>
 
-            <ParcelSearchForm onSearch={handleSearch} />
+                <ParcelSearchForm onSearch={handleSearch} />
+              </div>
+
+              <div className="flex justify-center md:justify-end shrink-0">
+                <img
+                  src={trackingIllustration}
+                  alt="Parcel tracking illustration"
+                  className="w-44 sm:w-56 lg:w-64 h-auto object-contain"
+                />
+              </div>
+            </div>
+
+            {result ? (
+              <div className="mt-10 sm:mt-14 w-full">
+                <TrackingResult result={result} />
+              </div>
+            ) : null}
           </div>
 
-          <div className="flex justify-center md:justify-end shrink-0">
-            <img
-              src={trackingIllustration}
-              alt="Parcel tracking illustration"
-              className="w-44 sm:w-56 lg:w-64 h-auto object-contain"
-            />
-          </div>
-        </div>
-
-        {result ? (
-          <div className="mt-10 sm:mt-14 w-full">
-            <TrackingResult result={result} />
-          </div>
-        ) : null}
-      </div>
-
-      <TrackingSpeaks />
-      <DeliveryConfirmation />
-      <CustomerFeedback />
-      <BrandedExperience />
-      <FAQ />
-    </section>
+          <TrackingSpeaks />
+          <DeliveryConfirmation />
+          <CustomerFeedback />
+          <BrandedExperience />
+          <FAQ />
+        </section>
+      </main>
+    </>
   )
 }

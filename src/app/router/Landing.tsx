@@ -1,3 +1,4 @@
+import { SEO } from "@/components/seo/SEO"
 import { BecomeOne } from "@/features/landing/sections/BecomeOne"
 import { BuiltForGrowingBusinesses } from "@/features/landing/sections/BuiltForGrowingBusinesses"
 import { DeliverWithConfidence } from "@/features/landing/sections/DeliverWithConfidence"
@@ -12,17 +13,20 @@ import { TrackingSpeaks } from "@/features/tracking/sections/TrackingSpeaks"
 export function Landing() {
   return (
     <>
-      <Hero />
-      <SecondSale />
-      {/* <DeliveryJourney /> */}
-      <DeliverySpeaks />
-      <BecomeOne />
-      <EverythingYouNeed />
-      <BuiltForGrowingBusinesses />
-      <TrackingSpeaks />
-      <Testimonials />
-      <DeliverWithConfidence />
-      <FAQ />
+      <SEO title="Moova | Home" />
+      <main>
+        <Hero />
+        <SecondSale />
+        {/* <DeliveryJourney /> */}
+        <DeliverySpeaks />
+        <BecomeOne />
+        <EverythingYouNeed />
+        <BuiltForGrowingBusinesses />
+        <TrackingSpeaks />
+        <Testimonials />
+        <DeliverWithConfidence />
+        <FAQ />
+      </main>
     </>
   )
 }

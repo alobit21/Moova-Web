@@ -1,0 +1,17 @@
+{
+  "name": "Moova Delivery & Logistics",
+  "short_name": "Moova",
+  "description": "Seamless, real-time tracking and delivery solutions.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2648A6",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
