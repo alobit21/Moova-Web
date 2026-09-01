@@ -28,9 +28,13 @@ function App() {
         setTimeout(() => {
           element.scrollIntoView({ behavior: "smooth" })
         }, 100)
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" })
       }
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" })
     }
-  }, [location])
+  }, [location.pathname, location.hash])
 
   return (
     <div className="relative min-h-screen">

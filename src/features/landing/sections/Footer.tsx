@@ -2,6 +2,7 @@ import brandLogo from "@/assets/logo/logo.png"
 import { Button } from "@/components/ui/button"
 import footerBg from "@/assets/footer-bg.png"
 import { AOSReveal } from "@/components/animation/AOSReveal"
+import { Link, useLocation } from "react-router-dom"
 
 
 function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -23,10 +24,10 @@ function LinkedinIcon(props: React.SVGProps<SVGSVGElement>) {
 }
 
 const QUICK_LINKS = [
-  { label: "Home", href: "#home" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "How It Works", href: "/#how-it-works" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "Contact", href: "/#contact" },
 ] as const
 
 const SOCIAL_LINKS = [
@@ -38,6 +39,27 @@ const linkButtonClass =
   "h-auto justify-start p-0 text-sm sm:text-base font-normal text-[#FFFFFF]/70 no-underline hover:text-[#FFFFFF] hover:no-underline"
 
 export function Footer() {
+  const { pathname, hash } = useLocation()
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href === "/" || href === "/#home") {
+      if (pathname === "/" && (!hash || hash === "#home")) {
+        e.preventDefault()
+        window.scrollTo({ top: 0, behavior: "smooth" })
+      }
+    } else if (href.startsWith("/#")) {
+      const targetHash = href.substring(1)
+      if (pathname === "/" && hash === targetHash) {
+        e.preventDefault()
+        const id = targetHash.replace("#", "")
+        const element = document.getElementById(id)
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" })
+        }
+      }
+    }
+  }
+
   return (
     <footer id="contact" className="relative isolate overflow-hidden bg-[#1c3b7a]">
       <img
@@ -50,7 +72,11 @@ export function Footer() {
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 px-4 sm:px-6 lg:px-12 py-12 sm:py-20">
         {/* Brand */}
         <AOSReveal animation="fade-up" delay={0} className="flex flex-col items-start">
-          <a href="#home" className="flex items-center gap-3 sm:gap-4 group">
+          <Link
+            to="/"
+            onClick={(e) => handleNavClick(e, "/")}
+            className="flex items-center gap-3 sm:gap-4 group"
+          >
             <div className="flex items-center justify-center shrink-0">
               <img
                 src={brandLogo}
@@ -61,7 +87,7 @@ export function Footer() {
             <div className="flex items-center">
               <span className="text-2xl sm:text-3xl font-bold text-[#FFFFFF]">Moova</span>
             </div>
-          </a>
+          </Link>
           <p className="mt-4 sm:mt-5 max-w-[34ch] text-sm leading-relaxed text-[#FFFFFF]/70">
             An app that helps online sellers manage deliveries and give their customers a stress-free delivery experience with real-time tracking.
           </p>
@@ -76,7 +102,14 @@ export function Footer() {
                 <Button
                   variant="link"
                   className={linkButtonClass}
-                  render={<a href={link.href}>{link.label}</a>}
+                  render={
+                    <Link
+                      to={link.href}
+                      onClick={(e) => handleNavClick(e, link.href)}
+                    >
+                      {link.label}
+                    </Link>
+                  }
                 />
               </li>
             ))}
@@ -135,8 +168,20 @@ export function Footer() {
             © {new Date().getFullYear()} Moova. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-[#FFFFFF]/60">
-            <a href="#privacy" className="hover:text-[#FFFFFF] transition-colors">Privacy Policy</a>
-            <a href="#terms" className="hover:text-[#FFFFFF] transition-colors">Terms of Service</a>
+            <Link
+              to="/#privacy"
+              onClick={(e) => handleNavClick(e, "/#privacy")}
+              className="hover:text-[#FFFFFF] transition-colors"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              to="/#terms"
+              onClick={(e) => handleNavClick(e, "/#terms")}
+              className="hover:text-[#FFFFFF] transition-colors"
+            >
+              Terms of Service
+            </Link>
           </div>
         </div>
       </div>

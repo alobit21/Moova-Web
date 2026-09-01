@@ -12,16 +12,16 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 const NAV_LINKS = [
-  { label: "Home", href: "/", isRoute: true },
-  { label: "About", href: "/#how-it-works", isRoute: false },
-  { label: "Tracking", href: "/tracking", isRoute: true },
-  // { label: "Pricing", href: "/#pricing", isRoute: false },
-  { label: "FAQ", href: "/#faq", isRoute: false },
-  { label: "Contact", href: "/#contact", isRoute: false },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/#how-it-works" },
+  { label: "Tracking", href: "/tracking" },
+  // { label: "Pricing", href: "/#pricing" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "Contact", href: "/#contact" },
 ] as const
 
 export function Header() {
-  const { pathname } = useLocation()
+  const { pathname, hash } = useLocation()
   const isHome = pathname === "/"
   const [isScrolled, setIsScrolled] = useState(false)
 
@@ -33,6 +33,36 @@ export function Header() {
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href === "/" || href === "/#home") {
+      if (pathname === "/" && (!hash || hash === "#home")) {
+        e.preventDefault()
+        window.scrollTo({ top: 0, behavior: "smooth" })
+      }
+    } else if (href.startsWith("/#")) {
+      const targetHash = href.substring(1)
+      if (pathname === "/" && hash === targetHash) {
+        e.preventDefault()
+        const id = targetHash.replace("#", "")
+        const element = document.getElementById(id)
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" })
+        }
+      }
+    }
+  }
+
+  const isLinkActive = (href: string) => {
+    if (href === "/") {
+      return pathname === "/" && (!hash || hash === "#home")
+    }
+    if (href.startsWith("/#")) {
+      const linkHash = href.substring(1)
+      return pathname === "/" && hash === linkHash
+    }
+    return pathname === href
+  }
 
   return (
     <header
@@ -53,7 +83,11 @@ export function Header() {
           isScrolled ? "py-3.5" : "py-5"
         )}
       >
-        <Link to="/" className="flex items-center gap-3 sm:gap-4 group">
+        <Link
+          to="/"
+          onClick={(e) => handleNavClick(e, "/")}
+          className="flex items-center gap-3 sm:gap-4 group"
+        >
           <img
             src={brandLogo}
             alt="Moova Logo"
@@ -71,9 +105,7 @@ export function Header() {
 
         <nav className="hidden items-center gap-8 md:flex">
           {NAV_LINKS.map((link) => {
-            const isActive =
-              (link.href === "/" && pathname === "/") ||
-              (link.href === "/tracking" && pathname === "/tracking")
+            const isActive = isLinkActive(link.href)
 
             const linkClass = cn(
               "text-sm transition-colors duration-150",
@@ -86,14 +118,15 @@ export function Header() {
                   : "font-medium text-slate-600 hover:text-blue-600"
             )
 
-            return link.isRoute ? (
-              <Link key={link.label} to={link.href} className={linkClass}>
+            return (
+              <Link
+                key={link.label}
+                to={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
+                className={linkClass}
+              >
                 {link.label}
               </Link>
-            ) : (
-              <a key={link.label} href={link.href} className={linkClass}>
-                {link.label}
-              </a>
             )
           })}
         </nav>
@@ -103,9 +136,12 @@ export function Header() {
             variant="ghost"
             className="h-9 sm:h-11 items-center justify-center rounded-full bg-gradient-to-r from-[#2648A6] to-[#3B82F6] px-4 sm:px-6 py-2 text-xs sm:text-sm font-semibold text-[#FFFFFF] shadow-md shadow-blue-500/25 transition-all duration-200 hover:opacity-95 hover:text-[#FFFFFF] hover:shadow-lg hover:shadow-blue-500/35 active:scale-95 flex border-0"
             render={
-              <a href="#get-started">
+              <Link
+                to="/#get-started"
+                onClick={(e) => handleNavClick(e, "/#get-started")}
+              >
                 Get Started
-              </a>
+              </Link>
             }
           />
 
@@ -128,9 +164,7 @@ export function Header() {
             />
             <DropdownMenuContent align="end" className="w-56 p-2 z-50">
               {NAV_LINKS.map((link) => {
-                const isActive =
-                  (link.href === "/" && pathname === "/") ||
-                  (link.href === "/tracking" && pathname === "/tracking")
+                const isActive = isLinkActive(link.href)
 
                 return (
                   <DropdownMenuItem
@@ -140,11 +174,12 @@ export function Header() {
                       isActive ? "bg-blue-50 font-bold text-blue-600" : "text-slate-700 hover:bg-slate-50"
                     )}
                     render={
-                      link.isRoute ? (
-                        <Link to={link.href}>{link.label}</Link>
-                      ) : (
-                        <a href={link.href}>{link.label}</a>
-                      )
+                      <Link
+                        to={link.href}
+                        onClick={(e) => handleNavClick(e, link.href)}
+                      >
+                        {link.label}
+                      </Link>
                     }
                   />
                 )
@@ -155,7 +190,14 @@ export function Header() {
                   <Button
                     variant="ghost"
                     className="flex w-full h-10 items-center justify-center rounded-full bg-gradient-to-r from-[#2648A6] to-[#3B82F6] py-2 text-center text-sm font-semibold text-[#FFFFFF] shadow-sm hover:opacity-95 hover:text-[#FFFFFF] border-0"
-                    render={<a href="#get-started">Get Started</a>}
+                    render={
+                      <Link
+                        to="/#get-started"
+                        onClick={(e) => handleNavClick(e, "/#get-started")}
+                      >
+                        Get Started
+                      </Link>
+                    }
                   />
                 }
               />
