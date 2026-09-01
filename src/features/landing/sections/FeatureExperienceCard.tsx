@@ -23,7 +23,7 @@ export function FeatureExperienceCard() {
           <img
             src={experiencePhone}
             alt="Moova app home screen showing shop performance"
-            className="w-[75%] max-w-[280px] sm:max-w-[320px] translate-y-4"
+            className="w-[75%] max-w-[280px] sm:max-w-[320px] translate-y-4 rounded-t-[32px] overflow-hidden"
           />
 
           <Card className="absolute -right-4 sm:-right-12 top-32 sm:top-[45%] gap-3 rounded-[12px] border-0 p-0 shadow-lg bg-white/95 backdrop-blur-xs">
