@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import footerBg from "@/assets/footer-bg.png"
 import { AOSReveal } from "@/components/animation/AOSReveal"
 import { Link, useLocation } from "react-router-dom"
+import { WHATSAPP_LINK, WHATSAPP_DISPLAY_PHONE, CONTACT_EMAIL } from "@/api"
 
 
 function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -125,7 +126,7 @@ export function Footer() {
               <Button
                 variant="link"
                 className={linkButtonClass}
-                render={<a href="mailto:smartcava@moova.co.tz">smartcava@moova.co.tz</a>}
+                render={<a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>}
               />
             </div>
             <div>
@@ -133,7 +134,11 @@ export function Footer() {
               <Button
                 variant="link"
                 className={linkButtonClass}
-                render={<a href="tel:+255753156659">+255 753 156 659</a>}
+                render={
+                  <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
+                    {WHATSAPP_DISPLAY_PHONE}
+                  </a>
+                }
               />
             </div>
           </div>

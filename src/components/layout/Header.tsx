@@ -10,6 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { WHATSAPP_LINK } from "@/api"
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -136,12 +137,13 @@ export function Header() {
             variant="ghost"
             className="h-9 sm:h-11 items-center justify-center rounded-full bg-gradient-to-r from-[#2648A6] to-[#3B82F6] px-4 sm:px-6 py-2 text-xs sm:text-sm font-semibold text-[#FFFFFF] shadow-md shadow-blue-500/25 transition-all duration-200 hover:opacity-95 hover:text-[#FFFFFF] hover:shadow-lg hover:shadow-blue-500/35 active:scale-95 flex border-0"
             render={
-              <Link
-                to="/#get-started"
-                onClick={(e) => handleNavClick(e, "/#get-started")}
+              <a
+                href={WHATSAPP_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Get Started
-              </Link>
+              </a>
             }
           />
 
@@ -191,12 +193,13 @@ export function Header() {
                     variant="ghost"
                     className="flex w-full h-10 items-center justify-center rounded-full bg-gradient-to-r from-[#2648A6] to-[#3B82F6] py-2 text-center text-sm font-semibold text-[#FFFFFF] shadow-sm hover:opacity-95 hover:text-[#FFFFFF] border-0"
                     render={
-                      <Link
-                        to="/#get-started"
-                        onClick={(e) => handleNavClick(e, "/#get-started")}
+                      <a
+                        href={WHATSAPP_LINK}
+                        target="_blank"
+                        rel="noopener noreferrer"
                       >
                         Get Started
-                      </Link>
+                      </a>
                     }
                   />
                 }

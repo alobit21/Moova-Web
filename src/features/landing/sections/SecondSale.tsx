@@ -220,6 +220,7 @@ function LoyaltyLoopMock() {
 }
 
 import { AOSReveal, TextReveal, GradientText } from "@/components/animation/AOSReveal"
+import { WHATSAPP_LINK } from "@/api"
 
 export function SecondSale() {
   const [cardsRef, cardsInView] = useInView<HTMLDivElement>({ threshold: 0.1, triggerOnce: true })
@@ -322,16 +323,30 @@ export function SecondSale() {
             <Button
               size="lg"
               className="w-full sm:w-auto rounded-full bg-white px-8 sm:px-10 text-[#2648A6] font-semibold  shadow-lg shadow-blue-950/20 hover:bg-white/90 hover:shadow-xl active:scale-[0.98] transition-all cursor-pointer"
-            >
-              Chat With Us to Get Started
-            </Button>
+              render={
+                <a
+                  href={WHATSAPP_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Chat With Us to Get Started
+                </a>
+              }
+            />
             <Button
               size="lg"
               variant="outline"
               className="w-full sm:w-auto rounded-full border-white/50 bg-white/5 px-8 sm:px-10 text-[#FFFFFF] backdrop-blur-xs hover:bg-white/15 hover:border-white/80 hover:text-[#FFFFFF] active:scale-[0.98] transition-all cursor-pointer"
-            >
-              Watch Product Demo
-            </Button>
+              render={
+                <a
+                  href={WHATSAPP_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Watch Product Demo
+                </a>
+              }
+            />
           </div>
         </div>
       </div>

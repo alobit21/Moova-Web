@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import ctaBackground from "@/assets/cta/cta-background.png"
 import phoneFront from "@/assets/cta/iMockup - iPhone 15.png"
 import phoneBack from "@/assets/cta/iMockup - iPhone.png"
+import { WHATSAPP_LINK } from "@/api"
 
 export function DeliverWithConfidence() {
   return (
@@ -32,9 +33,16 @@ export function DeliverWithConfidence() {
             <Button
               size="lg"
               className="mt-8 sm:mt-10 w-full sm:w-auto rounded-full bg-[#00C853] px-10 text-base font-bold text-[#FFFFFF] shadow-lg shadow-emerald-950/20 hover:bg-[#00A844] active:scale-[0.98] transition-all cursor-pointer border-0"
-            >
-              Chat With Us
-            </Button>
+              render={
+                <a
+                  href={WHATSAPP_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Chat With Us
+                </a>
+              }
+            />
           </div>
 
           {/* Phones Column */}

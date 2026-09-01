@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -10,6 +10,7 @@ import avatar3 from "@/assets/testimonies/testimonial-man-2.png"
 import { DELIVERY_NOTIFICATIONS } from "../data/notifications"
 import { useSectionVisibility } from "@/hooks/useInView"
 import { AOSReveal, GradientText } from "@/components/animation/AOSReveal"
+import { WHATSAPP_LINK } from "@/api"
 
 import mainHeroPhoto from "@/assets/hero/main-hero-photo.png"
 import mainHeroPhoto1 from "@/assets/hero/main-hero-photo1.png"
@@ -229,15 +230,29 @@ export function Hero() {
             <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 w-full">
               <Button
                 className="w-full sm:w-auto h-13 sm:h-14 rounded-full bg-[#5DD586] px-8 sm:px-10 text-base font-semibold text-slate-950 shadow-lg shadow-emerald-950/20 hover:bg-[#4ed079] active:scale-[0.98] transition-all cursor-pointer"
-              >
-                Chat With Us to Get Started
-              </Button>
+                render={
+                  <a
+                    href={WHATSAPP_LINK}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Chat With Us to Get Started
+                  </a>
+                }
+              />
               <Button
                 variant="outline"
                 className="w-full sm:w-auto h-13 sm:h-14 rounded-full border-white/50 bg-white/5 px-8 sm:px-10 text-base font-semibold text-[#FFFFFF] backdrop-blur-xs hover:bg-white/15 hover:border-white/80 hover:text-[#FFFFFF] active:scale-[0.98] transition-all cursor-pointer"
-              >
-                Watch Product Demo
-              </Button>
+                render={
+                  <a
+                    href={WHATSAPP_LINK}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Watch Product Demo
+                  </a>
+                }
+              />
             </div>
 
           </AOSReveal>
