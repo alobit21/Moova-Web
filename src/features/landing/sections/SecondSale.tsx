@@ -323,7 +323,7 @@ export function SecondSale() {
               size="lg"
               className="w-full sm:w-auto rounded-full bg-white px-8 sm:px-10 text-[#2648A6] font-semibold  shadow-lg shadow-blue-950/20 hover:bg-white/90 hover:shadow-xl active:scale-[0.98] transition-all cursor-pointer"
             >
-              Get started free
+              Chat With Us to Get Started
             </Button>
             <Button
               size="lg"

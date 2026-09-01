@@ -230,7 +230,7 @@ export function Hero() {
               <Button
                 className="w-full sm:w-auto h-13 sm:h-14 rounded-full bg-[#5DD586] px-8 sm:px-10 text-base font-semibold text-slate-950 shadow-lg shadow-emerald-950/20 hover:bg-[#4ed079] active:scale-[0.98] transition-all cursor-pointer"
               >
-                Start Delivering Smarter
+                Chat With Us to Get Started
               </Button>
               <Button
                 variant="outline"
