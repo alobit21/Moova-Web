@@ -20,7 +20,7 @@ export function TrackingMap({
   dropoffLabel: string
   driverLocation?: LatLng
 }) {
-  const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "AIzaSyDC1mNptZthKAI7ge48qeQUeL1J_Hmqu60"
+  const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || ""
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: apiKey,
