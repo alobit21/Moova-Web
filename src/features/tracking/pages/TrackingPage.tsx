@@ -135,7 +135,7 @@ export function TrackingPage() {
                   followed by digits.
                 </p>
 
-                <ParcelSearchForm onSearch={handleSearch} />
+                <ParcelSearchForm onSearch={handleSearch} initialValue={searchNumber} />
               </div>
 
               <div className="flex justify-center md:justify-end shrink-0">

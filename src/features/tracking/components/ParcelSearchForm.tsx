@@ -1,12 +1,23 @@
-import { useState, type FormEvent } from "react"
+import { useState, useEffect, type FormEvent } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 
 const TRACKING_NUMBER_PATTERN = /^M[\w-]+$/i
 
-export function ParcelSearchForm({ onSearch }: { onSearch: (trackingNumber: string) => void }) {
-  const [value, setValue] = useState("")
+interface ParcelSearchFormProps {
+  onSearch: (trackingNumber: string) => void
+  initialValue?: string
+}
+
+export function ParcelSearchForm({ onSearch, initialValue = "" }: ParcelSearchFormProps) {
+  const [value, setValue] = useState(initialValue)
   const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (initialValue) {
+      setValue(initialValue)
+    }
+  }, [initialValue])
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
