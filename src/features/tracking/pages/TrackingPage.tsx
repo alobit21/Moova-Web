@@ -10,7 +10,7 @@ import { BrandedExperience } from "@/features/tracking/sections/BrandedExperienc
 import { FAQ } from "@/features/landing/sections/FAQ"
 import { SEO } from "@/components/seo/SEO"
 
-const DEFAULT_COORDS: [number, number] = [-6.7924, 39.2083] // Dar es Salaam center fallback
+const DEFAULT_COORDS: [number, number] = [-6.7712, 39.239] // Dar es Salaam fallback
 
 const MOCK_RESULT: TrackingResultType = {
   status: "Connecting...",
@@ -19,7 +19,7 @@ const MOCK_RESULT: TrackingResultType = {
   city: "Dar-es-salaam",
   createdBy: "Moova Merchant",
   pickup: { label: "pickup", address: "Loading...", meta: "Pickup address", coordinates: DEFAULT_COORDS },
-  dropoff: { label: "dropoff", address: "Loading...", meta: "Drop-off address", coordinates: [-6.81, 39.28] },
+  dropoff: { label: "dropoff", address: "Loading...", meta: "Drop-off address", coordinates: [-6.745, 39.284] },
   driverName: "-",
   vehicle: "-",
   plate: "-",
@@ -31,6 +31,7 @@ export function TrackingPage() {
   const [result, setResult] = useState<TrackingResultType | null>(null)
   const [searchNumber, setSearchNumber] = useState<string>("")
   const wsRef = useRef<WebSocket | null>(null)
+  const resultRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     // Check if orderNumber is in URL on load
@@ -46,21 +47,29 @@ export function TrackingPage() {
     }
   }, [])
 
+  // Smooth focus scroll to map container on result update
+  useEffect(() => {
+    if (result && resultRef.current) {
+      resultRef.current.scrollIntoView({ behavior: "smooth", block: "start" })
+    }
+  }, [result !== null])
+
   function connectToTracking(trackingNumber: string) {
     if (wsRef.current) {
       wsRef.current.close()
     }
 
-    // Try to get WebSocket URL from environment variable, fallback to automatic detection
     const envWsUrl = import.meta.env.VITE_WS_API_URL
     let wsBaseUrl = ""
     
     if (envWsUrl) {
       wsBaseUrl = envWsUrl.endsWith('/') ? envWsUrl.slice(0, -1) : envWsUrl
+    } else if (window.location.hostname.endsWith(".trycloudflare.com") || window.location.hostname.endsWith(".loca.lt") || window.location.hostname.endsWith(".ngrok-free.dev") || window.location.hostname.endsWith(".ngrok.io")) {
+      wsBaseUrl = `wss://${window.location.hostname}`
+    } else if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+      wsBaseUrl = `ws://${window.location.hostname}:8000`
     } else {
-      wsBaseUrl = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
-        ? `ws://${window.location.hostname}:8000`
-        : `wss://moova-api.codemash.co.tz`
+      wsBaseUrl = `wss://consumption-minerals-expiration-cached.trycloudflare.com`
     }
 
     const wsUrl = `${wsBaseUrl}/ws/track/${trackingNumber}/`
@@ -81,12 +90,25 @@ export function TrackingPage() {
       if (msg.type === "initial_status") {
         setResult((prev) => {
           const base = prev || MOCK_RESULT
+          const pickupLat = msg.data.pickup_latitude ?? DEFAULT_COORDS[0]
+          const pickupLng = msg.data.pickup_longitude ?? DEFAULT_COORDS[1]
+          const deliveryLat = msg.data.delivery_latitude ?? -6.745
+          const deliveryLng = msg.data.delivery_longitude ?? 39.284
+
           return {
             ...base,
             status: msg.data.status,
             driverName: msg.data.driver ? msg.data.driver.username : "Not assigned",
-            pickup: { ...base.pickup, address: msg.data.pickup_address || base.pickup.address },
-            dropoff: { ...base.dropoff, address: msg.data.delivery_address || base.dropoff.address },
+            pickup: {
+              ...base.pickup,
+              address: msg.data.pickup_address || base.pickup.address,
+              coordinates: [pickupLat, pickupLng],
+            },
+            dropoff: {
+              ...base.dropoff,
+              address: msg.data.delivery_address || base.dropoff.address,
+              coordinates: [deliveryLat, deliveryLng],
+            },
           }
         })
       } else if (msg.type === "order_update" && msg.data.update_type === "driver_location") {
@@ -110,7 +132,6 @@ export function TrackingPage() {
   function handleSearch(trackingNumber: string) {
     setSearchNumber(trackingNumber)
     connectToTracking(trackingNumber)
-    // Update URL without reloading page
     const url = new URL(window.location.href)
     url.searchParams.set("orderNumber", trackingNumber)
     window.history.pushState({}, "", url)
@@ -122,38 +143,60 @@ export function TrackingPage() {
         title={searchNumber ? `Moova | Track ${searchNumber}` : "Moova | Parcel Tracking"} 
         description="Track your Moova parcel delivery in real-time."
       />
-      <main>
-        <section className="relative overflow-x-hidden bg-white pb-20 pt-24 sm:pt-28 lg:pt-32">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-            <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-              <div className="max-w-xl w-full">
-                <h1 className="text-3xl font-extrabold text-foreground sm:text-4xl lg:text-5xl tracking-tight">
-                  Parcel tracking
-                </h1>
-                <p className="mt-3 text-sm sm:text-basetext-[#5E656E]">
-                  Enter the parcel tracking number starts with the letter &apos;M&apos;
-                  followed by digits.
-                </p>
+      <main className="bg-slate-50 min-h-screen">
+        <section className="relative overflow-x-hidden pb-16 pt-20 sm:pt-24 lg:pt-28">
+          <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
+            
+            {/* Header & Search Bar Bar */}
+            <div className={`transition-all duration-300 ${result ? "mb-6" : "mb-10"}`}>
+              {!result ? (
+                <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-sm mb-8">
+                  <div className="max-w-xl w-full">
+                    <h1 className="text-3xl font-extrabold text-foreground sm:text-4xl tracking-tight">
+                      Parcel tracking
+                    </h1>
+                    <p className="mt-2 text-sm sm:text-base text-slate-500">
+                      Enter the parcel tracking number starting with &apos;MOV-&apos;.
+                    </p>
+                    <div className="mt-4">
+                      <ParcelSearchForm onSearch={handleSearch} initialValue={searchNumber} />
+                    </div>
+                  </div>
 
-                <ParcelSearchForm onSearch={handleSearch} initialValue={searchNumber} />
-              </div>
-
-              <div className="flex justify-center md:justify-end shrink-0">
-                <img
-                  src={trackingIllustration}
-                  alt="Parcel tracking illustration"
-                  className="w-44 sm:w-56 lg:w-64 h-auto object-contain"
-                />
-              </div>
+                  <div className="flex justify-center md:justify-end shrink-0">
+                    <img
+                      src={trackingIllustration}
+                      alt="Parcel tracking illustration"
+                      className="w-36 sm:w-48 lg:w-56 h-auto object-contain"
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+                  <div>
+                    <h1 className="text-xl font-bold text-slate-900 tracking-tight">
+                      Live Delivery Tracking
+                    </h1>
+                    <p className="text-xs text-slate-500 font-medium">
+                      Tracking ID: <span className="font-semibold text-slate-800">{searchNumber}</span>
+                    </p>
+                  </div>
+                  <div className="w-full sm:max-w-md">
+                    <ParcelSearchForm onSearch={handleSearch} initialValue={searchNumber} />
+                  </div>
+                </div>
+              )}
             </div>
 
+            {/* FIRST PRIMARY SECTION: 75% Viewport Live Map & Details */}
             {result ? (
-              <div className="mt-10 sm:mt-14 w-full">
+              <div ref={resultRef} className="w-full mb-16 transition-all duration-500">
                 <TrackingResult result={result} />
               </div>
             ) : null}
           </div>
 
+          {/* ALL LANDING SECTIONS RETAINED & DISPLAYED BELOW MAP */}
           <TrackingSpeaks />
           <DeliveryConfirmation />
           <CustomerFeedback />
