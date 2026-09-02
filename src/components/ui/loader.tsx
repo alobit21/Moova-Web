@@ -92,9 +92,9 @@ export function Loader({
   size = "md",
   fullScreen = false,
   overlay = false,
-  text,
-  subtext,
-  showAccentLine = true,
+  text = "Be Trusted from the first click",
+  subtext = "Turn every first delivery into a reason for customers to come back.",
+  showAccentLine = false,
   className,
   minDuration = 450,
 }: LoaderProps) {
@@ -152,14 +152,14 @@ export function Loader({
 
       {/* Main Text Heading */}
       {text && (
-        <h3 className="mt-2 text-lg sm:text-xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight max-w-md">
+        <h3 className="mt-4 text-2xl sm:text-3xl font-bold text-slate-900 dark:text-slate-100 tracking-tight max-w-md">
           {text}
         </h3>
       )}
 
       {/* Subtext Paragraph */}
       {subtext && (
-        <p className="mt-2 text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400 max-w-sm leading-relaxed">
+        <p className="mt-3 text-sm sm:text-base font-normal text-slate-500 dark:text-slate-400 max-w-md leading-relaxed">
           {subtext}
         </p>
       )}
