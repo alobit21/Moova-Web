@@ -240,7 +240,6 @@ export function TrackingPage() {
                   size="lg"
                   text={`Locating parcel ${searchNumber || '...'}`}
                   subtext="Connecting to Moova real-time delivery network..."
-                  showAccentLine
                 />
               </div>
             )}
@@ -254,7 +253,6 @@ export function TrackingPage() {
                   size="lg"
                   text={`Updating status for ${searchNumber}...`}
                   subtext="Fetching live route and driver updates..."
-                  showAccentLine
                 />
                 <TrackingResult result={result} />
               </div>

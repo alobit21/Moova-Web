@@ -15,8 +15,6 @@ export interface LoaderProps {
   text?: React.ReactNode
   /** Secondary subtitle message */
   subtext?: React.ReactNode
-  /** Show magenta accent pill line under loader ring */
-  showAccentLine?: boolean
   /** Additional container classes */
   className?: string
   /** Minimum display duration in ms to prevent flickering (default: 450ms) */
@@ -94,7 +92,6 @@ export function Loader({
   overlay = false,
   text = "Be Trusted from the first click",
   subtext = "Turn every first delivery into a reason for customers to come back.",
-  showAccentLine = false,
   className,
   minDuration = 450,
 }: LoaderProps) {
@@ -144,11 +141,6 @@ export function Loader({
     <div className={containerClasses} role="status" aria-live="polite">
       {/* Animated Loader Icon */}
       <LoaderIcon size={size} />
-
-      {/* Optional Accent Line */}
-      {showAccentLine && (text || subtext) && (
-        <div className="w-7 h-1 rounded-full bg-[#e83e8c] my-4 opacity-80" />
-      )}
 
       {/* Main Text Heading */}
       {text && (

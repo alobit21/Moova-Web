@@ -54,7 +54,6 @@ function App() {
         size="lg"
         text="Be Trusted from the first click"
         subtext="Turn every first delivery into a reason for customers to come back."
-        showAccentLine
       />
       <Header />
       <AppRoutes />
