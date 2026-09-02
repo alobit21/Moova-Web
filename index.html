@@ -26,9 +26,28 @@
     <meta property="twitter:title" content="Moova | Reliable Delivery & Logistics" />
     <meta property="twitter:description" content="Moova offers seamless, real-time tracking and delivery solutions for your business and personal needs." />
     <meta property="twitter:image" content="/favicon.png" />
+    <style>
+      @keyframes preloader-spin {
+        to { transform: rotate(360deg); }
+      }
+      .preloader-spinner {
+        animation: preloader-spin 1.1s linear infinite;
+      }
+    </style>
   </head>
-  <body>
-    <div id="root"></div>
+  <body class="bg-slate-50">
+    <div id="root">
+      <div style="position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #f8fafc; z-index: 9999; font-family: 'Instrument Sans', system-ui, -apple-system, sans-serif;">
+        <div style="position: relative; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center;">
+          <div style="position: absolute; inset: 0; border-radius: 9999px; border: 4px solid rgba(16, 185, 129, 0.18);"></div>
+          <div class="preloader-spinner" style="position: absolute; inset: 0; border-radius: 9999px; border: 4px solid transparent; border-top-color: #10b981; border-right-color: #10b981;"></div>
+          <img src="/src/assets/Loader/loader.png" alt="Loading" style="width: 48px; height: 48px; border-radius: 9999px; object-fit: contain;" />
+        </div>
+        <div style="width: 28px; height: 4px; border-radius: 9999px; background-color: #e83e8c; margin-top: 16px; margin-bottom: 12px; opacity: 0.8;"></div>
+        <h3 style="margin: 0; font-size: 18px; font-weight: 800; color: #0f172a; letter-spacing: -0.02em;">Moova Logistics</h3>
+        <p style="margin-top: 6px; font-size: 13px; font-weight: 500; color: #64748b;">Connecting you to fast & reliable deliveries</p>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

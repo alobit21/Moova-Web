@@ -9,6 +9,7 @@ import { CustomerFeedback } from "@/features/tracking/sections/CustomerFeedback"
 import { BrandedExperience } from "@/features/tracking/sections/BrandedExperience"
 import { FAQ } from "@/features/landing/sections/FAQ"
 import { SEO } from "@/components/seo/SEO"
+import { Loader } from "@/components/ui/loader"
 
 const DEFAULT_COORDS: [number, number] = [-6.7712, 39.239] // Dar es Salaam fallback
 
@@ -30,8 +31,12 @@ const MOCK_RESULT: TrackingResultType = {
 export function TrackingPage() {
   const [result, setResult] = useState<TrackingResultType | null>(null)
   const [searchNumber, setSearchNumber] = useState<string>("")
+  const [isSearching, setIsSearching] = useState<boolean>(false)
+  const [searchError, setSearchError] = useState<string | null>(null)
+
   const wsRef = useRef<WebSocket | null>(null)
   const resultRef = useRef<HTMLDivElement | null>(null)
+  const searchTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     // Check if orderNumber is in URL on load
@@ -44,6 +49,7 @@ export function TrackingPage() {
 
     return () => {
       if (wsRef.current) wsRef.current.close()
+      if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current)
     }
   }, [])
 
@@ -58,6 +64,24 @@ export function TrackingPage() {
     if (wsRef.current) {
       wsRef.current.close()
     }
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current)
+    }
+
+    setIsSearching(true)
+    setSearchError(null)
+
+    // Safety timeout: stop loader if server takes > 6s
+    searchTimeoutRef.current = setTimeout(() => {
+      setIsSearching(false)
+      setResult((prev) => {
+        if (!prev || prev.status === "Connecting...") {
+          setSearchError("Search timed out. Please verify your tracking number and try again.")
+          return null
+        }
+        return prev
+      })
+    }, 6000)
 
     const envWsUrl = import.meta.env.VITE_WS_API_URL
     let wsBaseUrl = ""
@@ -88,6 +112,9 @@ export function TrackingPage() {
       console.log("WebSocket message:", msg)
 
       if (msg.type === "initial_status") {
+        if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current)
+        setIsSearching(false)
+
         setResult((prev) => {
           const base = prev || MOCK_RESULT
           const pickupLat = msg.data.pickup_latitude ?? DEFAULT_COORDS[0]
@@ -112,6 +139,9 @@ export function TrackingPage() {
           }
         })
       } else if (msg.type === "order_update" && msg.data.update_type === "driver_location") {
+        if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current)
+        setIsSearching(false)
+
         setResult((prev) => {
           if (!prev) return null
           return {
@@ -125,7 +155,15 @@ export function TrackingPage() {
 
     ws.onerror = (error) => {
       console.error("WebSocket error:", error)
+      if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current)
+      setIsSearching(false)
+      setSearchError("Failed to fetch tracking data. Please verify your tracking ID or try again.")
       setResult((prev) => prev ? { ...prev, status: "Connection Error" } : null)
+    }
+
+    ws.onclose = () => {
+      if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current)
+      setIsSearching(false)
     }
   }
 
@@ -159,8 +197,14 @@ export function TrackingPage() {
                       Enter the parcel tracking number starting with &apos;MOV-&apos;.
                     </p>
                     <div className="mt-4">
-                      <ParcelSearchForm onSearch={handleSearch} initialValue={searchNumber} />
+                      <ParcelSearchForm onSearch={handleSearch} initialValue={searchNumber} isLoading={isSearching} />
                     </div>
+
+                    {searchError && (
+                      <div className="mt-4 p-3.5 rounded-xl bg-rose-50 border border-rose-200/80 text-xs sm:text-sm text-rose-700 font-medium">
+                        {searchError}
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex justify-center md:justify-end shrink-0">
@@ -182,15 +226,36 @@ export function TrackingPage() {
                     </p>
                   </div>
                   <div className="w-full sm:max-w-md">
-                    <ParcelSearchForm onSearch={handleSearch} initialValue={searchNumber} />
+                    <ParcelSearchForm onSearch={handleSearch} initialValue={searchNumber} isLoading={isSearching} />
                   </div>
                 </div>
               )}
             </div>
 
+            {/* Standalone Loader when searching without prior result */}
+            {isSearching && !result && (
+              <div className="bg-white p-12 rounded-3xl border border-slate-200/80 shadow-sm mb-16 flex justify-center">
+                <Loader
+                  show={isSearching}
+                  size="lg"
+                  text={`Locating parcel ${searchNumber || '...'}`}
+                  subtext="Connecting to Moova real-time delivery network..."
+                  showAccentLine
+                />
+              </div>
+            )}
+
             {/* FIRST PRIMARY SECTION: 75% Viewport Live Map & Details */}
             {result ? (
-              <div ref={resultRef} className="w-full mb-16 transition-all duration-500">
+              <div ref={resultRef} className="relative w-full mb-16 transition-all duration-500 rounded-3xl overflow-hidden">
+                <Loader
+                  overlay
+                  show={isSearching}
+                  size="lg"
+                  text={`Updating status for ${searchNumber}...`}
+                  subtext="Fetching live route and driver updates..."
+                  showAccentLine
+                />
                 <TrackingResult result={result} />
               </div>
             ) : null}

@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 import AOS from "aos"
 import "aos/dist/aos.css"
@@ -6,9 +6,11 @@ import { Header } from "@/components/layout/Header"
 import { AppRoutes } from "@/app/router"
 import { Footer } from "@/features/landing/sections/Footer"
 import { ScrollControls } from "@/components/layout/ScrollControls"
+import { Loader } from "@/components/ui/loader"
 
 function App() {
   const location = useLocation()
+  const [isInitialLoading, setIsInitialLoading] = useState(true)
 
   useEffect(() => {
     AOS.init({
@@ -18,6 +20,13 @@ function App() {
       offset: 40,
     })
     AOS.refresh()
+
+    // Smooth transition from initial loading state to app interface
+    const timer = setTimeout(() => {
+      setIsInitialLoading(false)
+    }, 350)
+
+    return () => clearTimeout(timer)
   }, [])
 
   useEffect(() => {
@@ -38,6 +47,15 @@ function App() {
 
   return (
     <div className="relative min-h-screen">
+      {/* Global Initial Site Loader */}
+      <Loader
+        fullScreen
+        show={isInitialLoading}
+        size="lg"
+        text="Be Trusted from the first click"
+        subtext="Turn every first delivery into a reason for customers to come back."
+        showAccentLine
+      />
       <Header />
       <AppRoutes />
       <Footer />
