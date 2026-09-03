@@ -1,8 +1,8 @@
 import { Quote, Star } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
-import womanPortrait from "@/assets/become-one/avatars/woman-portrait.png"
-import fashionistas from "@/assets/become-one/avatars/fashionistas.png"
+import brandAvatarLeft from "@/assets/brabnd-150/left-girl.png"
+import brandAvatarMiddle from "@/assets/brabnd-150/middle-girl.png"
 import seamoss from "@/assets/become-one/avatars/seamoss.png"
 import { AOSReveal, TextReveal } from "@/components/animation/AOSReveal"
 
@@ -12,7 +12,7 @@ const TESTIMONIALS = [
       "With Moova, I don’t have to stop what I’m doing to manage deliveries. Their drivers come straight to my shop, giving me more time to focus on my business.",
     name: "Tuliza Ngozi",
     role: "Owner",
-    avatar: womanPortrait,
+    avatar: brandAvatarLeft,
     featured: false,
     delay: 0,
   },
@@ -21,7 +21,7 @@ const TESTIMONIALS = [
       "Moova makes delivery simple and transparent. My customers know exactly what’s happening with their orders at every step, and that gives them confidence.",
     name: "Rona Shop",
     role: "Owner",
-    avatar: fashionistas,
+    avatar: brandAvatarMiddle,
     featured: true,
     delay: 120,
   },

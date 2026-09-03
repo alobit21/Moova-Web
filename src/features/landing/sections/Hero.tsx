@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import heroBg from "@/assets/hero-bg.png"
-import avatar1 from "@/assets/testimonies/testimonial-man-1.png"
-import avatar2 from "@/assets/become-one/avatars/woman-portrait.png"
-import avatar3 from "@/assets/testimonies/testimonial-man-2.png"
+import brandAvatarLeft from "@/assets/brabnd-150/left-girl.png"
+import brandAvatarMiddle from "@/assets/brabnd-150/middle-girl.png"
+import brandAvatarRight from "@/assets/brabnd-150/right-girl.png"
 import { DELIVERY_NOTIFICATIONS } from "../data/notifications"
 import { useSectionVisibility } from "@/hooks/useInView"
 import { AOSReveal, GradientText } from "@/components/animation/AOSReveal"
@@ -187,17 +187,17 @@ export function Hero() {
             >
               <div className="flex -space-x-2.5">
                 <img
-                  src={avatar1}
+                  src={brandAvatarLeft}
                   alt="Customer avatar"
                   className="h-7 w-7 sm:h-8 sm:w-8 rounded-full border-2 border-white/60 object-cover shadow-sm"
                 />
                 <img
-                  src={avatar2}
+                  src={brandAvatarMiddle}
                   alt="Customer avatar"
                   className="h-7 w-7 sm:h-8 sm:w-8 rounded-full border-2 border-white/60 object-cover shadow-sm"
                 />
                 <img
-                  src={avatar3}
+                  src={brandAvatarRight}
                   alt="Customer avatar"
                   className="h-7 w-7 sm:h-8 sm:w-8 rounded-full border-2 border-white/60 object-cover shadow-sm"
                 />
