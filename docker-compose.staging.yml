@@ -1,0 +1,7 @@
+services:
+  moova-hq-staging:
+    image: ghcr.io/alobit21/react-app:staging
+    container_name: moova-hq-staging
+    restart: unless-stopped
+    ports:
+      - "8081:80"
