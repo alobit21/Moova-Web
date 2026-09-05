@@ -1,0 +1,7 @@
+services:
+  moova-hq:
+    image: ghcr.io/YOUR_GITHUB_USERNAME/react-app:latest
+    container_name: moova-hq
+    restart: unless-stopped
+    ports:
+      - "80:80"
