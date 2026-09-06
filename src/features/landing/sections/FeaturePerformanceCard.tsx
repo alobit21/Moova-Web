@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card"
 import performancePhone from "@/assets/features/performance-bg.png"
-import dollarIcon from "@/assets/features/icon-dollar.png"
+import dollarIcon from "@/assets/features/measure-growth.png"
 
 export function FeaturePerformanceCard() {
   return (
