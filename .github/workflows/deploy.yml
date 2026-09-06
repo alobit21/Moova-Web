@@ -52,6 +52,8 @@ jobs:
             VITE_WS_API_URL=${{ secrets.VITE_WS_API_URL }}
             VITE_GOOGLE_MAPS_API_KEY=${{ secrets.VITE_GOOGLE_MAPS_API_KEY }}
 
+
+
       - uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.VPS_HOST }}
@@ -96,6 +98,7 @@ jobs:
           build-args: |
             VITE_WS_API_URL=${{ secrets.VITE_WS_API_URL }}
             VITE_GOOGLE_MAPS_API_KEY=${{ secrets.VITE_GOOGLE_MAPS_API_KEY }}
+            VITE_GA_MEASUREMENT_ID=${{ secrets.VITE_GA_MEASUREMENT_ID }}
 
       - uses: appleboy/scp-action@v0.1.7
         with:
@@ -115,3 +118,4 @@ jobs:
             docker login ghcr.io -u ${{ github.repository_owner }} -p ${{ secrets.GITHUB_TOKEN }}
             docker compose pull
             docker compose up -d
+
