@@ -238,7 +238,7 @@ function ReceiveConfirmationPanel() {
           </div>
           <div className="flex justify-between py-1">
             <span className="text-muted-foreground">Total</span>
-            <span className="font-semibold text-foreground">$24.99</span>
+            <span className="font-semibold text-foreground"> Tzs 50,000.</span>
           </div>
           <div className="flex justify-between py-1">
             <span className="text-muted-foreground">Est. Delivery</span>
@@ -291,7 +291,7 @@ function ProductOrderPanel() {
             </div>
             <div>
               <p className="text-sm font-bold text-foreground">Artisan Coffee Blend</p>
-              <p className="text-sm font-semibold text-slate-900">$24.99</p>
+              <p className="text-sm font-semibold text-slate-900"> Tzs 50,000.</p>
             </div>
           </div>
           <Button className="mt-4 w-full bg-emerald-500 text-[#FFFFFF] hover:bg-emerald-600">Place First Order</Button>

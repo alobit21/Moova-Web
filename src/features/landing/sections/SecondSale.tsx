@@ -106,7 +106,7 @@ function FirstClickMock() {
         </span>
         <div className="min-w-0">
           <p className="truncate text-sm font-semibold text-foreground">Artisan Coffee Blend</p>
-          <p className="text-sm font-semibold text-[#2648A6]">$24.99</p>
+          <p className="text-sm font-semibold text-[#2648A6]"> Tzs 50,000.</p>
         </div>
       </div>
       <Button className="w-full rounded-full bg-blue-800 text-[#FFFFFF] hover:bg-blue-700 active:scale-[0.98] transition-all">
