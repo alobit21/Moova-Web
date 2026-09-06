@@ -10,7 +10,7 @@ import brandAvatarRight from "@/assets/brabnd-150/right-girl.png"
 import { DELIVERY_NOTIFICATIONS } from "../data/notifications"
 import { useSectionVisibility } from "@/hooks/useInView"
 import { AOSReveal, GradientText } from "@/components/animation/AOSReveal"
-import { WHATSAPP_LINK } from "@/api"
+import { INSTAGRAM_LINK, WHATSAPP_LINK } from "@/api"
 
 import mainHeroPhoto from "@/assets/hero/main-hero-photo.png"
 import mainHeroPhoto1 from "@/assets/hero/main-hero-photo1.png"
@@ -245,7 +245,7 @@ export function Hero() {
                 className="w-full sm:w-auto h-13 sm:h-14 rounded-full border-white/50 bg-white/5 px-8 sm:px-10 text-base font-semibold text-[#FFFFFF] backdrop-blur-xs hover:bg-white/15 hover:border-white/80 hover:text-[#FFFFFF] active:scale-[0.98] transition-all cursor-pointer"
                 render={
                   <a
-                    href={WHATSAPP_LINK}
+                    href={INSTAGRAM_LINK}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -263,8 +263,8 @@ export function Hero() {
         </AOSReveal>
       </div>
 
-      {/* Marquee cards inside hero section - paused when off-screen */}
-      <div className="relative z-10 mt-10 sm:mt-14 lg:mt-20 overflow-hidden edge-fade">
+      {/* Marquee cards inside hero section - paused when off-screen or hovered */}
+      <div className="marquee-container relative z-10 mt-10 sm:mt-14 lg:mt-20 overflow-hidden edge-fade">
         <div
           className={`flex w-max animate-marquee ${isVisible ? "" : "animation-paused"
             }`}

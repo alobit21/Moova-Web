@@ -104,6 +104,7 @@ function MobileDockMarquee() {
   const trackRef = useRef<HTMLDivElement>(null)
   const offsetRef = useRef(0)
   const animationFrameRef = useRef<number | null>(null)
+  const isPausedRef = useRef(false)
 
   const ALL_AVATARS = [...OUTER_ORBIT_AVATARS, ...INNER_ORBIT_AVATARS]
   const DISPLAY_AVATARS = [...ALL_AVATARS, ...ALL_AVATARS, ...ALL_AVATARS, ...ALL_AVATARS]
@@ -124,7 +125,7 @@ function MobileDockMarquee() {
     observer.observe(container)
 
     const animate = (time: number) => {
-      if (isIntersecting) {
+      if (isIntersecting && !isPausedRef.current) {
         const delta = (time - lastTime) / 1000
         lastTime = time
 
@@ -181,6 +182,12 @@ function MobileDockMarquee() {
   return (
     <div
       ref={containerRef}
+      onMouseEnter={() => {
+        isPausedRef.current = true
+      }}
+      onMouseLeave={() => {
+        isPausedRef.current = false
+      }}
       className="relative my-6 w-full overflow-hidden py-10 edge-fade md:hidden"
     >
       <div ref={trackRef} className="flex w-max items-center gap-4 px-4 will-change-transform">

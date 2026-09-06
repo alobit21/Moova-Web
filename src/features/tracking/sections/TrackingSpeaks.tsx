@@ -69,7 +69,7 @@ export function TrackingSpeaks() {
         </p>
       </div>
 
-      <div className="edge-fade relative mt-10 sm:mt-16 overflow-hidden">
+      <div className="marquee-container edge-fade relative mt-10 sm:mt-16 overflow-hidden">
         <div className={`flex w-max animate-marquee ${isVisible ? "" : "animation-paused"}`}>
           <div className="flex shrink-0 items-center gap-4 sm:gap-6 pr-4 sm:pr-6">
             {[...DELIVERY_NOTIFICATIONS, ...DELIVERY_NOTIFICATIONS].map((item, i) => (
@@ -84,7 +84,7 @@ export function TrackingSpeaks() {
         </div>
       </div>
 
-      <div className="relative mt-6 sm:mt-8 overflow-hidden">
+      <div className="marquee-container relative mt-6 sm:mt-8 overflow-hidden">
         <div className={`flex w-max animate-marquee-reverse ${isVisible ? "" : "animation-paused"}`}>
           <div className="flex shrink-0 items-center gap-3 sm:gap-4 pr-3 sm:pr-4">
             {[...BADGES, ...BADGES, ...BADGES, ...BADGES].map((badge, i) => (

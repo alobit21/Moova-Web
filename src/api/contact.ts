@@ -1,7 +1,8 @@
 export const WHATSAPP_PHONE_NUMBER = "255753156659"
 export const WHATSAPP_DISPLAY_PHONE = "+255 753 156 659"
 export const CONTACT_EMAIL = "smartcava@moova.co.tz"
-
+export const INSTAGRAM_LINK = "https://www.instagram.com/moova_hq?igsi=YjF3ZGltbHVmNnZz"
+export const LINKEDIN_LINK = "https://www.linkedin.com/company/moova-hq/"
 /**
  * Generates a WhatsApp click-to-chat URL for the given phone number and optional message.
  */

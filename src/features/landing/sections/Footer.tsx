@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import footerBg from "@/assets/footer-bg.png"
 import { AOSReveal } from "@/components/animation/AOSReveal"
 import { Link, useLocation } from "react-router-dom"
-import { WHATSAPP_LINK, WHATSAPP_DISPLAY_PHONE, CONTACT_EMAIL } from "@/api"
+import { WHATSAPP_LINK, WHATSAPP_DISPLAY_PHONE, CONTACT_EMAIL, INSTAGRAM_LINK, LINKEDIN_LINK } from "@/api"
 
 
 function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
@@ -32,8 +32,8 @@ const QUICK_LINKS = [
 ] as const
 
 const SOCIAL_LINKS = [
-  { label: "Instagram", href: "https://www.instagram.com/moova_hq?igsi=YjF3ZGltbHVmNnZz", icon: InstagramIcon },
-  { label: "LinkedIn", href: "https://www.linkedin.com/company/moova-hq/", icon: LinkedinIcon },
+  { label: "Instagram", href: INSTAGRAM_LINK, icon: InstagramIcon },
+  { label: "LinkedIn", href: LINKEDIN_LINK, icon: LinkedinIcon },
 ] as const
 
 const linkButtonClass =

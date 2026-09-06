@@ -220,7 +220,7 @@ function LoyaltyLoopMock() {
 }
 
 import { AOSReveal, TextReveal, GradientText } from "@/components/animation/AOSReveal"
-import { WHATSAPP_LINK } from "@/api"
+import { INSTAGRAM_LINK, WHATSAPP_LINK } from "@/api"
 
 export function SecondSale() {
   const [cardsRef, cardsInView] = useInView<HTMLDivElement>({ threshold: 0.1, triggerOnce: true })
@@ -339,7 +339,7 @@ export function SecondSale() {
               className="w-full sm:w-auto rounded-full border-white/50 bg-white/5 px-8 sm:px-10 text-[#FFFFFF] backdrop-blur-xs hover:bg-white/15 hover:border-white/80 hover:text-[#FFFFFF] active:scale-[0.98] transition-all cursor-pointer"
               render={
                 <a
-                  href={WHATSAPP_LINK}
+                  href={INSTAGRAM_LINK}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
