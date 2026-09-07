@@ -95,10 +95,10 @@ export function TrackingResultPanel({ result }: { result: TrackingResult }) {
 
             <div>
               <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
-                Created by
+                Ordered by shop
               </p>
               <p className="font-bold text-slate-900 text-xs sm:text-sm mt-0.5">
-                {result.createdBy && !/^moova\s*merchant$/i.test(result.createdBy) ? result.createdBy : "Shop"}
+                {result.createdBy && !/^moova\s*merchant$/i.test(result.createdBy) ? result.createdBy : "Moova Merchant"}
               </p>
             </div>
           </div>
