@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react"
+import { useParams, useSearchParams } from "react-router-dom"
 import trackingIllustration from "@/assets/tracking/tracking-illustration.png"
 import { ParcelSearchForm } from "@/features/tracking/components/ParcelSearchForm"
 import type { TrackingResult as TrackingResultType } from "@/features/tracking/types/tracking.types"
@@ -98,7 +99,6 @@ function parseEtaMinutes(data: any): number | undefined {
   return undefined
 }
 
-
 function parseShopName(data: any): string | undefined {
   if (!data) return undefined
 
@@ -147,8 +147,12 @@ function parseShopName(data: any): string | undefined {
 }
 
 export function TrackingPage() {
+  const { orderNumber: paramOrderNumber } = useParams<{ orderNumber?: string }>()
+  const [searchParams] = useSearchParams()
+  const initialOrder = paramOrderNumber || searchParams.get("orderNumber") || ""
+
   const [result, setResult] = useState<TrackingResultType | null>(null)
-  const [searchNumber, setSearchNumber] = useState<string>("")
+  const [searchNumber, setSearchNumber] = useState<string>(initialOrder)
   const [isSearching, setIsSearching] = useState<boolean>(false)
   const [searchError, setSearchError] = useState<string | null>(null)
 
@@ -157,26 +161,63 @@ export function TrackingPage() {
   const searchTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
-    // Check if orderNumber is in URL on load
-    const urlParams = new URLSearchParams(window.location.search)
-    const orderNum = urlParams.get("orderNumber")
-    if (orderNum) {
-      setSearchNumber(orderNum)
-      connectToTracking(orderNum)
+    if (initialOrder) {
+      setSearchNumber(initialOrder)
+      connectToTracking(initialOrder)
     }
 
     return () => {
       if (wsRef.current) wsRef.current.close()
       if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current)
     }
-  }, [])
+  }, [initialOrder])
 
   // Smooth focus scroll to map container on result update
   useEffect(() => {
     if (result && resultRef.current) {
-      resultRef.current.scrollIntoView({ behavior: "smooth", block: "start" })
+      const timer = setTimeout(() => {
+        resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
+      }, 150)
+      return () => clearTimeout(timer)
     }
   }, [result !== null])
+
+  function applyTrackingPayload(data: any) {
+    const pickupLat = data.pickup_latitude ?? DEFAULT_COORDS[0]
+    const pickupLng = data.pickup_longitude ?? DEFAULT_COORDS[1]
+    const deliveryLat = data.delivery_latitude ?? -6.745
+    const deliveryLng = data.delivery_longitude ?? 39.284
+
+    const driverInfo = parseDriver(data)
+    const eta = parseEtaMinutes(data)
+
+    setResult((prev) => {
+      const base = prev || MOCK_RESULT
+      return {
+        ...base,
+        status: data.status || base.status,
+        driverName: driverInfo ? driverInfo.name : "Not assigned",
+        driverPhone: driverInfo?.phone ?? prev?.driverPhone,
+        vehicle: driverInfo?.vehicle ?? prev?.vehicle,
+        plate: driverInfo?.plate ?? prev?.plate,
+        rating: driverInfo?.rating ?? prev?.rating,
+        driverLocation: driverInfo?.location ?? prev?.driverLocation,
+        createdBy: parseShopName(data) || prev?.createdBy || base.createdBy || "",
+        shopPhone: data.shop_phone ?? prev?.shopPhone,
+        etaMinutes: eta !== undefined ? eta : base.etaMinutes,
+        pickup: {
+          ...base.pickup,
+          address: data.pickup_address || base.pickup.address,
+          coordinates: [pickupLat, pickupLng],
+        },
+        dropoff: {
+          ...base.dropoff,
+          address: data.delivery_address || base.dropoff.address,
+          coordinates: [deliveryLat, deliveryLng],
+        },
+      }
+    })
+  }
 
   function connectToTracking(trackingNumber: string) {
     if (wsRef.current) {
@@ -189,7 +230,7 @@ export function TrackingPage() {
     setIsSearching(true)
     setSearchError(null)
 
-    // Safety timeout: stop loader if server takes > 6s
+    // Safety timeout: stop loader if neither REST nor WS returns within 8s
     searchTimeoutRef.current = setTimeout(() => {
       setIsSearching(false)
       setResult((prev) => {
@@ -199,7 +240,7 @@ export function TrackingPage() {
         }
         return prev
       })
-    }, 6000)
+    }, 8000)
 
     const envWsUrl = import.meta.env.VITE_WS_API_URL
     let wsBaseUrl = ""
@@ -215,10 +256,34 @@ export function TrackingPage() {
       wsBaseUrl = `wss://${window.location.hostname}`
     } else if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
       wsBaseUrl = `ws://${window.location.hostname}:8000`
+    } else if (window.location.hostname.includes("canary")) {
+      wsBaseUrl = `wss://canary-api.moova.co.tz`
     } else {
-      wsBaseUrl = `wss://consumption-minerals-expiration-cached.trycloudflare.com`
+      wsBaseUrl = `wss://api.moova.co.tz`
     }
 
+    // 1. FAST REST API INITIAL LOAD: Fetch data immediately for instant map display
+    let httpBaseUrl = wsBaseUrl.replace(/^ws:/i, "http:").replace(/^wss:/i, "https:")
+    if (httpBaseUrl.endsWith("/")) httpBaseUrl = httpBaseUrl.slice(0, -1)
+
+    fetch(`${httpBaseUrl}/api/v1/orders/track/${encodeURIComponent(trackingNumber)}/`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Order not found via API")
+        return res.json()
+      })
+      .then((data) => {
+        if (data && data.order_number) {
+          if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current)
+          setIsSearching(false)
+          setSearchError(null)
+          applyTrackingPayload(data)
+        }
+      })
+      .catch((err) => {
+        console.warn("REST tracking load:", err.message)
+      })
+
+    // 2. LIVE WEBSOCKET CONNECTION: Real-time driver location and status updates
     const wsUrl = `${wsBaseUrl}/ws/track/${trackingNumber}/`
     console.log("Connecting to WebSocket:", wsUrl)
     const ws = new WebSocket(wsUrl)
@@ -227,7 +292,7 @@ export function TrackingPage() {
     ws.onopen = () => {
       console.log("Connected to tracking server")
       ws.send(JSON.stringify({ type: "get_status" }))
-      setResult({ ...MOCK_RESULT, status: "Connected - waiting for data..." })
+      setResult((prev) => prev || { ...MOCK_RESULT, status: "Connected - waiting for data..." })
     }
 
     ws.onmessage = (event) => {
@@ -242,41 +307,7 @@ export function TrackingPage() {
       if (msg.type === "initial_status" || msg.type === "status_update") {
         if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current)
         setIsSearching(false)
-
-        setResult((prev) => {
-          const base = prev || MOCK_RESULT
-          const pickupLat = msg.data.pickup_latitude ?? DEFAULT_COORDS[0]
-          const pickupLng = msg.data.pickup_longitude ?? DEFAULT_COORDS[1]
-          const deliveryLat = msg.data.delivery_latitude ?? -6.745
-          const deliveryLng = msg.data.delivery_longitude ?? 39.284
-
-          const driverInfo = parseDriver(msg.data)
-          const eta = parseEtaMinutes(msg.data)
-
-          return {
-            ...base,
-            status: msg.data.status || base.status,
-            driverName: driverInfo ? driverInfo.name : "Not assigned",
-            driverPhone: driverInfo?.phone ?? prev?.driverPhone,
-            vehicle: driverInfo?.vehicle ?? prev?.vehicle,
-            plate: driverInfo?.plate ?? prev?.plate,
-            rating: driverInfo?.rating ?? prev?.rating,
-            driverLocation: driverInfo?.location ?? prev?.driverLocation,
-            createdBy: parseShopName(msg.data) || prev?.createdBy || base.createdBy || "",
-            shopPhone: msg.data.shop_phone ?? prev?.shopPhone,
-            etaMinutes: eta !== undefined ? eta : base.etaMinutes,
-            pickup: {
-              ...base.pickup,
-              address: msg.data.pickup_address || base.pickup.address,
-              coordinates: [pickupLat, pickupLng],
-            },
-            dropoff: {
-              ...base.dropoff,
-              address: msg.data.delivery_address || base.dropoff.address,
-              coordinates: [deliveryLat, deliveryLng],
-            },
-          }
-        })
+        applyTrackingPayload(msg.data)
       } else if (msg.type === "driver_assignment") {
         const driverInfo = parseDriver(msg.data)
         if (driverInfo) {
@@ -339,11 +370,17 @@ export function TrackingPage() {
     }
 
     ws.onerror = (error) => {
-      console.error("WebSocket error:", error)
-      if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current)
-      setIsSearching(false)
-      setSearchError("Failed to fetch tracking data. Please verify your tracking ID or try again.")
-      setResult((prev) => (prev ? { ...prev, status: "Connection Error" } : null))
+      console.warn("WebSocket error:", error)
+      // Only set error if REST hasn't populated result
+      setResult((prev) => {
+        if (!prev) {
+          if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current)
+          setIsSearching(false)
+          setSearchError("Failed to fetch live tracking data. Please verify your tracking ID or try again.")
+          return null
+        }
+        return prev
+      })
     }
 
     ws.onclose = () => {

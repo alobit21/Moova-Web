@@ -1,3 +1,4 @@
+import { useSearchParams, Navigate } from "react-router-dom"
 import { SEO } from "@/components/seo/SEO"
 import { BecomeOne } from "@/features/landing/sections/BecomeOne"
 import { BuiltForGrowingBusinesses } from "@/features/landing/sections/BuiltForGrowingBusinesses"
@@ -11,6 +12,13 @@ import { Testimonials } from "@/features/landing/sections/Testimonials"
 import { TrackingSpeaks } from "@/features/tracking/sections/TrackingSpeaks"
 
 export function Landing() {
+  const [searchParams] = useSearchParams()
+  const orderNumber = searchParams.get("orderNumber")
+
+  if (orderNumber) {
+    return <Navigate to={`/tracking?orderNumber=${encodeURIComponent(orderNumber)}`} replace />
+  }
+
   return (
     <>
       <SEO title="Moova | Home" />

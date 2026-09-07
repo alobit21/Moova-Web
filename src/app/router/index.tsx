@@ -8,6 +8,9 @@ export function AppRoutes() {
     <Routes>
       <Route path="/" element={<Landing />} />
       <Route path="/tracking" element={<TrackingPage />} />
+      <Route path="/track" element={<TrackingPage />} />
+      <Route path="/track/:orderNumber" element={<TrackingPage />} />
+      <Route path="/tracking/:orderNumber" element={<TrackingPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   )
