@@ -16,9 +16,12 @@ export type TrackingResult = {
   pickup: RouteAddress
   dropoff: RouteAddress
   driverName?: string
+  driverPhone?: string
   vehicle?: string
   plate?: string
+  rating?: number
   paymentMethod?: string
   requestedByLine?: string
   driverLocation?: [number, number]
+  shopPhone?: string
 }

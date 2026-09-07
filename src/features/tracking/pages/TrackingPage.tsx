@@ -21,11 +21,81 @@ const MOCK_RESULT: TrackingResultType = {
   createdBy: "Moova Merchant",
   pickup: { label: "pickup", address: "Loading...", meta: "Pickup address", coordinates: DEFAULT_COORDS },
   dropoff: { label: "dropoff", address: "Loading...", meta: "Drop-off address", coordinates: [-6.745, 39.284] },
-  driverName: "-",
+  driverName: "Not assigned",
   vehicle: "-",
   plate: "-",
   paymentMethod: "Cash on delivery",
   requestedByLine: "-",
+}
+
+interface RawDriverData {
+  full_name?: string
+  name?: string
+  username?: string
+  first_name?: string
+  phone_number?: string
+  phone?: string
+  vehicle?: string
+  license_plate?: string
+  plate_number?: string
+  plate?: string
+  rating?: number
+  latitude?: number
+  longitude?: number
+}
+
+function parseDriver(data: any): {
+  name: string
+  phone?: string
+  vehicle?: string
+  plate?: string
+  rating?: number
+  location?: [number, number]
+} | null {
+  if (!data) return null
+  const d: RawDriverData | null =
+    data.assigned_driver ||
+    data.driver ||
+    data.driver_info ||
+    (data.assigned_driver_name
+      ? {
+          full_name: data.assigned_driver_name,
+          phone_number: data.assigned_driver_phone,
+        }
+      : null)
+
+  if (!d) return null
+
+  const name = d.full_name || d.name || d.username || d.first_name || ""
+  const phone = d.phone_number || d.phone
+  const plate = d.license_plate || d.plate_number || d.plate
+  const vehicle = d.vehicle
+  const rating = typeof d.rating === "number" ? d.rating : undefined
+  const location: [number, number] | undefined =
+    d.latitude != null && d.longitude != null
+      ? [Number(d.latitude), Number(d.longitude)]
+      : data.driver_latitude != null && data.driver_longitude != null
+        ? [Number(data.driver_latitude), Number(data.driver_longitude)]
+        : undefined
+
+  if (!name && !phone && !plate) return null
+
+  return { name: name || "Assigned Driver", phone, vehicle, plate, rating, location }
+}
+
+function parseEtaMinutes(data: any): number | undefined {
+  if (data?.remaining_time && typeof data.remaining_time === "string") {
+    const match = data.remaining_time.match(/(\d+)\s*min/i)
+    if (match) return parseInt(match[1], 10)
+    const hourMatch = data.remaining_time.match(/(\d+)\s*hour/i)
+    if (hourMatch) return parseInt(hourMatch[1], 10) * 60
+  }
+  const estTime = data?.pricing?.estimated_delivery_time || data?.estimated_delivery_time
+  if (estTime) {
+    const diff = (new Date(estTime).getTime() - Date.now()) / 60000
+    if (diff > 0) return Math.round(diff)
+  }
+  return undefined
 }
 
 export function TrackingPage() {
@@ -85,10 +155,15 @@ export function TrackingPage() {
 
     const envWsUrl = import.meta.env.VITE_WS_API_URL
     let wsBaseUrl = ""
-    
+
     if (envWsUrl) {
-      wsBaseUrl = envWsUrl.endsWith('/') ? envWsUrl.slice(0, -1) : envWsUrl
-    } else if (window.location.hostname.endsWith(".trycloudflare.com") || window.location.hostname.endsWith(".loca.lt") || window.location.hostname.endsWith(".ngrok-free.dev") || window.location.hostname.endsWith(".ngrok.io")) {
+      wsBaseUrl = envWsUrl.endsWith("/") ? envWsUrl.slice(0, -1) : envWsUrl
+    } else if (
+      window.location.hostname.endsWith(".trycloudflare.com") ||
+      window.location.hostname.endsWith(".loca.lt") ||
+      window.location.hostname.endsWith(".ngrok-free.dev") ||
+      window.location.hostname.endsWith(".ngrok.io")
+    ) {
       wsBaseUrl = `wss://${window.location.hostname}`
     } else if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
       wsBaseUrl = `ws://${window.location.hostname}:8000`
@@ -108,10 +183,15 @@ export function TrackingPage() {
     }
 
     ws.onmessage = (event) => {
-      const msg = JSON.parse(event.data)
+      let msg: any
+      try {
+        msg = JSON.parse(event.data)
+      } catch {
+        return
+      }
       console.log("WebSocket message:", msg)
 
-      if (msg.type === "initial_status") {
+      if (msg.type === "initial_status" || msg.type === "status_update") {
         if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current)
         setIsSearching(false)
 
@@ -122,10 +202,21 @@ export function TrackingPage() {
           const deliveryLat = msg.data.delivery_latitude ?? -6.745
           const deliveryLng = msg.data.delivery_longitude ?? 39.284
 
+          const driverInfo = parseDriver(msg.data)
+          const eta = parseEtaMinutes(msg.data)
+
           return {
             ...base,
-            status: msg.data.status,
-            driverName: msg.data.driver ? msg.data.driver.username : "Not assigned",
+            status: msg.data.status || base.status,
+            driverName: driverInfo ? driverInfo.name : "Not assigned",
+            driverPhone: driverInfo?.phone ?? prev?.driverPhone,
+            vehicle: driverInfo?.vehicle ?? prev?.vehicle,
+            plate: driverInfo?.plate ?? prev?.plate,
+            rating: driverInfo?.rating ?? prev?.rating,
+            driverLocation: driverInfo?.location ?? prev?.driverLocation,
+            createdBy: msg.data.created_by || msg.data.business_name || base.createdBy,
+            shopPhone: msg.data.shop_phone ?? prev?.shopPhone,
+            etaMinutes: eta !== undefined ? eta : base.etaMinutes,
             pickup: {
               ...base.pickup,
               address: msg.data.pickup_address || base.pickup.address,
@@ -138,18 +229,64 @@ export function TrackingPage() {
             },
           }
         })
-      } else if (msg.type === "order_update" && msg.data.update_type === "driver_location") {
+      } else if (msg.type === "driver_assignment") {
+        const driverInfo = parseDriver(msg.data)
+        if (driverInfo) {
+          setResult((prev) => {
+            if (!prev) return null
+            return {
+              ...prev,
+              driverName: driverInfo.name,
+              driverPhone: driverInfo.phone ?? prev.driverPhone,
+              vehicle: driverInfo.vehicle ?? prev.vehicle,
+              plate: driverInfo.plate ?? prev.plate,
+              rating: driverInfo.rating ?? prev.rating,
+              driverLocation: driverInfo.location ?? prev.driverLocation,
+            }
+          })
+        }
+      } else if (msg.type === "order_update") {
         if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current)
         setIsSearching(false)
 
-        setResult((prev) => {
-          if (!prev) return null
-          return {
-            ...prev,
-            timestamp: new Date(msg.data.timestamp).toLocaleTimeString(),
-            driverLocation: [msg.data.latitude, msg.data.longitude],
-          }
-        })
+        if (msg.data?.update_type === "driver_location") {
+          setResult((prev) => {
+            if (!prev) return null
+            return {
+              ...prev,
+              timestamp: new Date(msg.data.timestamp || Date.now()).toLocaleTimeString(),
+              driverLocation: [msg.data.latitude, msg.data.longitude],
+            }
+          })
+        } else {
+          const driverInfo = parseDriver(msg.data)
+          const eta = parseEtaMinutes(msg.data)
+          setResult((prev) => {
+            if (!prev) return null
+            return {
+              ...prev,
+              status: msg.data.new_status || msg.data.status || prev.status,
+              driverName: driverInfo ? driverInfo.name : prev.driverName,
+              driverPhone: driverInfo?.phone ?? prev.driverPhone,
+              vehicle: driverInfo?.vehicle ?? prev.vehicle,
+              plate: driverInfo?.plate ?? prev.plate,
+              rating: driverInfo?.rating ?? prev.rating,
+              driverLocation: driverInfo?.location ?? prev.driverLocation,
+              createdBy: msg.data.created_by || msg.data.business_name || prev.createdBy,
+              etaMinutes: eta !== undefined ? eta : prev.etaMinutes,
+            }
+          })
+        }
+      } else if (msg.type === "location_update") {
+        if (msg.data?.latitude != null && msg.data?.longitude != null) {
+          setResult((prev) => {
+            if (!prev) return null
+            return {
+              ...prev,
+              driverLocation: [Number(msg.data.latitude), Number(msg.data.longitude)],
+            }
+          })
+        }
       }
     }
 
@@ -158,7 +295,7 @@ export function TrackingPage() {
       if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current)
       setIsSearching(false)
       setSearchError("Failed to fetch tracking data. Please verify your tracking ID or try again.")
-      setResult((prev) => prev ? { ...prev, status: "Connection Error" } : null)
+      setResult((prev) => (prev ? { ...prev, status: "Connection Error" } : null))
     }
 
     ws.onclose = () => {
@@ -177,14 +314,13 @@ export function TrackingPage() {
 
   return (
     <>
-      <SEO 
-        title={searchNumber ? `Moova | Track ${searchNumber}` : "Moova | Parcel Tracking"} 
+      <SEO
+        title={searchNumber ? `Moova | Track ${searchNumber}` : "Moova | Parcel Tracking"}
         description="Track your Moova parcel delivery in real-time."
       />
       <main className="bg-slate-50 min-h-screen">
         <section className="relative overflow-x-hidden pb-16 pt-20 sm:pt-24 lg:pt-28">
           <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
-            
             {/* Header & Search Bar Bar */}
             <div className={`transition-all duration-300 ${result ? "mb-6" : "mb-10"}`}>
               {!result ? (
