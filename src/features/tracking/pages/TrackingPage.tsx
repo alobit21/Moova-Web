@@ -18,7 +18,7 @@ const MOCK_RESULT: TrackingResultType = {
   etaMinutes: 0,
   timestamp: new Date().toLocaleString(),
   city: "Dar-es-salaam",
-  createdBy: "Moova Merchant",
+  createdBy: "",
   pickup: { label: "pickup", address: "Loading...", meta: "Pickup address", coordinates: DEFAULT_COORDS },
   dropoff: { label: "dropoff", address: "Loading...", meta: "Drop-off address", coordinates: [-6.745, 39.284] },
   driverName: "Not assigned",
@@ -95,6 +95,54 @@ function parseEtaMinutes(data: any): number | undefined {
     const diff = (new Date(estTime).getTime() - Date.now()) / 60000
     if (diff > 0) return Math.round(diff)
   }
+  return undefined
+}
+
+
+function parseShopName(data: any): string | undefined {
+  if (!data) return undefined
+
+  const rawValues = [
+    data.created_by,
+    data.business_name,
+    data.shop_name,
+    data.merchant_name,
+    data.store_name,
+    data.shop,
+    data.merchant,
+    data.sme,
+    data.created_by_sme,
+  ]
+
+  for (const item of rawValues) {
+    if (!item) continue
+    if (typeof item === "string") {
+      const trimmed = item.trim()
+      if (trimmed && !/^moova\s*merchant$/i.test(trimmed) && !/^merchant$/i.test(trimmed)) {
+        return trimmed
+      }
+    } else if (typeof item === "object") {
+      const nested =
+        item.business_name ||
+        item.shop_name ||
+        item.name ||
+        item.full_name ||
+        item.sme_profile?.business_name ||
+        item.username
+      if (typeof nested === "string" && nested.trim() && !/^moova\s*merchant$/i.test(nested.trim())) {
+        return nested.trim()
+      }
+    }
+  }
+
+  // If pickup_address is a named location/shop (not a plus-code or street number)
+  if (data.pickup_address && typeof data.pickup_address === "string") {
+    const firstPart = data.pickup_address.split(",")[0].trim()
+    if (firstPart && !/^[A-Z0-9]{4}\+[A-Z0-9]{2,}/i.test(firstPart) && !/^\d+\s+/i.test(firstPart)) {
+      return firstPart
+    }
+  }
+
   return undefined
 }
 
@@ -214,7 +262,7 @@ export function TrackingPage() {
             plate: driverInfo?.plate ?? prev?.plate,
             rating: driverInfo?.rating ?? prev?.rating,
             driverLocation: driverInfo?.location ?? prev?.driverLocation,
-            createdBy: msg.data.created_by || msg.data.business_name || base.createdBy,
+            createdBy: parseShopName(msg.data) || prev?.createdBy || base.createdBy || "",
             shopPhone: msg.data.shop_phone ?? prev?.shopPhone,
             etaMinutes: eta !== undefined ? eta : base.etaMinutes,
             pickup: {
@@ -272,7 +320,7 @@ export function TrackingPage() {
               plate: driverInfo?.plate ?? prev.plate,
               rating: driverInfo?.rating ?? prev.rating,
               driverLocation: driverInfo?.location ?? prev.driverLocation,
-              createdBy: msg.data.created_by || msg.data.business_name || prev.createdBy,
+              createdBy: parseShopName(msg.data) || prev.createdBy,
               etaMinutes: eta !== undefined ? eta : prev.etaMinutes,
             }
           })
