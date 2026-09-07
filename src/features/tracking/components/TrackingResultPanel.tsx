@@ -22,7 +22,7 @@ export function TrackingResultPanel({ result }: { result: TrackingResult }) {
     result.driverName !== "Not assigned" &&
     result.driverName !== "-"
 
-  const vehiclePlateInfo = [result.vehicle, result.plate]
+  const vehiclePlateInfo = [...new Set([result.vehicle, result.plate])]
     .filter(Boolean)
     .filter((v) => v !== "-")
     .join(" · ")
