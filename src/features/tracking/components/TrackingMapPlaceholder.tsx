@@ -1,9 +1,42 @@
-import { useEffect, useState, useMemo } from "react"
+import { useEffect, useState, useMemo, useRef } from "react"
 import { GoogleMap, useLoadScript, Marker, DirectionsRenderer } from "@react-google-maps/api"
 import locationPinIcon from "@/assets/tracking/location/location.png"
 import motorbikeIcon from "@/assets/tracking/location/motorbike.png"
 
 type LatLng = [number, number]
+type Point = { lat: number; lng: number }
+
+/** Moves the driver's marker smoothly from where it is shown to each new GPS position. */
+function useGlidingPosition(target: Point | null, durationMs = 1200): Point | null {
+  const [shown, setShown] = useState<Point | null>(target)
+  const shownRef = useRef<Point | null>(target)
+
+  useEffect(() => {
+    if (!target) return
+    const from = shownRef.current ?? target
+    const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
+    if (reduceMotion) {
+      shownRef.current = target
+      setShown(target)
+      return
+    }
+    const start = performance.now()
+    let frame = 0
+    const step = (now: number) => {
+      const t = Math.min(1, (now - start) / durationMs)
+      const eased = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2
+      const next = { lat: from.lat + (target.lat - from.lat) * eased, lng: from.lng + (target.lng - from.lng) * eased }
+      shownRef.current = next
+      setShown(next)
+      if (t < 1) frame = requestAnimationFrame(step)
+    }
+    frame = requestAnimationFrame(step)
+    return () => cancelAnimationFrame(frame)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [target?.lat, target?.lng])
+
+  return shown
+}
 
 const LIBRARIES: ("places" | "geometry")[] = ["places", "geometry"]
 
@@ -32,6 +65,7 @@ export function TrackingMap({
   const pickupObj = useMemo(() => ({ lat: pickup[0], lng: pickup[1] }), [pickup])
   const dropoffObj = useMemo(() => ({ lat: dropoff[0], lng: dropoff[1] }), [dropoff])
   const driverObj = useMemo(() => (driverLocation ? { lat: driverLocation[0], lng: driverLocation[1] } : null), [driverLocation])
+  const driverShown = useGlidingPosition(driverObj)
 
   useEffect(() => {
     if (!isLoaded || !pickupObj || !dropoffObj) return
@@ -114,9 +148,9 @@ export function TrackingMap({
       )}
 
       {/* Custom Live Motorbike Driver Marker */}
-      {driverObj && (
+      {driverShown && (
         <Marker
-          position={driverObj}
+          position={driverShown}
           icon={{
             url: motorbikeIcon,
             scaledSize: new window.google.maps.Size(48, 48),
