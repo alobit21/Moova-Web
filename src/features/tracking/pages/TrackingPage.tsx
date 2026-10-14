@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react"
+import { apiHttpBaseUrl, apiWsBaseUrl } from "@/lib/api-base"
 import { useParams, useSearchParams } from "react-router-dom"
 import trackingIllustration from "@/assets/tracking/tracking-illustration.png"
 import { ParcelSearchForm } from "@/features/tracking/components/ParcelSearchForm"
@@ -242,29 +243,10 @@ export function TrackingPage() {
       })
     }, 8000)
 
-    const envWsUrl = import.meta.env.VITE_WS_API_URL
-    let wsBaseUrl = ""
-
-    if (envWsUrl) {
-      wsBaseUrl = envWsUrl.endsWith("/") ? envWsUrl.slice(0, -1) : envWsUrl
-    } else if (
-      window.location.hostname.endsWith(".trycloudflare.com") ||
-      window.location.hostname.endsWith(".loca.lt") ||
-      window.location.hostname.endsWith(".ngrok-free.dev") ||
-      window.location.hostname.endsWith(".ngrok.io")
-    ) {
-      wsBaseUrl = `wss://${window.location.hostname}`
-    } else if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-      wsBaseUrl = `ws://${window.location.hostname}:8000`
-    } else if (window.location.hostname.includes("canary")) {
-      wsBaseUrl = `wss://canary-api.moova.co.tz`
-    } else {
-      wsBaseUrl = `wss://api.moova.co.tz`
-    }
+    const wsBaseUrl = apiWsBaseUrl()
 
     // 1. FAST REST API INITIAL LOAD: Fetch data immediately for instant map display
-    let httpBaseUrl = wsBaseUrl.replace(/^ws:/i, "http:").replace(/^wss:/i, "https:")
-    if (httpBaseUrl.endsWith("/")) httpBaseUrl = httpBaseUrl.slice(0, -1)
+    const httpBaseUrl = apiHttpBaseUrl()
 
     fetch(`${httpBaseUrl}/api/v1/orders/track/${encodeURIComponent(trackingNumber)}/`)
       .then((res) => {
