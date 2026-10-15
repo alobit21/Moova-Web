@@ -15,7 +15,7 @@ interface RatingInfo {
   reasons: { driver: string[]; shop: string[] }
 }
 
-interface Part {
+export interface Part {
   score: number
   reasons: string[]
   review: string
@@ -159,7 +159,7 @@ export function RatePage() {
   )
 }
 
-function RatingCard({ title, part, onChange, reasons }: {
+export function RatingCard({ title, part, onChange, reasons }: {
   title: string
   part: Part
   onChange: (p: Part) => void
@@ -193,7 +193,7 @@ function RatingCard({ title, part, onChange, reasons }: {
         <span className="ml-2 text-sm font-medium text-[#5E656E]">{SCORE_LABELS[part.score]}</span>
       </div>
 
-      {low && (
+      {low && reasons.length > 0 && (
         <fieldset className="mt-5">
           <legend className="text-sm font-medium text-foreground">What went wrong?</legend>
           <div className="mt-2 flex flex-wrap gap-2">
@@ -234,7 +234,7 @@ function RatingCard({ title, part, onChange, reasons }: {
   )
 }
 
-function Message({ title, text, icon }: { title: string; text: string; icon?: boolean }) {
+export function Message({ title, text, icon }: { title: string; text: string; icon?: boolean }) {
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm">
       {icon && <CheckCircle2 className="mx-auto mb-4 size-12 text-emerald-500" aria-hidden />}
@@ -248,7 +248,7 @@ function Message({ title, text, icon }: { title: string; text: string; icon?: bo
 }
 
 /** The first readable message in a DRF error response. */
-function firstError(data: unknown): string | null {
+export function firstError(data: unknown): string | null {
   if (typeof data === "string") return data
   if (Array.isArray(data)) return firstError(data[0])
   if (data && typeof data === "object") {
