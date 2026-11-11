@@ -10,6 +10,7 @@ import { Loader } from "@/components/ui/loader"
 
 function App() {
   const location = useLocation()
+  const standalone = /^\/(r|feedback)\//.test(location.pathname)
   const [isInitialLoading, setIsInitialLoading] = useState(true)
 
   useEffect(() => {
@@ -55,10 +56,11 @@ function App() {
         text="Be Trusted from the first click"
         subtext="Turn every first delivery into a reason for customers to come back."
       />
-      <Header />
+      {/* The review page is a page of its own (private link from a message): no site navigation around it */}
+      {!standalone && <Header />}
       <AppRoutes />
-      <Footer />
-      <ScrollControls />
+      {!standalone && <Footer />}
+      {!standalone && <ScrollControls />}
     </div>
   )
 }
