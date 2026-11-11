@@ -10,7 +10,7 @@ import { Loader } from "@/components/ui/loader"
 
 function App() {
   const location = useLocation()
-  const standalone = /^\/(r|feedback)\//.test(location.pathname)
+  const standalone = /^\/(r|feedback|s|shop)\//.test(location.pathname)
   const [isInitialLoading, setIsInitialLoading] = useState(true)
 
   useEffect(() => {
