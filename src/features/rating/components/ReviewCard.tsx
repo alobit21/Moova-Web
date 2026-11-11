@@ -24,8 +24,8 @@ export function ReviewCard({ review }: { review: PublicReview }) {
   }
 
   return (
-    <article className="rounded-2xl border border-[#EAE6DE] bg-white p-4 sm:p-5">
-      <header className="flex items-center gap-3">
+    <article className="@container rounded-2xl border border-[#EAE6DE] bg-white p-4 sm:p-5">
+      <header className="flex flex-wrap items-center gap-x-3 gap-y-1">
         <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#E7F5EE] text-sm font-semibold text-[#1B6B45]" aria-hidden>
           {review.initials}
         </span>
@@ -33,9 +33,9 @@ export function ReviewCard({ review }: { review: PublicReview }) {
         {review.verified && (
           <span className="whitespace-nowrap rounded-full bg-[#E7F5EE] px-2.5 py-0.5 text-xs font-semibold text-[#1B6B45]">
             <span aria-hidden>✓ </span>
-            <span className="sm:hidden">Verified</span>
-            <span className="hidden sm:inline">Verified Purchase</span>
-            <span className="sr-only sm:hidden"> Purchase</span>
+            <span className="@sm:hidden">Verified</span>
+            <span className="hidden @sm:inline">Verified Purchase</span>
+            <span className="sr-only @sm:hidden"> Purchase</span>
           </span>
         )}
         <time dateTime={review.date} className="ml-auto whitespace-nowrap text-sm text-[#5E656E]">
