@@ -3,7 +3,7 @@ import { TrackingPage } from "@/features/tracking/pages/TrackingPage"
 import { Landing } from "./Landing"
 import { NotFoundPage } from "@/features/misc/pages/NotFoundPage"
 import { RatePage } from "@/features/rating/pages/RatePage"
-import { FeedbackPage } from "@/features/rating/pages/FeedbackPage"
+import { ReviewPage } from "@/features/rating/pages/ReviewPage"
 
 export function AppRoutes() {
   return (
@@ -14,7 +14,9 @@ export function AppRoutes() {
       <Route path="/track/:orderNumber" element={<TrackingPage />} />
       <Route path="/tracking/:orderNumber" element={<TrackingPage />} />
       <Route path="/rate/:token" element={<RatePage />} />
-      <Route path="/feedback/:code" element={<FeedbackPage />} />
+      {/* The short link in the thank-you message; /feedback/:code keeps the links already sent working */}
+      <Route path="/r/:code" element={<ReviewPage />} />
+      <Route path="/feedback/:code" element={<ReviewPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   )
