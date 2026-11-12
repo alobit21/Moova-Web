@@ -25,7 +25,8 @@ export interface TreelinkData {
   social_links: SocialLink[]
   chat_url: string | null
   shop_now_url: string | null
-  top_products: { product: string; items: number }[]
+  top_products: { product: string; items: number; delivered: number; sold: number; image_url: string | null }[]
+  delivery_coverage: { area: string; percent: number }[]
   buyer_guarantee: boolean
 }
 
