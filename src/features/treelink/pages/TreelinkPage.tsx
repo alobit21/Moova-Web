@@ -185,7 +185,6 @@ export function TreelinkPage() {
               <h2 id="reviews" className="text-sm font-extrabold uppercase tracking-wide" style={{ color: GREEN }}>
                 Verified customer reviews
               </h2>
-              <p className="mt-1 text-sm text-[#5E656E]">Collected automatically after confirmed purchases, checked by Moova and never filtered by the seller.</p>
             </div>
             <div className="flex gap-2" role="group" aria-label="Sort reviews">
               {(["recent", "top"] as const).map((s) => (
