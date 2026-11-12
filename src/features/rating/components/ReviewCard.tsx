@@ -24,18 +24,18 @@ export function ReviewCard({ review, compact = false }: { review: PublicReview; 
   }
 
   return (
-    <article className="@container rounded-2xl border border-[#EAE6DE] bg-white p-4 sm:p-5">
+    <article className={cn("@container rounded-2xl border border-[#EAE6DE] bg-white", compact ? "p-3.5" : "p-4 sm:p-5")}>
       <header className="flex flex-wrap items-center gap-x-3 gap-y-1">
         {compact ? (
-          <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#0F7B55] text-white" aria-hidden>
-            <User className="size-5" />
+          <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-[#0F7B55] text-white" aria-hidden>
+            <User className="size-4" />
           </span>
         ) : (
           <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#E7F5EE] text-sm font-semibold text-[#1B6B45]" aria-hidden>
             {review.initials}
           </span>
         )}
-        <StarsDisplay score={review.score} />
+        <StarsDisplay score={review.score} size={compact ? 13 : 16} outline={compact} />
         {review.verified && !compact && (
           <span className="whitespace-nowrap rounded-full bg-[#E7F5EE] px-2.5 py-0.5 text-xs font-semibold text-[#1B6B45]">
             <span aria-hidden>✓ </span>
@@ -44,11 +44,11 @@ export function ReviewCard({ review, compact = false }: { review: PublicReview; 
             <span className="sr-only @sm:hidden"> Purchase</span>
           </span>
         )}
-        <time dateTime={review.date} className="ml-auto whitespace-nowrap text-sm text-[#5E656E]">
+        <time dateTime={review.date} className={cn("ml-auto whitespace-nowrap text-[#5E656E]", compact ? "text-xs" : "text-sm")}>
           {shortDate(review.date)}
         </time>
       </header>
-      <p className="mt-3 text-[15px] leading-relaxed text-foreground">
+      <p className={cn("mt-3 leading-relaxed text-foreground", compact ? "text-[13px]" : "text-[15px]")}>
         <span className="sr-only">{review.reviewer} wrote: </span>
         {review.review || <span className="text-[#5E656E]">Rated without a comment.</span>}
       </p>

@@ -117,22 +117,22 @@ export function TreelinkPage() {
         aria-label={`${shop.name} banner`}
       />
 
-      <main className="mx-auto -mt-14 flex max-w-[1280px] flex-col gap-5 px-4 md:mt-8 md:px-6 lg:grid lg:grid-cols-[420px_minmax(0,1fr)] lg:items-start lg:gap-x-8 lg:px-12">
+      <main className="mx-auto -mt-14 flex max-w-[1280px] flex-col gap-4 px-4 md:mt-8 md:px-6 lg:grid lg:grid-cols-[420px_minmax(0,1fr)] lg:items-start lg:gap-x-8 lg:px-12">
         <div className="contents lg:flex lg:min-w-0 lg:flex-col lg:gap-5">
         {/* The shop: who it is and how it is doing */}
-        <section className="order-1 min-w-0 rounded-3xl border border-[#E7E2D8] bg-white p-5 shadow-sm sm:p-6 lg:order-none" aria-label="About the shop">
+        <section className="order-1 min-w-0 rounded-3xl border border-[#E7E2D8] bg-white p-4 shadow-sm sm:p-6 lg:order-none" aria-label="About the shop">
           <div className="flex items-center gap-4">
             <Avatar shop={shop} size="size-14 rounded-full sm:size-20" />
             <div className="min-w-0">
               <h1 className="flex items-center gap-2 text-[22px] font-bold sm:text-2xl">
                 <span className="truncate">{shop.name}</span>
-                {shop.verified && <BadgeCheck className="size-5 shrink-0" style={{ color: GREEN }} aria-label="Verified by Moova" />}
+                {shop.verified && <BadgeCheck className="size-[18px] shrink-0 opacity-60" style={{ color: GREEN }} aria-label="Verified by Moova" />}
               </h1>
               {(shop.tagline || shop.category) && <p className="text-sm text-[#5E656E]">{shop.tagline || shop.category}</p>}
             </div>
           </div>
           {(data.stats.active_this_week || data.stats.deliveries_badge) && (
-            <p className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[13px] font-semibold" style={{ color: GREEN }}>
+            <p className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[13px] font-medium" style={{ color: GREEN }}>
               {data.stats.active_this_week && (
                 <span className="inline-flex items-center gap-2">
                   <span className="size-2 rounded-full" style={{ background: GREEN }} aria-hidden />
@@ -151,7 +151,7 @@ export function TreelinkPage() {
         </section>
 
         {data.social_links.length > 0 && (
-          <section className="order-4 rounded-3xl border border-[#E7E2D8] bg-white p-5 shadow-sm sm:p-6 md:order-5 lg:order-none" aria-labelledby="links">
+          <section className="order-4 rounded-3xl border border-[#E7E2D8] bg-white p-4 shadow-sm sm:p-6 md:order-5 lg:order-none" aria-labelledby="links">
             <h2 id="links" className="text-base font-bold">
               Shop Links
             </h2>
@@ -179,7 +179,7 @@ export function TreelinkPage() {
           </p>
         </aside>
 
-        <section className="order-2 min-w-0 rounded-3xl border border-[#E7E2D8] bg-white p-5 shadow-sm sm:p-6 md:order-3 lg:order-none" aria-labelledby="reviews">
+        <section className="order-2 min-w-0 rounded-3xl border border-[#E7E2D8] bg-white p-4 shadow-sm sm:p-6 md:order-3 lg:order-none" aria-labelledby="reviews">
           <h2 id="reviews" className="text-xs font-extrabold uppercase tracking-wide" style={{ color: GREEN }}>
             Verified customer reviews
           </h2>
@@ -319,8 +319,8 @@ function Avatar({ shop, size }: { shop: TreelinkData["merchant_profile"]; size: 
 function Stat({ value, label }: { value: string; label: string }) {
   return (
     <div className="px-3 first:pl-0 last:pr-0">
-      <dd className="text-2xl font-bold text-[#3A4048] sm:text-3xl">{value}</dd>
-      <dt className="text-sm text-[#5E656E]">{label}</dt>
+      <dd className="text-xl font-semibold text-[#3A4048] sm:text-3xl sm:font-bold">{value}</dd>
+      <dt className="text-xs text-[#5E656E] sm:text-sm">{label}</dt>
     </div>
   )
 }
@@ -336,7 +336,7 @@ function RatingBlock({ data }: { data: TreelinkData }) {
           <>
             <p className="text-5xl font-extrabold tracking-tight sm:text-6xl">{rating.average.toFixed(1)}</p>
             <div className="mt-2 flex justify-center">
-              <StarsDisplay score={Math.round(rating.average)} size={14} />
+              <StarsDisplay score={Math.round(rating.average)} size={14} outline />
             </div>
           </>
         ) : (

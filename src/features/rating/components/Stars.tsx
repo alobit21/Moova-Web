@@ -5,11 +5,12 @@ import { cn } from "@/lib/utils"
 const LABELS = ["", "Very bad", "Bad", "Okay", "Good", "Excellent"]
 
 /** Five stars to look at (size in px). */
-export function StarsDisplay({ score, size = 16 }: { score: number; size?: number }) {
+export function StarsDisplay({ score, size = 16, outline = false }: { score: number; size?: number; outline?: boolean }) {
   return (
     <span className="inline-flex items-center gap-0.5" role="img" aria-label={`${score} out of 5 stars`}>
       {[1, 2, 3, 4, 5].map((n) => (
-        <Star key={n} style={{ width: size, height: size }} className={n <= score ? "fill-amber-500 text-amber-500" : "text-amber-300"} aria-hidden />
+        <Star key={n} style={{ width: size, height: size }} className={n <= score ? (outline ? "fill-amber-100 text-amber-500" : "fill-amber-500 text-amber-500") : "text-amber-300"}
+          strokeWidth={outline ? 1.75 : 2} aria-hidden />
       ))}
     </span>
   )
