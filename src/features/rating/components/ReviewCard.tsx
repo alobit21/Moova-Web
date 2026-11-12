@@ -24,7 +24,7 @@ export function ReviewCard({ review, compact = false }: { review: PublicReview; 
   }
 
   return (
-    <article className={cn("@container rounded-2xl border border-[#EAE6DE] bg-white", compact ? "p-3.5" : "p-4 sm:p-5")}>
+    <article className={cn("@container rounded-2xl border border-[#EAE6DE] bg-white", compact ? "p-4" : "p-4 sm:p-5")}>
       <header className="flex flex-wrap items-center gap-x-3 gap-y-1">
         {compact ? (
           <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-[#0F7B55] text-white" aria-hidden>
@@ -48,7 +48,7 @@ export function ReviewCard({ review, compact = false }: { review: PublicReview; 
           {shortDate(review.date)}
         </time>
       </header>
-      <p className={cn("mt-3 leading-relaxed text-foreground", compact ? "text-[13px]" : "text-[15px]")}>
+      <p className={cn("mt-3 leading-relaxed text-foreground", "text-[15px]")}>
         <span className="sr-only">{review.reviewer} wrote: </span>
         {review.review || <span className="text-[#5E656E]">Rated without a comment.</span>}
       </p>
