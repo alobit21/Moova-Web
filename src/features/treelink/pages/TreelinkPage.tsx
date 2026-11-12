@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { Helmet } from "react-helmet-async"
-import { BadgeCheck, CircleCheck, Loader2, MapPin, MessageCircle, ShieldCheck, ShoppingBag, Store } from "lucide-react"
+import { BadgeCheck, CircleCheck, Star, Loader2, MapPin, MessageCircle, ShieldCheck, ShoppingBag, Store } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { StarsDisplay } from "@/features/rating/components/Stars"
 import { ReviewCard } from "@/features/rating/components/ReviewCard"
@@ -10,6 +10,9 @@ import { BrandIcon } from "../components/BrandIcons"
 import { loadTreelink, type Sort, type TreelinkData } from "../lib/treelink-api"
 
 const GREEN = "#0F7B55"
+/** What the page says instead of a number when a shop does not have enough records yet. */
+const NEW_RATING = "New"
+const NEW_ON_TIME = "Building"
 const initials = (name: string) => name.split(/\s+/).slice(0, 2).map((w) => w[0]?.toUpperCase() ?? "").join("")
 
 /** The public trust page a shop puts in its bio (/shop/:slug/treelink). Everything about how the shop is doing is read from
@@ -145,8 +148,8 @@ export function TreelinkPage() {
           )}
           <dl className="mt-4 grid grid-cols-3 divide-x divide-[#ECE8DF] border-t border-[#ECE8DF] pt-4">
             <Stat value={data.stats.deliveries > 0 ? data.stats.deliveries.toLocaleString("en-US") : data.stats.sales.toLocaleString("en-US")} label={data.stats.deliveries > 0 ? "Deliveries" : "Sales"} />
-            <Stat value={data.stats.rating != null ? data.stats.rating.toFixed(1) : "–"} label="Shop rating" />
-            <Stat value={data.stats.on_time_pct != null ? `${data.stats.on_time_pct}%` : "–"} label="On-time" />
+            <Stat value={data.stats.rating != null ? data.stats.rating.toFixed(1) : NEW_RATING} soft={data.stats.rating == null} label="Shop rating" />
+            <Stat value={data.stats.on_time_pct != null ? `${data.stats.on_time_pct}%` : NEW_ON_TIME} soft={data.stats.on_time_pct == null} label="On-time" />
           </dl>
         </section>
 
@@ -316,10 +319,12 @@ function Avatar({ shop, size }: { shop: TreelinkData["merchant_profile"]; size: 
   )
 }
 
-function Stat({ value, label }: { value: string; label: string }) {
+function Stat({ value, label, soft = false }: { value: string; label: string; soft?: boolean }) {
   return (
     <div className="px-3 first:pl-0 last:pr-0">
-      <dd className="text-xl font-semibold text-[#3A4048] sm:text-3xl sm:font-bold">{value}</dd>
+      <dd className={soft ? "pt-1 text-base font-semibold sm:pt-2 sm:text-xl" : "text-xl font-semibold text-[#3A4048] sm:text-3xl sm:font-bold"} style={soft ? { color: GREEN } : undefined}>
+        {value}
+      </dd>
       <dt className="text-xs text-[#5E656E] sm:text-sm">{label}</dt>
     </div>
   )
@@ -340,10 +345,13 @@ function RatingBlock({ data }: { data: TreelinkData }) {
             </div>
           </>
         ) : (
-          <p className="text-sm font-semibold text-[#5E656E]">Rating appears after {rating.minimum} verified reviews</p>
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-[#E8F3EC] px-3 py-1.5 text-sm font-bold" style={{ color: GREEN }}>
+            <Star className="size-4 fill-current" aria-hidden /> {NEW_RATING}
+          </span>
         )}
         <p className="mt-1 text-xs text-[#5E656E]">
-          {rating.total.toLocaleString("en-US")} {rating.total === 1 ? "review" : "reviews"}
+          {rating.total.toLocaleString("en-US")} {rating.average == null ? "verified " : ""}
+          {rating.total === 1 ? "review" : "reviews"}
         </p>
       </div>
       <ul className="space-y-1.5" aria-label="Rating split">
@@ -357,6 +365,7 @@ function RatingBlock({ data }: { data: TreelinkData }) {
           </li>
         ))}
       </ul>
+      {rating.average == null && <p className="col-span-2 text-center text-xs text-[#5E656E]">Shop rating starts at {rating.minimum} verified reviews</p>}
     </div>
   )
 }
