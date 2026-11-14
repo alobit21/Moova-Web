@@ -18,6 +18,11 @@ export interface TreelinkData {
     rating: number | null
     review_count: number
     deliveries_badge: string | null
+    /** Units sold, counted by Moova from its own records (the shop cannot set it), and its display form: "37" or "1000+". */
+    sold_units: number
+    sold_label: string | null
+    /** True when the shop stated the number itself (not Moova's count): the page marks it "Shop-reported". */
+    sold_reported: boolean
     active_this_week: boolean
   }
   rating: { average: number | null; total: number; distribution: Record<"1" | "2" | "3" | "4" | "5", number>; minimum: number }

@@ -48,11 +48,15 @@ export function ReviewCard({ review, compact = false }: { review: PublicReview; 
           {shortDate(review.date)}
         </time>
       </header>
+      {review.verified && compact && (
+        <span className="mt-3 inline-block whitespace-nowrap rounded-full bg-[#E7F5EE] px-2.5 py-0.5 text-xs font-semibold text-[#1B6B45]">
+          <span aria-hidden>✓ </span>Verified Purchase
+        </span>
+      )}
       <p className={cn("mt-3 leading-relaxed text-foreground", "text-[15px]")}>
         <span className="sr-only">{review.reviewer} wrote: </span>
         {review.review || <span className="text-[#5E656E]">Rated without a comment.</span>}
       </p>
-      {!compact && (
       <footer className="mt-3 flex items-center justify-between gap-3 text-sm text-[#5E656E]">
         <span className="flex min-w-0 items-center gap-2">
           <ShoppingBag className="size-4 shrink-0" aria-hidden />
@@ -69,7 +73,6 @@ export function ReviewCard({ review, compact = false }: { review: PublicReview; 
           {busy ? <Loader2 className="size-4 animate-spin" aria-hidden /> : <ThumbsUp className={cn("size-4", voted && "fill-[#1B8A5A]/20")} aria-hidden />}
         </button>
       </footer>
-      )}
     </article>
   )
 }

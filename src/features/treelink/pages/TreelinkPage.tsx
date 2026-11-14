@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { Helmet } from "react-helmet-async"
-import { BadgeCheck, CircleCheck, Star, Loader2, MapPin, MessageCircle, ShieldCheck, ShoppingBag, Store } from "lucide-react"
+import { BadgeCheck, Star, Loader2, MapPin, MessageCircle, ShieldCheck, ShoppingBag, Store } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { StarsDisplay } from "@/features/rating/components/Stars"
 import { ReviewCard } from "@/features/rating/components/ReviewCard"
@@ -12,7 +12,7 @@ import { loadTreelink, type Sort, type TreelinkData } from "../lib/treelink-api"
 const GREEN = "#0F7B55"
 /** What the page says instead of a number when a shop does not have enough records yet. */
 const NEW_RATING = "New"
-const NEW_ON_TIME = "Building"
+const NEW_SOLD = "New"
 const initials = (name: string) => name.split(/\s+/).slice(0, 2).map((w) => w[0]?.toUpperCase() ?? "").join("")
 
 /** The public trust page a shop puts in its bio (/shop/:slug/treelink). Everything about how the shop is doing is read from
@@ -100,8 +100,7 @@ export function TreelinkPage() {
           <div className="flex shrink-0 items-center gap-3">
             {data.chat_url && (
               <a href={data.chat_url} target="_blank" rel="noopener noreferrer" className="rounded-full border-2 px-5 py-2 text-sm font-bold transition-colors hover:bg-[#E8F3EC]" style={{ borderColor: GREEN, color: GREEN }}>
-                <span className="lg:hidden">Chat</span>
-                <span className="hidden lg:inline">Chat Seller</span>
+                <span className="block max-w-[10rem] truncate lg:max-w-[18rem]">Chat with {shop.name}</span>
               </a>
             )}
             {data.shop_now_url && (
@@ -149,7 +148,7 @@ export function TreelinkPage() {
           <dl className="mt-4 grid grid-cols-3 divide-x divide-[#ECE8DF] border-t border-[#ECE8DF] pt-4">
             <Stat value={data.stats.deliveries > 0 ? data.stats.deliveries.toLocaleString("en-US") : data.stats.sales.toLocaleString("en-US")} label={data.stats.deliveries > 0 ? "Deliveries" : "Sales"} />
             <Stat value={data.stats.rating != null ? data.stats.rating.toFixed(1) : NEW_RATING} soft={data.stats.rating == null} label="Shop rating" />
-            <Stat value={data.stats.on_time_pct != null ? `${data.stats.on_time_pct}%` : NEW_ON_TIME} soft={data.stats.on_time_pct == null} label="On-time" />
+            <Stat value={data.stats.sold_label ?? NEW_SOLD} soft={data.stats.sold_label == null} label="Sold by store" note={data.stats.sold_reported ? "Shop-reported" : undefined} />
           </dl>
         </section>
 
@@ -178,7 +177,10 @@ export function TreelinkPage() {
         <aside className="order-5 flex items-start gap-3 rounded-2xl border bg-[#E8F3EC] p-4 sm:p-5 md:order-2 lg:order-none" style={{ borderColor: GREEN, color: GREEN }}>
           <ShieldCheck className="mt-0.5 size-5 shrink-0" aria-hidden />
           <p className="text-[13px] leading-relaxed">
-            <strong>Independently verified by Moova.</strong> Every data point on this page is automatically generated from real Moova records, not entered or edited by the seller.
+            <strong>Independently verified by Moova.</strong>{" "}
+            {data.stats.sold_reported
+              ? "Deliveries, ratings and reviews are generated from real Moova records, not entered or edited by the seller. “Sold by store” is the seller’s own figure."
+              : "Every data point on this page is automatically generated from real Moova records, not entered or edited by the seller."}
           </p>
         </aside>
 
@@ -220,28 +222,27 @@ export function TreelinkPage() {
         </section>
 
         {data.top_products.length > 0 && (
-          <section className="order-3 md:order-4 lg:order-none" aria-labelledby="products">
-            <h2 id="products" className="text-xs font-extrabold uppercase tracking-wide" style={{ color: GREEN }}>
-              Most trusted products
+          <section className="order-3 rounded-3xl border border-[#E7E2D8] bg-white p-4 shadow-sm sm:p-6 md:order-4 lg:order-none" aria-labelledby="products">
+            <h2 id="products" className="text-xl font-extrabold tracking-tight text-foreground">
+              Most Trusted Products
             </h2>
-            <p className="mt-1 text-sm text-[#5E656E]">Customers keep ordering these through Moova</p>
-            <ul className="mt-3 grid grid-cols-3 gap-3">
+            <p className="mt-1 text-sm text-[#5E656E]">
+              customers keep ordering these through <strong className="font-bold text-foreground">{data.merchant_profile.slug}</strong>
+            </p>
+            <ul className="mt-4 grid grid-cols-3 gap-3 sm:gap-4">
               {data.top_products.map((p) => (
-                <li key={p.product} className="overflow-hidden rounded-2xl border border-[#E7E2D8] bg-white">
+                <li key={p.product} className="min-w-0">
                   {p.image_url ? (
-                    <img src={p.image_url} alt="" className="aspect-square w-full object-cover" />
+                    <img src={p.image_url} alt="" className="aspect-[4/5] w-full rounded-2xl object-cover" />
                   ) : (
-                    <span className="flex aspect-square w-full items-center justify-center bg-[#E8F3EC]" style={{ color: GREEN }} aria-hidden>
+                    <span className="flex aspect-[4/5] w-full items-center justify-center rounded-2xl bg-[#E8F3EC]" style={{ color: GREEN }} aria-hidden>
                       <ShoppingBag className="size-8" />
                     </span>
                   )}
-                  <div className="p-2.5">
-                    <p className="truncate text-xs font-semibold">{p.product}</p>
-                    <p className="mt-1 flex items-center gap-1 text-xs font-semibold" style={{ color: GREEN }}>
-                      <CircleCheck className="size-3.5 shrink-0" aria-hidden />
-                      {p.delivered > 0 ? `${p.delivered.toLocaleString("en-US")} delivered` : `${p.sold.toLocaleString("en-US")} sold`}
-                    </p>
-                  </div>
+                  <p className="mt-3 truncate text-sm font-bold sm:text-base">{p.product}</p>
+                  <p className="mt-0.5 text-sm font-semibold" style={{ color: GREEN }}>
+                    {p.items.toLocaleString("en-US")} sold
+                  </p>
                 </li>
               ))}
             </ul>
@@ -290,12 +291,12 @@ export function TreelinkPage() {
         <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#E7E2D8] bg-white/95 px-4 pb-4 pt-3 shadow-[0_-8px_24px_rgba(0,0,0,0.06)] backdrop-blur md:hidden">
           <div className="mx-auto flex max-w-md gap-3">
             {data.chat_url && (
-              <a href={data.chat_url} target="_blank" rel="noopener noreferrer" className="flex flex-1 items-center justify-center gap-2 rounded-2xl py-3.5 text-base font-bold text-white shadow-md" style={{ background: GREEN }}>
-                <MessageCircle className="size-5" aria-hidden /> Chat Seller
+              <a href={data.chat_url} target="_blank" rel="noopener noreferrer" className="flex min-w-0 flex-[3] items-center justify-center gap-2 rounded-2xl px-3 py-3.5 text-[15px] font-bold text-white shadow-md" style={{ background: GREEN }}>
+                <MessageCircle className="size-5 shrink-0" aria-hidden /> <span className="truncate">Chat with {shop.name}</span>
               </a>
             )}
             {data.shop_now_url && (
-              <a href={data.shop_now_url} target="_blank" rel="noopener noreferrer" className="flex flex-1 items-center justify-center gap-2 rounded-2xl py-3.5 text-base font-bold text-white shadow-md" style={{ background: GREEN }}>
+              <a href={data.shop_now_url} target="_blank" rel="noopener noreferrer" className="flex flex-[2] items-center justify-center gap-2 rounded-2xl py-3.5 text-[15px] font-bold text-white shadow-md" style={{ background: GREEN }}>
                 <ShoppingBag className="size-5" aria-hidden /> Shop Now
               </a>
             )}
@@ -319,13 +320,14 @@ function Avatar({ shop, size }: { shop: TreelinkData["merchant_profile"]; size: 
   )
 }
 
-function Stat({ value, label, soft = false }: { value: string; label: string; soft?: boolean }) {
+function Stat({ value, label, soft = false, note }: { value: string; label: string; soft?: boolean; note?: string }) {
   return (
     <div className="px-3 first:pl-0 last:pr-0">
       <dd className={soft ? "pt-1 text-base font-semibold sm:pt-2 sm:text-xl" : "text-xl font-semibold text-[#3A4048] sm:text-3xl sm:font-bold"} style={soft ? { color: GREEN } : undefined}>
         {value}
       </dd>
       <dt className="text-xs text-[#5E656E] sm:text-sm">{label}</dt>
+      {note && <dd className="mt-0.5 text-[11px] italic text-[#5E656E]">{note}</dd>}
     </div>
   )
 }
