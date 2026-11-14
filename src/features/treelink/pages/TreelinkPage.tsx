@@ -100,8 +100,7 @@ export function TreelinkPage() {
           <div className="flex shrink-0 items-center gap-3">
             {data.chat_url && (
               <a href={data.chat_url} target="_blank" rel="noopener noreferrer" className="rounded-full border-2 px-5 py-2 text-sm font-bold transition-colors hover:bg-[#E8F3EC]" style={{ borderColor: GREEN, color: GREEN }}>
-                <span className="lg:hidden">Chat</span>
-                <span className="hidden lg:inline">Chat Seller</span>
+                <span className="block max-w-[10rem] truncate lg:max-w-[18rem]">Chat with {shop.name}</span>
               </a>
             )}
             {data.shop_now_url && (
@@ -289,12 +288,12 @@ export function TreelinkPage() {
         <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#E7E2D8] bg-white/95 px-4 pb-4 pt-3 shadow-[0_-8px_24px_rgba(0,0,0,0.06)] backdrop-blur md:hidden">
           <div className="mx-auto flex max-w-md gap-3">
             {data.chat_url && (
-              <a href={data.chat_url} target="_blank" rel="noopener noreferrer" className="flex flex-1 items-center justify-center gap-2 rounded-2xl py-3.5 text-base font-bold text-white shadow-md" style={{ background: GREEN }}>
-                <MessageCircle className="size-5" aria-hidden /> Chat Seller
+              <a href={data.chat_url} target="_blank" rel="noopener noreferrer" className="flex min-w-0 flex-[3] items-center justify-center gap-2 rounded-2xl px-3 py-3.5 text-[15px] font-bold text-white shadow-md" style={{ background: GREEN }}>
+                <MessageCircle className="size-5 shrink-0" aria-hidden /> <span className="truncate">Chat with {shop.name}</span>
               </a>
             )}
             {data.shop_now_url && (
-              <a href={data.shop_now_url} target="_blank" rel="noopener noreferrer" className="flex flex-1 items-center justify-center gap-2 rounded-2xl py-3.5 text-base font-bold text-white shadow-md" style={{ background: GREEN }}>
+              <a href={data.shop_now_url} target="_blank" rel="noopener noreferrer" className="flex flex-[2] items-center justify-center gap-2 rounded-2xl py-3.5 text-[15px] font-bold text-white shadow-md" style={{ background: GREEN }}>
                 <ShoppingBag className="size-5" aria-hidden /> Shop Now
               </a>
             )}
