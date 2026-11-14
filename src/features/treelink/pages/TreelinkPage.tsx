@@ -148,7 +148,7 @@ export function TreelinkPage() {
           <dl className="mt-4 grid grid-cols-3 divide-x divide-[#ECE8DF] border-t border-[#ECE8DF] pt-4">
             <Stat value={data.stats.deliveries > 0 ? data.stats.deliveries.toLocaleString("en-US") : data.stats.sales.toLocaleString("en-US")} label={data.stats.deliveries > 0 ? "Deliveries" : "Sales"} />
             <Stat value={data.stats.rating != null ? data.stats.rating.toFixed(1) : NEW_RATING} soft={data.stats.rating == null} label="Shop rating" />
-            <Stat value={data.stats.sold_label ?? NEW_SOLD} soft={data.stats.sold_label == null} label="Sold by store" />
+            <Stat value={data.stats.sold_label ?? NEW_SOLD} soft={data.stats.sold_label == null} label="Sold by store" note={data.stats.sold_reported ? "Shop-reported" : undefined} />
           </dl>
         </section>
 
@@ -177,7 +177,10 @@ export function TreelinkPage() {
         <aside className="order-5 flex items-start gap-3 rounded-2xl border bg-[#E8F3EC] p-4 sm:p-5 md:order-2 lg:order-none" style={{ borderColor: GREEN, color: GREEN }}>
           <ShieldCheck className="mt-0.5 size-5 shrink-0" aria-hidden />
           <p className="text-[13px] leading-relaxed">
-            <strong>Independently verified by Moova.</strong> Every data point on this page is automatically generated from real Moova records, not entered or edited by the seller.
+            <strong>Independently verified by Moova.</strong>{" "}
+            {data.stats.sold_reported
+              ? "Deliveries, ratings and reviews are generated from real Moova records, not entered or edited by the seller. “Sold by store” is the seller’s own figure."
+              : "Every data point on this page is automatically generated from real Moova records, not entered or edited by the seller."}
           </p>
         </aside>
 
@@ -317,13 +320,14 @@ function Avatar({ shop, size }: { shop: TreelinkData["merchant_profile"]; size: 
   )
 }
 
-function Stat({ value, label, soft = false }: { value: string; label: string; soft?: boolean }) {
+function Stat({ value, label, soft = false, note }: { value: string; label: string; soft?: boolean; note?: string }) {
   return (
     <div className="px-3 first:pl-0 last:pr-0">
       <dd className={soft ? "pt-1 text-base font-semibold sm:pt-2 sm:text-xl" : "text-xl font-semibold text-[#3A4048] sm:text-3xl sm:font-bold"} style={soft ? { color: GREEN } : undefined}>
         {value}
       </dd>
       <dt className="text-xs text-[#5E656E] sm:text-sm">{label}</dt>
+      {note && <dd className="mt-0.5 text-[11px] italic text-[#5E656E]">{note}</dd>}
     </div>
   )
 }
