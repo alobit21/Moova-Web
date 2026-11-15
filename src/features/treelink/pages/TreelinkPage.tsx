@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { Helmet } from "react-helmet-async"
-import { BadgeCheck, Star, Loader2, MapPin, MessageCircle, ShieldCheck, ShoppingBag, Store } from "lucide-react"
+import { BadgeCheck, Star, Loader2, MessageCircle, ShieldCheck, ShoppingBag, Store } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { StarsDisplay } from "@/features/rating/components/Stars"
 import { ReviewCard } from "@/features/rating/components/ReviewCard"
@@ -243,31 +243,6 @@ export function TreelinkPage() {
                   <p className="mt-0.5 text-sm font-semibold" style={{ color: GREEN }}>
                     {p.items.toLocaleString("en-US")} sold
                   </p>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        {data.delivery_coverage.length > 0 && (
-          <section className="order-3 md:order-4 lg:order-none" aria-labelledby="coverage">
-            <h2 id="coverage" className="text-xs font-extrabold uppercase tracking-wide" style={{ color: GREEN }}>
-              Delivery coverage
-            </h2>
-            <p className="mt-1 text-sm text-[#5E656E]">Areas where this shop regularly fulfils orders</p>
-            <ul className="mt-3 space-y-3 rounded-2xl border border-[#E7E2D8] bg-white p-4">
-              {data.delivery_coverage.map((c) => (
-                <li key={c.area}>
-                  <div className="flex items-center gap-2 text-sm">
-                    <MapPin className="size-4 shrink-0" style={{ color: GREEN }} aria-hidden />
-                    <span className="min-w-0 flex-1 truncate font-semibold">{c.area}</span>
-                    <span className="font-bold" style={{ color: GREEN }}>
-                      {c.percent}%
-                    </span>
-                  </div>
-                  <span className="mt-1.5 block h-1.5 overflow-hidden rounded-full bg-[#EAF0F4]">
-                    <span className="block h-full rounded-full" style={{ width: `${c.percent}%`, background: GREEN }} />
-                  </span>
                 </li>
               ))}
             </ul>
