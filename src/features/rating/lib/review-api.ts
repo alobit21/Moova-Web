@@ -1,4 +1,5 @@
 import { apiHttpBaseUrl } from "@/lib/api-base"
+import { dateLocale, makeT, type Lang, type T } from "./prefs"
 
 /** One approved review on the page ("Others who shopped here"). */
 export interface PublicReview {
@@ -115,12 +116,12 @@ export async function voteHelpful(reviewId: string): Promise<number> {
   return data.helpful
 }
 
-/** "Nov 12, 2023" */
-export const shortDate = (iso: string) => new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+/** "Nov 12, 2023" / "12 Nov 2023" (Swahili) */
+export const shortDate = (iso: string, lang: Lang = "en") => new Date(iso).toLocaleDateString(dateLocale(lang), { month: "short", day: "numeric", year: "numeric" })
 
-/** "Today at 2:34 PM" or "Nov 12, 2023" */
-export function when(iso: string): string {
+/** "Today at 2:34 PM" ("Leo saa 14:34") or "Nov 12, 2023" */
+export function when(iso: string, lang: Lang = "en", t: T = makeT("en")): string {
   const d = new Date(iso)
-  const time = d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })
-  return d.toDateString() === new Date().toDateString() ? `Today at ${time}` : shortDate(iso)
+  const time = d.toLocaleTimeString(dateLocale(lang), { hour: "numeric", minute: "2-digit" })
+  return d.toDateString() === new Date().toDateString() ? t("today", { time }) : shortDate(iso, lang)
 }

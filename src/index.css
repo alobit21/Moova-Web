@@ -242,3 +242,37 @@
     scroll-behavior: auto !important;
   }
 }
+/* The customer review page: its colours as variables, so it can switch to dark. Each rv-* class carries the light colour as a
+   fallback, so the same cards on the Treelink page (outside .review-page) look exactly as before. */
+.review-page {
+    --rv-page: #FBF9F5; --rv-card: #FFFFFF; --rv-line: #EAE6DE; --rv-muted: #5E656E; --rv-faint: #8B919A;
+    --rv-soft: #F8F6F1; --rv-input: #F4F7FD; --rv-input-line: #E3E8F5;
+    --rv-green-bg: #E7F5EE; --rv-green-fg: #1B6B45; --rv-coral-bg: #FCE9E4; --rv-coral-fg: #C85F45;
+    --rv-note-bg: #FDF1EE; --rv-note-line: #F1C6BB; --rv-pill: #FFFFFF; --rv-pill-line: #E3DED3; --rv-dashed: #D8D2C6;
+    --rv-error-bg: #FEF2F2; --rv-error-fg: #B91C1C; --rv-hover: #F1F5F9;
+    color-scheme: light;
+}
+.review-page[data-theme="dark"] {
+    --foreground: #F3F1EC;
+    --rv-page: #121513; --rv-card: #1B1F1D; --rv-line: #2C322F; --rv-muted: #A8B0AB; --rv-faint: #7E8782;
+    --rv-soft: #232825; --rv-input: #222724; --rv-input-line: #343B37;
+    --rv-green-bg: #1D3A2C; --rv-green-fg: #7FD3A6; --rv-coral-bg: #3F2620; --rv-coral-fg: #F0A18D;
+    --rv-note-bg: #2A1F1C; --rv-note-line: #4A312B; --rv-pill: #1B1F1D; --rv-pill-line: #343B37; --rv-dashed: #3A423E;
+    --rv-error-bg: #3A1D1D; --rv-error-fg: #FCA5A5; --rv-hover: #262B28;
+    color-scheme: dark;
+}
+@utility rv-page { background-color: var(--rv-page, #FBF9F5); }
+@utility rv-card { background-color: var(--rv-card, #FFFFFF); border-color: var(--rv-line, #EAE6DE); }
+@utility rv-line { border-color: var(--rv-line, #EAE6DE); }
+@utility rv-muted { color: var(--rv-muted, #5E656E); }
+@utility rv-faint { color: var(--rv-faint, #8B919A); }
+@utility rv-soft { background-color: var(--rv-soft, #F8F6F1); }
+@utility rv-field { background-color: var(--rv-input, #F4F7FD); border-color: var(--rv-input-line, #E3E8F5); }
+@utility rv-green { background-color: var(--rv-green-bg, #E7F5EE); color: var(--rv-green-fg, #1B6B45); }
+@utility rv-green-text { color: var(--rv-green-fg, #1B6B45); }
+@utility rv-coral { background-color: var(--rv-coral-bg, #FCE9E4); color: var(--rv-coral-fg, #C85F45); }
+@utility rv-note { background-color: var(--rv-note-bg, #FDF1EE); border-color: var(--rv-note-line, #F1C6BB); }
+@utility rv-pill { background-color: var(--rv-pill, #FFFFFF); border-color: var(--rv-pill-line, #E3DED3); }
+@utility rv-dashed { border-color: var(--rv-dashed, #D8D2C6); }
+@utility rv-error { background-color: var(--rv-error-bg, #FEF2F2); color: var(--rv-error-fg, #B91C1C); }
+@utility rv-hover { &:hover { background-color: var(--rv-hover, #F1F5F9); } }
